@@ -1,0 +1,32 @@
+GAME IDEA:
+Grid-based game with player blue and player green
+Stamina:
+Stamina powerups randomly spawn like the apples we had last year (replenishes a certain amount of stamina)
+Gain stamina every round - much lower
+Gaining control of a hill (50%+ which is static, part of the map) increases the max stamina you have. Hills and max stamina can be lost.
+Optional(90/10): You also naturally regenerate stamina according to how many squares adjacent to you are your color + Base amount B (anywhere from B + [0, 9], or if we do 2 square adjacency B + [0, 25]). 
+You can take extra moves using stamina (first move takes none)
+Movement steps
+Regular steps (-1 layer of opponent paint)
+Optional(50/50): Erase step (erases all layers at the cost of extra stamina)
+Beacons step: You can place a beacon on the square you left behind (costs)
+You can place a beacon if you have atleast Q squares in a  p x p are painted your color (e.g. if you have at least 15 squares painted in a 5x5)
+It decreases all painted squares of your color in that p x p by 1, increases all painted squares of enemy color in that p x p by 1, then places a beacon at the center
+Beacons prevent the opponent from painting a square, and count as your color
+You may move between beacons as a standard movement step
+Optional (70/30): Maybe moving between beacons should consume one of the beacons? (either the one that you entered or the one you exited at). I think this should be a thing, depending on how OP beacons are. When consumed, beacons leave behind a square fully in your color.
+Optional (70/30): Beacons count +N to stamina regen wherever you are on the map. (N should be a very small amount to prevent beacon farming)
+You can paint 1 square at a time around yourself (each tile holds a value anywhere from -3 to 3, where -3 is fully blue and 3 is fully green) 
+Can’t paint underneath yourself
+Each paint action increments that tile’s paint value negative (if blue) and positive (if green), you can only paint on your own color
+Optional (50/50): you can only paint either behind you/ in the direction you are facing (snake directional idea)
+Collisions
+If your opponent collides with you on your own paint, you win
+If your opponent collides with you on their paint, you lose
+If you collide with your opponent on an unpainted square, whoever gets hit loses
+Competitor would want to go back to their painted square costing stamina
+Optional (20/80): Take average of paint around collision to decide instead of just the square collided on
+Full diagonal pathing (k=8)
+Could have standard grid pathing (k=4) or snake pathing (k=5) 
+Wins determined by Code crash, Time out, Invalid move, Stamina loss, Number of squares painted in your color
+

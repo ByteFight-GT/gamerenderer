@@ -14,6 +14,27 @@ export type PowerupSpawn = {
 	round: number;
 }
 
+export type PaintMatrix = number[][];
+
+export type BeaconOwner = "P1" | "P2" | null;
+
+export type BeaconMatrix = BeaconOwner[][];
+
+export type PowerupCellState = {
+	hasHealth: boolean;
+	hasStamina: boolean;
+};
+
+export type PowerupMatrix = PowerupCellState[][];
+
+export type GameRenderState = {
+	p1Loc: MapLoc;
+	p2Loc: MapLoc;
+	paint?: PaintMatrix;
+	beacons?: BeaconMatrix;
+	powerups?: PowerupMatrix;
+};
+
 /**
  * Represents all data about a map.
  * Map features like hills, walls, spawnpoints, etc. are only guarnateed to be specified

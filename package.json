@@ -1,6 +1,7 @@
 {
   "name": "bytefight-2026-gamerenderer",
   "version": "1.0.0",
+  "type": "module",
   "description": "",
   "main": "index.tsx",
   "scripts": {

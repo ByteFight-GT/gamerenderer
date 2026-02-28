@@ -1,10 +1,9 @@
 import { 
 	PX_PER_TILE, 
-	getLocOnSpritesheet, 
-	SPRITESHEET_FILE, 
-	Sprite
+	Sprite,
+	SPRITE_FILES
 } from "./spritesheet";
-import { MapInfo } from "./types";
+import { GameRenderState, MapInfo } from "./types";
 
 /**
  * Handler for rendering game things onto a canvas element.
@@ -16,7 +15,7 @@ export class CanvasManager {
 	public spriteCtx: CanvasRenderingContext2D;
 	public backgroundCtx: CanvasRenderingContext2D;
 
-	public spritesheet: HTMLImageElement;
+	private spriteImages: Partial<Record<Sprite, HTMLImageElement>> = {};
 
 	public mapInfo: MapInfo;
 
@@ -32,8 +31,6 @@ export class CanvasManager {
 		const _spriteCtx = spriteCanvas.getContext("2d");
 		const _backgroundCtx = backgroundCanvas.getContext("2d");
 
-		this.spritesheet = new Image();
-
 		if (!_spriteCtx || !_backgroundCtx) {
 			// TODO - is there a way to handle this?
 			throw new Error("Couldn't load canvas2d context!");
@@ -45,8 +42,92 @@ export class CanvasManager {
 		this.updateCanvasSize();
 	}
 
-	drawGameState() {
-		// TODO
+	drawGameState(state: GameRenderState) {
+		// clear dynamic layer
+		this.spriteCtx.clearRect(0, 0, this.spriteCanvas.width, this.spriteCanvas.height);
+
+		const { paint, beacons, powerups, p1Loc, p2Loc } = state;
+
+		// draw paint as colored overlays
+		if (paint) {
+			for (let y = 0; y < this.mapInfo.height; y++) {
+				for (let x = 0; x < this.mapInfo.width; x++) {
+					const value = paint[y]?.[x] ?? 0;
+					if (value === 0) continue;
+
+					const magnitude = Math.min(3, Math.abs(value));
+					const alpha = 0.2 + 0.2 * magnitude;
+
+					if (value > 0) {
+						// positive -> blue player
+						this.spriteCtx.fillStyle = `rgba(30, 144, 255, ${alpha})`;
+					} else {
+						// negative -> green player
+						this.spriteCtx.fillStyle = `rgba(0, 200, 0, ${alpha})`;
+					}
+
+					this.spriteCtx.fillRect(
+						x * PX_PER_TILE,
+						y * PX_PER_TILE,
+						PX_PER_TILE,
+						PX_PER_TILE
+					);
+				}
+			}
+		}
+
+		// draw beacons on top of paint
+		if (beacons) {
+			for (let y = 0; y < this.mapInfo.height; y++) {
+				for (let x = 0; x < this.mapInfo.width; x++) {
+					const owner = beacons[y]?.[x];
+					if (!owner) continue;
+
+					if (owner === "P1") {
+						this.blitSpriteOnTile(Sprite.BEACON_BLUE, x, y);
+					} else {
+						this.blitSpriteOnTile(Sprite.BEACON_GREEN, x, y);
+					}
+				}
+			}
+		}
+
+		// draw powerups
+		if (powerups) {
+			for (let y = 0; y < this.mapInfo.height; y++) {
+				for (let x = 0; x < this.mapInfo.width; x++) {
+					const cell = powerups[y]?.[x];
+					if (!cell) continue;
+
+					const baseX = x * PX_PER_TILE;
+					const baseY = y * PX_PER_TILE;
+
+					if (cell.hasHealth) {
+						this.blitSpriteOnTile(
+							Sprite.POWERUP_HEALTH,
+							x,
+							y,
+							-PX_PER_TILE * 0.2,
+							-PX_PER_TILE * 0.2
+						);
+					}
+
+					if (cell.hasStamina) {
+						this.blitSpriteOnTile(
+							Sprite.POWERUP_STAMINA,
+							x,
+							y,
+							PX_PER_TILE * 0.2,
+							PX_PER_TILE * 0.2
+						);
+					}
+				}
+			}
+		}
+
+		// draw players last so they are on top
+		this.blitSpriteOnTile(Sprite.PLAYER_BLUE, p1Loc.x, p1Loc.y);
+		this.blitSpriteOnTile(Sprite.PLAYER_GREEN, p2Loc.x, p2Loc.y);
 	}
 
 	/**
@@ -57,7 +138,30 @@ export class CanvasManager {
 	preloadAssets() {
 		this.spriteCtx.imageSmoothingEnabled = false;
 		this.backgroundCtx.imageSmoothingEnabled = false;
-		this.spritesheet.src = SPRITESHEET_FILE;
+
+		// load individual sprite images; redraw static map whenever base tiles load
+		const entries = Object.entries(SPRITE_FILES) as [string, string][];
+
+		for (const [key, src] of entries) {
+			const sprite = Number(key) as Sprite;
+			const img = new Image();
+
+			img.onload = () => {
+				this.spriteImages[sprite] = img;
+
+				// when core tile sprites load, (re)draw the map background
+				if (
+					sprite === Sprite.TILE_LIGHT ||
+					sprite === Sprite.TILE_DARK ||
+					sprite === Sprite.HILL_LIGHT ||
+					sprite === Sprite.WALL
+				) {
+					this.blitMap();
+				}
+			};
+
+			img.src = src;
+		}
 	}
 
 	/**
@@ -75,18 +179,15 @@ export class CanvasManager {
 		dx: number = 0, 
 		dy: number = 0
 	) {
-		const { x: srcX, y: srcY } = getLocOnSpritesheet(name);
+		const img = this.spriteImages[name];
+		if (!img) {
+			return;
+		}
 
-		this.spriteCtx.drawImage(this.spritesheet, 
-			// src (where to yoink from spritesheet)
-			srcX*PX_PER_TILE, 
-			srcY*PX_PER_TILE, 
-			PX_PER_TILE, 
-			PX_PER_TILE, 
-
-			// dst (where to draw on canvas)
-			tileX*PX_PER_TILE+dx,
-			tileY*PX_PER_TILE+dy,
+		this.spriteCtx.drawImage(
+			img,
+			tileX * PX_PER_TILE + dx,
+			tileY * PX_PER_TILE + dy,
 			PX_PER_TILE,
 			PX_PER_TILE,
 		);
@@ -105,15 +206,15 @@ export class CanvasManager {
 
 		// helper function
 		const blitMapFeature = (featureName: Sprite, tileX: number, tileY: number) => {
-			const { x: srcX, y: srcY } = getLocOnSpritesheet(featureName);
+			const img = this.spriteImages[featureName];
+			if (!img) {
+				return;
+			}
 
-			this.backgroundCtx.drawImage(this.spritesheet,
-				srcX*PX_PER_TILE,
-				srcY*PX_PER_TILE,
-				PX_PER_TILE,
-				PX_PER_TILE,
-				tileX*PX_PER_TILE,
-				tileY*PX_PER_TILE,
+			this.backgroundCtx.drawImage(
+				img,
+				tileX * PX_PER_TILE,
+				tileY * PX_PER_TILE,
 				PX_PER_TILE,
 				PX_PER_TILE
 			);
