@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 
-import smallMatch from "./matches_example/match.json";
-import bigMatch from "./matches_example/big_match.json";
+// import smallMatch from "./matches_example/match.json";
+// import bigMatch from "./matches_example/big_match.json";
+import { useState } from "react";
 import { CanvasManager } from "./CanvasManager";
 import { GameRenderState, MapInfo, Symmetry, MapLoc } from "./types";
 
@@ -174,15 +175,82 @@ function buildFramesFromMatch(match: any, width: number, height: number): GameRe
   return frames;
 }
 
-export function GameRenderer() {
-  const canvasManager = React.useRef<CanvasManager | null>(null);
-  const [frames, setFrames] = React.useState<GameRenderState[]>([]);
-  const [currentTurn, setCurrentTurn] = React.useState(0);
-  const [isPlaying, setIsPlaying] = React.useState(false);
-  const [playbackSpeed, setPlaybackSpeed] = React.useState(1); // 1x
-  const [selectedMatch, setSelectedMatch] = React.useState<"small" | "big">("big");
+interface GameRendererProps {
+  initialData?: any | null;
+  // This callback gives the parent the ability to push new dictionaries
+  onRegisterUpdater?: (updater: (newDict: any) => void) => void;
+}
 
-  const matchData = selectedMatch === "big" ? bigMatch : smallMatch;
+export const GameRenderer = ({ initialData, onRegisterUpdater }: GameRendererProps) => {
+  const canvasManager = useRef<CanvasManager | null>(null);
+  const [matchData, setMatchData] = useState<any | null>(initialData);
+  const [frames, setFrames] = useState<GameRenderState[]>([]);
+  const [currentTurn, setCurrentTurn] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [playbackSpeed, setPlaybackSpeed] = useState(1);
+
+  // --- Data Management ---
+
+  // Update internal matchData when the parent provides a new dictionary (Local Client Mode)
+  const addMatchUpdate = (newDict: any) => {
+    setMatchData((prev: any) => {
+      if (!prev) return newDict;
+
+      // Merge arrays to support streaming history
+      const merge = (key: string) => [...(prev[key] || []), ...(newDict[key] || [])];
+
+      return {
+        ...prev,
+        ...newDict,
+        turn_count: newDict.turn_count ?? prev.turn_count,
+        p1_loc: merge("p1_loc"),
+        p2_loc: merge("p2_loc"),
+        paint_updates: merge("paint_updates"),
+        beacon_updates: merge("beacon_updates"),
+        p1_stamina: merge("p1_stamina"),
+        p2_stamina: merge("p2_stamina"),
+        p1_territory: merge("p1_territory"),
+        p2_territory: merge("p2_territory"),
+      };
+    });
+  };
+
+  // Give the update function to the parent component on mount
+  useEffect(() => {
+    if (onRegisterUpdater) {
+      onRegisterUpdater(addMatchUpdate);
+    }
+  }, [onRegisterUpdater]);
+
+  // Update frames whenever matchData changes
+  useEffect(() => {
+    if (!matchData) return;
+
+    const mapInfo = buildMapInfoFromMatch(matchData);
+    
+    // Initialize CanvasManager if it doesn't exist
+    if (!canvasManager.current) {
+      const spriteCanvas = document.getElementById("sprite-canvas") as HTMLCanvasElement;
+      const bgCanvas = document.getElementById("background-canvas") as HTMLCanvasElement;
+      canvasManager.current = new CanvasManager(mapInfo, spriteCanvas, bgCanvas);
+    }
+
+    const allFrames = buildFramesFromMatch(matchData, mapInfo.width, mapInfo.height);
+    setFrames(allFrames);
+
+    // If we were at the end of a live stream, auto-advance
+    if (isPlaying && currentTurn >= allFrames.length - 2) {
+      setCurrentTurn(allFrames.length - 1);
+    }
+  }, [matchData]);
+
+  // --- Rendering Loop ---
+  useEffect(() => {
+    if (!canvasManager.current || frames.length === 0) return;
+    const clampedTurn = Math.max(0, Math.min(currentTurn, frames.length - 1));
+    canvasManager.current.drawGameState(frames[clampedTurn]);
+  }, [currentTurn, frames]);
+
 
   React.useEffect(() => {
     const spriteCanvas = document.getElementById("sprite-canvas")! as HTMLCanvasElement;
@@ -259,7 +327,7 @@ export function GameRenderer() {
   return (
     <div className="app-root">
       <div className="controls">
-        <label style={{ marginRight: 12, fontSize: 13 }}>
+        {/* <label style={{ marginRight: 12, fontSize: 13 }}>
           <span style={{ marginRight: 4 }}>Match:</span>
           <select
             value={selectedMatch}
@@ -270,7 +338,7 @@ export function GameRenderer() {
             <option value="small">Small match</option>
             <option value="big">Big match</option>
           </select>
-        </label>
+        </label> */}
 
         <button
           type="button"
