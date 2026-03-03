@@ -232,46 +232,7 @@ export class CanvasManager {
 		// drawing walls
 		// Build quick lookup for wall positions
 		for (const { x, y } of this.mapInfo.wallLocs) {
-
-			const maxX = this.mapInfo.width - 1;
-			const maxY = this.mapInfo.height - 1;
-		
-			let sprite: Sprite;
-		
-			// Corners
-			if (x === 0 && y === 0) {
-				sprite = Sprite.WALL_TOP_LEFT;
-			}
-			else if (x === maxX && y === 0) {
-				sprite = Sprite.WALL_TOP_RIGHT;
-			}
-			else if (x === 0 && y === maxY) {
-				sprite = Sprite.WALL_BOTTOM_LEFT;
-			}
-			else if (x === maxX && y === maxY) {
-				sprite = Sprite.WALL_BOTTOM_RIGHT;
-			}
-		
-			// Edges
-			else if (y === 0) {
-				sprite = Sprite.WALL_TOP;
-			}
-			else if (y === maxY) {
-				sprite = Sprite.WALL_BOTTOM;
-			}
-			else if (x === 0) {
-				sprite = Sprite.WALL_LEFT;
-			}
-			else if (x === maxX) {
-				sprite = Sprite.WALL_RIGHT;
-			}
-		
-			// Fallback (shouldn't really happen for border-only walls)
-			else {
-				sprite = Sprite.WALL;
-			}
-		
-			blitMapFeature(sprite, x, y);
+			blitMapFeature(Sprite.WALL, x, y);
 		}
 
 		// drawing hills
