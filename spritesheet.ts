@@ -16,8 +16,18 @@ export enum Sprite {
 
 	POWERUP_HEALTH,
 	POWERUP_STAMINA,
-}
 
+	FLOATING_PIECE_BOTTOM,
+
+	WALL_TOP,
+	WALL_BOTTOM,
+	WALL_LEFT,
+	WALL_RIGHT,
+	WALL_TOP_LEFT,
+	WALL_TOP_RIGHT,
+	WALL_BOTTOM_LEFT,
+	WALL_BOTTOM_RIGHT,
+}
 /**
  * File paths for individual sprite images.
  * Each PNG in the `sprites/` folder has a semantic name, e.g. `blue_player.png`.
@@ -39,4 +49,15 @@ export const SPRITE_FILES = {
 	[Sprite.BEACON_BLUE]: "./sprites/blue_beacon.png",
 	[Sprite.POWERUP_HEALTH]: "./sprites/power_cell.png",
 	[Sprite.POWERUP_STAMINA]: "./sprites/power_cell.png",
+
+	[Sprite.FLOATING_PIECE_BOTTOM]: "./sprites/floating_piece_bottom.png",
+	[Sprite.WALL_TOP]: "./sprites/wall_top.png",
+	[Sprite.WALL_BOTTOM]: "./sprites/wall_bottom.png",
+	[Sprite.WALL_LEFT]: "./sprites/wall_left.png",
+	[Sprite.WALL_RIGHT]: "./sprites/wall_right.png",
+
+	[Sprite.WALL_TOP_LEFT]: "./sprites/wall_top_left.png",
+	[Sprite.WALL_TOP_RIGHT]: "./sprites/wall_top_right.png",
+	[Sprite.WALL_BOTTOM_LEFT]: "./sprites/wall_bottom_left.png",
+	[Sprite.WALL_BOTTOM_RIGHT]: "./sprites/wall_bottom_right.png",
 } as const;

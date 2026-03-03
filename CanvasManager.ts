@@ -99,16 +99,13 @@ export class CanvasManager {
 					const cell = powerups[y]?.[x];
 					if (!cell) continue;
 
-					const baseX = x * PX_PER_TILE;
-					const baseY = y * PX_PER_TILE;
-
 					if (cell.hasHealth) {
 						this.blitSpriteOnTile(
 							Sprite.POWERUP_HEALTH,
 							x,
 							y,
-							-PX_PER_TILE * 0.2,
-							-PX_PER_TILE * 0.2
+							-PX_PER_TILE,
+							-PX_PER_TILE
 						);
 					}
 
@@ -117,8 +114,8 @@ export class CanvasManager {
 							Sprite.POWERUP_STAMINA,
 							x,
 							y,
-							PX_PER_TILE * 0.2,
-							PX_PER_TILE * 0.2
+							PX_PER_TILE,
+							PX_PER_TILE
 						);
 					}
 				}
@@ -138,28 +135,23 @@ export class CanvasManager {
 	preloadAssets() {
 		this.spriteCtx.imageSmoothingEnabled = false;
 		this.backgroundCtx.imageSmoothingEnabled = false;
-
-		// load individual sprite images; redraw static map whenever base tiles load
+	
 		const entries = Object.entries(SPRITE_FILES) as [string, string][];
-
+		let loaded = 0;
+	
 		for (const [key, src] of entries) {
 			const sprite = Number(key) as Sprite;
 			const img = new Image();
-
+	
 			img.onload = () => {
 				this.spriteImages[sprite] = img;
-
-				// when core tile sprites load, (re)draw the map background
-				if (
-					sprite === Sprite.TILE_LIGHT ||
-					sprite === Sprite.TILE_DARK ||
-					sprite === Sprite.HILL_LIGHT ||
-					sprite === Sprite.WALL
-				) {
-					this.blitMap();
+				loaded++;
+	
+				if (loaded === entries.length) {
+					this.blitMap(); // draw once when everything is ready
 				}
 			};
-
+	
 			img.src = src;
 		}
 	}
@@ -220,23 +212,66 @@ export class CanvasManager {
 			);
 		};
 
-		// equivalent to a normal loop. 
-		// BATTLECODE REFERENCE! those who know...
+		// draw main board tiles
 		for (let y = this.mapInfo.height; --y >= 0;) {
 			for (let x = this.mapInfo.width; --x >= 0;) {
 				if (x % 2 === y % 2) {
-					// light tile
 					blitMapFeature(Sprite.TILE_LIGHT, x, y);
 				} else {
-					// dark tile
 					blitMapFeature(Sprite.TILE_DARK, x, y);
 				}
 			}
 		}
 
+		// decorative floating pieces row just below the map
+		const decoY = this.mapInfo.height;
+		for (let x = 0; x < this.mapInfo.width; x++) {
+			blitMapFeature(Sprite.FLOATING_PIECE_BOTTOM, x, decoY);
+		}
+
 		// drawing walls
-		for (const {x, y} of this.mapInfo.wallLocs) {
-			blitMapFeature(Sprite.WALL, x, y);
+		// Build quick lookup for wall positions
+		for (const { x, y } of this.mapInfo.wallLocs) {
+
+			const maxX = this.mapInfo.width - 1;
+			const maxY = this.mapInfo.height - 1;
+		
+			let sprite: Sprite;
+		
+			// Corners
+			if (x === 0 && y === 0) {
+				sprite = Sprite.WALL_TOP_LEFT;
+			}
+			else if (x === maxX && y === 0) {
+				sprite = Sprite.WALL_TOP_RIGHT;
+			}
+			else if (x === 0 && y === maxY) {
+				sprite = Sprite.WALL_BOTTOM_LEFT;
+			}
+			else if (x === maxX && y === maxY) {
+				sprite = Sprite.WALL_BOTTOM_RIGHT;
+			}
+		
+			// Edges
+			else if (y === 0) {
+				sprite = Sprite.WALL_TOP;
+			}
+			else if (y === maxY) {
+				sprite = Sprite.WALL_BOTTOM;
+			}
+			else if (x === 0) {
+				sprite = Sprite.WALL_LEFT;
+			}
+			else if (x === maxX) {
+				sprite = Sprite.WALL_RIGHT;
+			}
+		
+			// Fallback (shouldn't really happen for border-only walls)
+			else {
+				sprite = Sprite.WALL;
+			}
+		
+			blitMapFeature(sprite, x, y);
 		}
 
 		// drawing hills
@@ -256,7 +291,8 @@ export class CanvasManager {
 		this.spriteCanvas.width = PX_PER_TILE * this.mapInfo.width;
 		this.backgroundCanvas.width = PX_PER_TILE * this.mapInfo.width;
 
-		this.spriteCanvas.height = PX_PER_TILE * this.mapInfo.height;
-		this.backgroundCanvas.height = PX_PER_TILE * this.mapInfo.height;
+		// add one extra decorative row below the map
+		this.spriteCanvas.height = PX_PER_TILE * (this.mapInfo.height + 1);
+		this.backgroundCanvas.height = PX_PER_TILE * (this.mapInfo.height + 1);
 	}
 }
