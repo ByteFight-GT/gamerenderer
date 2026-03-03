@@ -77,7 +77,7 @@ function buildFramesFromMatch(match: any, width: number, height: number): GameRe
   );
 
   for (let i = 0; i < totalSteps; i++) {
-    // paint diffs
+    // paint
     const paintUpdates = match.paint_updates?.[i] as Record<string, number> | undefined;
     if (paintUpdates) {
       for (const key of Object.keys(paintUpdates)) {
@@ -92,7 +92,7 @@ function buildFramesFromMatch(match: any, width: number, height: number): GameRe
       }
     }
 
-    // beacon diffs
+    // beacons
     const beaconUpdates = match.beacon_updates?.[i] as Record<string, unknown> | undefined;
     if (beaconUpdates) {
       const parity = match.parity_playing?.[i] as number | undefined;
@@ -107,11 +107,9 @@ function buildFramesFromMatch(match: any, width: number, height: number): GameRe
         if (y < 0 || y >= height || x < 0 || x >= width) continue;
 
         if (typeof raw === "boolean") {
-          // true -> place beacon for current player, false -> remove
           beacons[y][x] = raw && currentPlayer ? currentPlayer : null;
         } else if (typeof raw === "number") {
-          // non-zero numeric -> presence for current player, zero -> remove
-          if (!raw) {
+          if (raw === 0) {
             beacons[y][x] = null;
           } else if (currentPlayer) {
             beacons[y][x] = currentPlayer;
@@ -120,7 +118,7 @@ function buildFramesFromMatch(match: any, width: number, height: number): GameRe
       }
     }
 
-    // powerup diffs (future-proof; current sample has none)
+    // powerups (none in current example, but wired generically)
     const powerupUpdates = match.powerup_updates?.[i] as
       | Record<string, unknown>
       | undefined;
@@ -139,7 +137,7 @@ function buildFramesFromMatch(match: any, width: number, height: number): GameRe
           cell.hasHealth = v.includes("health") || v.includes("hp");
           cell.hasStamina = v.includes("stamina") || v.includes("stam");
         } else if (typeof raw === "number") {
-          if (!raw) {
+          if (raw === 0) {
             cell.hasHealth = false;
             cell.hasStamina = false;
           } else if (raw > 0) {
@@ -148,7 +146,6 @@ function buildFramesFromMatch(match: any, width: number, height: number): GameRe
             cell.hasHealth = true;
           }
         } else if (typeof raw === "boolean") {
-          // simple toggle: true -> stamina, false -> clear
           if (raw) {
             cell.hasStamina = true;
           } else {
@@ -180,7 +177,7 @@ export function GameRenderer() {
   const [currentTurn, setCurrentTurn] = React.useState(0);
   const [isPlaying, setIsPlaying] = React.useState(false);
   const [playbackSpeed, setPlaybackSpeed] = React.useState(1); // 1x
-  const [selectedMatch, setSelectedMatch] = React.useState<"small" | "big">("big");
+  const [selectedMatch, setSelectedMatch] = React.useState<"small" | "big">("small");
 
   const matchData = selectedMatch === "big" ? bigMatch : smallMatch;
 
