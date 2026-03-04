@@ -172,10 +172,20 @@ function buildFramesFromMatch(match: any, width: number, height: number): GameRe
   return frames;
 }
 
+const BASE_PLAYBACK_INTERVAL_MS = 500; // base time between autoplayed moves at 1x speed
+
 interface GameRendererProps {
   initialData?: any | null;
+
   currentTurn: number;
   setCurrentTurn: React.Dispatch<React.SetStateAction<number>>;
+
+  autoAdvance: boolean; // whether to automatically advance turns
+  setAutoAdvance: React.Dispatch<React.SetStateAction<boolean>>;
+
+  playbackSpeed: number; // DO NOT GIVE x <= 0 OR ELSE!!!!!!!!
+  setPlaybackSpeed: React.Dispatch<React.SetStateAction<number>>;
+
   // This callback gives the parent the ability to push new dictionaries
   onRegisterUpdater?: (updater: (newDict: any) => void) => void;
 }
@@ -184,8 +194,6 @@ export const GameRenderer = (props: GameRendererProps) => {
   const canvasManager = useRef<CanvasManager | null>(null);
   const [matchData, setMatchData] = useState<any | null>(props.initialData);
   const [frames, setFrames] = useState<GameRenderState[]>([]);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [playbackSpeed, setPlaybackSpeed] = useState(1);
 
   // --- Data Management ---
 
@@ -237,7 +245,7 @@ export const GameRenderer = (props: GameRendererProps) => {
     setFrames(allFrames);
 
     // If we were at the end of a live stream, auto-advance
-    if (isPlaying && props.currentTurn >= allFrames.length - 2) {
+    if (props.autoAdvance && props.currentTurn >= allFrames.length - 2) {
       props.setCurrentTurn && props.setCurrentTurn(allFrames.length - 1);
     }
   }, [matchData]);
@@ -261,7 +269,7 @@ export const GameRenderer = (props: GameRendererProps) => {
     const allFrames = buildFramesFromMatch(matchData, mapInfo.width, mapInfo.height);
     setFrames(allFrames);
     props.setCurrentTurn && props.setCurrentTurn(0);
-    setIsPlaying(false);
+    props.setAutoAdvance(false);
 
     // draw first frame (static map will be drawn automatically
     // once all tile images are loaded inside CanvasManager.preloadAssets)
@@ -284,11 +292,11 @@ export const GameRenderer = (props: GameRendererProps) => {
 
   // auto-play effect
   React.useEffect(() => {
-    if (!isPlaying || frames.length === 0) {
+    if (!props.autoAdvance || frames.length === 0) {
       return;
     }
 
-    const intervalDuration = 500 / Math.max(playbackSpeed, 0.25); // base 500ms at 1x
+    const intervalDuration = BASE_PLAYBACK_INTERVAL_MS / props.playbackSpeed;
 
     const interval = window.setInterval(() => {
       props.setCurrentTurn?.((prev) => {
@@ -298,7 +306,7 @@ export const GameRenderer = (props: GameRendererProps) => {
         const max = frames.length - 1;
         if (prev >= max) {
           // reached the end, stop playing
-          setIsPlaying(false);
+          props.setAutoAdvance(false);
           return prev;
         }
         return prev + 1;
@@ -308,7 +316,7 @@ export const GameRenderer = (props: GameRendererProps) => {
     return () => {
       window.clearInterval(interval);
     };
-  }, [isPlaying, frames, playbackSpeed]);
+  }, [props.autoAdvance, frames, props.playbackSpeed]);
 
   return (
     <TransformWrapper limitToBounds={false} minScale={0.1}>
