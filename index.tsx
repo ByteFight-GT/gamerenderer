@@ -5,7 +5,5 @@ import './style.css'
 import { GameRenderer } from './GameRenderer'
 
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <GameRenderer />
-  </StrictMode>,
+  <GameRenderer />
 )
