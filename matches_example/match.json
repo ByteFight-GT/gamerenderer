@@ -1,1 +1,3968 @@
-{"p1_bid": 15, "p2_bid": 15, "p1_time_left": [540.0, 539.9993074520025, 539.9993074520025, 539.9991070449905, 539.9991070449905, 539.9987829419842, 539.9987829419842, 539.9986266509804, 539.9986266509804, 539.9984536239936, 539.9984536239936, 539.998277214996, 539.998277214996, 539.9981323160027, 539.9981323160027, 539.997882257012, 539.997882257012, 539.9976868010126, 539.9976868010126, 539.9975292730232, 539.9975292730232, 539.9973412790278, 539.9973412790278, 539.997157647027, 539.997157647027, 539.9968858510256, 539.9968858510256, 539.9966784620192, 539.9966784620192, 539.9964737570117, 539.9964737570117, 539.9962380460202, 539.9962380460202, 539.996035676013, 539.996035676013, 539.995721379004, 539.995721379004, 539.9953969970084, 539.9953969970084, 539.995237250012, 539.995237250012, 539.9949602940178, 539.9949602940178, 539.9947983530146, 539.9947983530146, 539.9945685060084, 539.9945685060084, 539.994350789013, 539.994350789013, 539.9940778680175, 539.9940778680175, 539.9937442510127, 539.9937442510127, 539.9932083130116, 539.9932083130116, 539.9930310030177, 539.9930310030177, 539.9928308660164, 539.9928308660164, 539.9926232230209, 539.9926232230209, 539.9924293390213, 539.9924293390213, 539.9922233650141, 539.9922233650141, 539.9920017310069, 539.9920017310069, 539.9918431920087, 539.9918431920087, 539.9916454650083, 539.9916454650083, 539.9913687200169, 539.9913687200169, 539.9911124770151, 539.9911124770151, 539.9908913410181, 539.9908913410181, 539.9907432790205, 539.9907432790205, 539.9905685760314, 539.9905685760314, 539.9903189080214, 539.9903189080214, 539.9901389730221, 539.9901389730221, 539.9899287810113, 539.9899287810113, 539.9897728650103, 539.9897728650103, 539.9895816020144, 539.9895816020144, 539.9894355580182, 539.9894355580182, 539.9892719250201, 539.9892719250201, 539.9891357480228, 539.9891357480228, 539.988950214014, 539.988950214014, 539.9887745620217, 539.9887745620217, 539.9875756630208, 539.9875756630208, 539.9872425020294, 539.9872425020294, 539.9870825220278, 539.9870825220278, 539.9869175370259, 539.9869175370259, 539.986668882033, 539.986668882033, 539.9863273420342, 539.9863273420342, 539.9861677520385, 539.9861677520385, 539.985996308038, 539.985996308038, 539.9858596270351, 539.9858596270351, 539.9856888890354, 539.9856888890354, 539.9855309300474, 539.9855309300474, 539.9853266830469, 539.9853266830469, 539.9851610530604, 539.9851610530604, 539.9849871170591, 539.9849871170591, 539.9847426640627, 539.9847426640627, 539.9845025410614, 539.9845025410614, 539.9842986520525, 539.9842986520525, 539.9841172650486, 539.9841172650486, 539.9839018060447, 539.9839018060447, 539.9837546050403, 539.9837546050403, 539.9835864070483, 539.9835864070483, 539.983392668044, 539.983392668044, 539.9828474340466, 539.9828474340466, 539.982601137046, 539.982601137046, 539.982473976037, 539.982473976037, 539.9822458600247, 539.9822458600247, 539.9820379870216, 539.9820379870216, 539.9819123060297, 539.9819123060297, 539.9817427480157, 539.9817427480157, 539.9815841240197, 539.9815841240197, 539.9814128270227, 539.9814128270227, 539.9811638780229], "p2_time_left": [540.0, 540.0, 539.9995776539872, 539.9995776539872, 539.9993613279803, 539.9993613279803, 539.9992045609688, 539.9992045609688, 539.9990157099674, 539.9990157099674, 539.9988270049653, 539.9988270049653, 539.9986634559609, 539.9986634559609, 539.9984667459503, 539.9984667459503, 539.9982798339479, 539.9982798339479, 539.9980766469525, 539.9980766469525, 539.9979081629572, 539.9979081629572, 539.9977548949537, 539.9977548949537, 539.9975184399518, 539.9975184399518, 539.9973281469574, 539.9973281469574, 539.9971100659604, 539.9971100659604, 539.9969485179608, 539.9969485179608, 539.9967124929535, 539.9967124929535, 539.996492642953, 539.996492642953, 539.9963253729657, 539.9963253729657, 539.9961305099569, 539.9961305099569, 539.9959815309558, 539.9959815309558, 539.9957408789487, 539.9957408789487, 539.9955760109442, 539.9955760109442, 539.9953289319383, 539.9953289319383, 539.9951694709453, 539.9951694709453, 539.9949344809429, 539.9949344809429, 539.9945776489476, 539.9945776489476, 539.9944189099479, 539.9944189099479, 539.9941972079541, 539.9941972079541, 539.993807879946, 539.993807879946, 539.9936435809359, 539.9936435809359, 539.9934608019394, 539.9934608019394, 539.9932996969437, 539.9932996969437, 539.993133567943, 539.993133567943, 539.9929480529536, 539.9929480529536, 539.9928023199609, 539.9928023199609, 539.9926384479622, 539.9926384479622, 539.9924573539611, 539.9924573539611, 539.9923309219739, 539.9923309219739, 539.9921756539698, 539.9921756539698, 539.9919369659619, 539.9919369659619, 539.9917794479552, 539.9917794479552, 539.9916210909578, 539.9916210909578, 539.9914579839678, 539.9914579839678, 539.991264599972, 539.991264599972, 539.9911197839683, 539.9911197839683, 539.9908925519558, 539.9908925519558, 539.9907700819458, 539.9907700819458, 539.9906396129518, 539.9906396129518, 539.9904971479555, 539.9904971479555, 539.9902500779572, 539.9902500779572, 539.9899941479671, 539.9899941479671, 539.9898164059705, 539.9898164059705, 539.9896201279771, 539.9896201279771, 539.9894290739758, 539.9894290739758, 539.9892337989877, 539.9892337989877, 539.9890463699849, 539.9890463699849, 539.9888348409877, 539.9888348409877, 539.9885543249984, 539.9885543249984, 539.9883767439896, 539.9883767439896, 539.988186394985, 539.988186394985, 539.9880278619821, 539.9880278619821, 539.9878746749746, 539.9878746749746, 539.9876766119705, 539.9876766119705, 539.9874924579635, 539.9874924579635, 539.9872461779742, 539.9872461779742, 539.9870063379785, 539.9870063379785, 539.98671091898, 539.98671091898, 539.9863853729767, 539.9863853729767, 539.9860697759723, 539.9860697759723, 539.9858993719681, 539.9858993719681, 539.9857088589779, 539.9857088589779, 539.9855280069751, 539.9855280069751, 539.98531361598, 539.98531361598, 539.985106128981, 539.985106128981, 539.9848096299829, 539.9848096299829, 539.9846494889789, 539.9846494889789, 539.9844902459736, 539.9844902459736, 539.9842184089794, 539.9842184089794, 539.9840135209815, 539.9840135209815, 539.9838221079845, 539.9838221079845, 539.9836608529877, 539.9836608529877], "p1_loc": [[1, 10], [1, 12], [1, 12], [1, 12], [1, 12], [1, 13], [1, 13], [1, 13], [1, 13], [1, 14], [1, 14], [1, 15], [1, 15], [2, 15], [2, 15], [2, 14], [2, 14], [2, 15], [2, 15], [2, 16], [2, 16], [1, 16], [1, 16], [2, 16], [2, 16], [1, 16], [1, 16], [3, 16], [3, 16], [3, 17], [3, 17], [2, 17], [2, 17], [4, 18], [4, 18], [3, 18], [3, 18], [4, 17], [4, 17], [3, 17], [3, 17], [2, 17], [2, 17], [3, 17], [3, 17], [3, 16], [3, 16], [2, 16], [2, 16], [2, 16], [2, 16], [2, 17], [2, 17], [2, 18], [2, 18], [2, 17], [2, 17], [1, 17], [1, 17], [1, 16], [1, 16], [2, 15], [2, 15], [2, 16], [2, 16], [2, 17], [2, 17], [3, 16], [3, 16], [2, 16], [2, 16], [4, 16], [4, 16], [3, 16], [3, 16], [3, 16], [3, 16], [4, 16], [4, 16], [4, 17], [4, 17], [4, 18], [4, 18], [4, 17], [4, 17], [4, 18], [4, 18], [4, 16], [4, 16], [4, 15], [4, 15], [5, 15], [5, 15], [5, 14], [5, 14], [5, 13], [5, 13], [6, 13], [6, 13], [5, 13], [5, 13], [4, 11], [4, 11], [4, 9], [4, 9], [5, 9], [5, 9], [3, 8], [3, 8], [5, 7], [5, 7], [4, 9], [4, 9], [6, 10], [6, 10], [7, 9], [7, 9], [7, 10], [7, 10], [7, 9], [7, 9], [7, 9], [7, 9], [7, 9], [7, 9], [6, 9], [6, 9], [7, 9], [7, 9], [6, 11], [6, 11], [6, 10], [6, 10], [6, 8], [6, 8], [6, 7], [6, 7], [6, 8], [6, 8], [6, 9], [6, 9], [6, 10], [6, 10], [6, 9], [6, 9], [6, 8], [6, 8], [7, 8], [7, 8], [6, 8], [6, 8], [5, 8], [5, 8], [4, 17], [4, 17], [4, 16], [4, 16], [4, 15], [4, 15], [4, 16], [4, 16], [4, 15], [4, 15], [2, 16]], "p2_loc": [[18, 10], [18, 10], [18, 10], [18, 10], [17, 10], [17, 10], [16, 10], [16, 10], [16, 9], [16, 9], [15, 7], [15, 7], [15, 7], [15, 7], [15, 9], [15, 9], [14, 9], [14, 9], [12, 9], [12, 9], [13, 9], [13, 9], [14, 9], [14, 9], [14, 8], [14, 8], [14, 9], [14, 9], [14, 10], [14, 10], [14, 9], [14, 9], [14, 10], [14, 10], [14, 11], [14, 11], [13, 11], [13, 11], [14, 11], [14, 11], [15, 10], [15, 10], [15, 10], [15, 10], [16, 9], [16, 9], [15, 8], [15, 8], [15, 7], [15, 7], [16, 7], [16, 7], [16, 8], [16, 8], [15, 8], [15, 8], [16, 7], [16, 7], [16, 8], [16, 8], [16, 7], [16, 7], [16, 6], [16, 6], [16, 6], [16, 6], [15, 7], [15, 7], [16, 6], [16, 6], [16, 6], [16, 6], [16, 6], [16, 6], [17, 6], [17, 6], [17, 5], [17, 5], [16, 5], [16, 5], [16, 6], [16, 6], [16, 5], [16, 5], [16, 4], [16, 4], [15, 5], [15, 5], [15, 4], [15, 4], [14, 5], [14, 5], [13, 5], [13, 5], [12, 3], [12, 3], [12, 4], [12, 4], [12, 5], [12, 5], [13, 5], [13, 5], [13, 2], [13, 2], [13, 3], [13, 3], [14, 3], [14, 3], [12, 4], [12, 4], [12, 3], [12, 3], [12, 4], [12, 4], [12, 4], [12, 4], [12, 3], [12, 3], [12, 4], [12, 4], [13, 2], [13, 2], [14, 2], [14, 2], [14, 1], [14, 1], [14, 1], [14, 1], [14, 3], [14, 3], [14, 2], [14, 2], [14, 3], [14, 3], [13, 4], [13, 4], [16, 7], [16, 7], [16, 7], [16, 7], [16, 6], [16, 6], [17, 6], [17, 6], [17, 5], [17, 5], [16, 5], [16, 5], [16, 6], [16, 6], [13, 4], [13, 4], [14, 4], [14, 4], [15, 3], [15, 3], [14, 4], [14, 4], [14, 3], [14, 3], [16, 6], [16, 6], [18, 7], [18, 7]], "p1_stamina": [100, 60, 65, 40, 47, 47, 54, 29, 38, 23, 32, 32, 39, 39, 46, 46, 55, 55, 62, 47, 56, 41, 52, 37, 50, 35, 51, 26, 44, 44, 60, 60, 76, 31, 41, 26, 42, 17, 33, 18, 42, 27, 53, 53, 79, 79, 100, 55, 71, 46, 64, 64, 80, 80, 96, 81, 99, 54, 72, 27, 47, 22, 42, 27, 53, 38, 62, 37, 67, 67, 97, 100, 100, 85, 100, 75, 100, 100, 100, 100, 100, 55, 78, 33, 64, 49, 76, 51, 76, 61, 84, 69, 86, 41, 58, 43, 60, 60, 75, 30, 49, 74, 87, 100, 100, 100, 100, 55, 67, 92, 100, 55, 71, 61, 73, 48, 58, 58, 70, 25, 37, 12, 26, 1, 17, 17, 37, 37, 53, 8, 33, 18, 43, 18, 41, 41, 58, 48, 73, 73, 100, 100, 100, 55, 84, 39, 66, 51, 76, 61, 92, 77, 98, 83, 100, 100, 100, 85, 100, 85, 100, 85, 100, 75], "p2_stamina": [100, 100, 75, 82, 67, 76, 61, 72, 72, 83, 73, 80, 55, 64, 39, 52, 52, 63, 38, 47, 47, 58, 58, 71, 56, 74, 74, 90, 75, 91, 91, 100, 55, 71, 71, 85, 85, 97, 97, 100, 75, 95, 70, 92, 67, 89, 64, 88, 43, 63, 63, 83, 83, 100, 85, 100, 75, 97, 52, 82, 82, 100, 55, 77, 52, 76, 51, 81, 56, 70, 45, 62, 37, 56, 41, 56, 11, 28, 13, 34, 19, 44, 29, 52, 52, 71, 46, 71, 71, 92, 67, 90, 45, 64, 19, 32, 17, 32, 32, 49, 49, 72, 27, 42, 42, 63, 48, 74, 29, 51, 51, 73, 58, 80, 55, 77, 62, 84, 69, 91, 46, 64, 64, 82, 100, 100, 75, 89, 64, 93, 93, 116, 101, 132, 107, 138, 138, 140, 115, 140, 95, 130, 130, 140, 95, 114, 99, 124, 109, 140, 140, 140, 140, 140, 115, 140, 90, 100, 100, 100, 100, 100, 55, 55], "p1_max_stamina": [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], "p2_max_stamina": [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 140, 140, 140, 140, 140, 140, 140, 140, 140, 140, 140, 140, 140, 140, 140, 140, 140, 140, 140, 140, 140, 140, 140, 140, 140, 140, 140, 140, 140, 140, 100, 100, 100, 100, 100, 100, 100, 100], "p1_territory": [0, 1, 1, 2, 2, 2, 2, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 9, 9, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 14, 14, 14, 14, 8, 8, 9, 9, 9, 9, 9, 9, 10, 10, 11, 11, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15, 15, 15, 16, 16, 17, 17, 18, 18, 18, 18, 18, 18, 19, 19, 20, 20, 21, 21, 16, 16, 17, 17, 18, 18, 19, 19, 20, 20, 20, 20, 21, 21, 22, 22, 23, 23, 23, 23, 24, 24, 25, 25, 26, 26, 27, 27, 28, 28, 28, 28, 29, 29, 30, 30, 31, 31, 31, 31, 31, 31, 32, 32, 33, 33, 34, 34, 34, 34, 35, 35, 35, 35, 35, 35, 35, 35, 36, 36, 37, 37, 38, 38, 32, 32, 33, 33, 33, 33, 34, 34, 35, 35, 30, 30, 31], "p2_territory": [0, 0, 1, 1, 2, 2, 3, 3, 3, 3, 4, 4, 5, 5, 6, 6, 6, 6, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 10, 10, 11, 11, 11, 11, 12, 12, 13, 13, 13, 13, 13, 13, 14, 14, 14, 14, 15, 15, 15, 15, 16, 16, 17, 17, 18, 18, 12, 12, 13, 13, 14, 14, 14, 14, 15, 15, 16, 16, 17, 17, 17, 17, 17, 17, 18, 18, 18, 18, 19, 19, 20, 20, 21, 21, 22, 22, 22, 22, 22, 22, 23, 23, 23, 23, 24, 24, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 23, 23, 23, 23, 23, 23, 24, 24, 25, 25, 25, 25, 26, 26, 27, 27, 27, 27, 28, 28, 29, 29, 29, 29, 25, 25, 26, 26, 27, 27, 27, 27, 27, 27, 28, 28, 22, 22, 22, 22, 22, 22, 23, 23], "parity_playing": [0, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1], "paint_updates": [{}, {"29": 1}, {"350": -1}, {"31": 1}, {"369": -1}, {}, {"330": -1}, {"32": 1}, {}, {"34": 1}, {"309": -1}, {}, {"287": -1}, {}, {"306": -1}, {}, {}, {}, {"269": -1}, {"35": 1}, {}, {"36": 1}, {}, {"37": 1}, {"288": -1}, {"55": 1}, {}, {"56": 1}, {"290": -1}, {}, {}, {}, {"269": -2}, {"58": 1}, {}, {"78": 1}, {}, {"77": 1}, {}, {"96": 1}, {"271": -1}, {"57": 1}, {"311": -1}, {}, {"290": -2}, {}, {"328": -1}, {"35": 0, "36": 0, "37": 0, "55": 0, "56": 0, "57": 0, "77": 0}, {"307": -1}, {"36": 1}, {}, {}, {}, {}, {"308": -1}, {"57": 1}, {"288": -2}, {"37": 1}, {"326": -1}, {"36": 2}, {}, {"35": 1}, {"347": -1}, {"54": 1}, {"325": -1}, {"55": 1}, {"327": -1}, {"77": 1}, {"287": -2, "306": 0, "307": 0, "308": 0, "326": 0, "327": 0, "328": 0, "347": 0}, {}, {"306": -1}, {"76": 1}, {"346": -1}, {"95": 1}, {"306": -2}, {"75": 1}, {"326": -1}, {}, {"344": -1}, {}, {"305": -1}, {"98": 1}, {"325": -2}, {"97": 1}, {}, {"117": 1}, {"304": -1}, {"76": 0, "77": 0, "96": 0, "97": 0, "98": 0, "117": 0}, {}, {"76": 1}, {"284": -1}, {"94": 1}, {"265": -1}, {"114": 1}, {"245": -1}, {"113": 1}, {"244": -1}, {}, {}, {"132": 1}, {}, {"93": 1}, {"264": -1}, {"71": 1}, {}, {}, {"243": -1}, {"89": 1}, {"263": -1}, {"48": 1}, {}, {"87": 1}, {"244": -2}, {"69": 1}, {"243": -2}, {"110": 1}, {"245": -2}, {}, {"263": -2}, {"130": 1}, {"243": -1, "244": -1, "245": -1, "263": -1, "265": 0, "284": 0}, {"129": 1}, {}, {"148": 1}, {}, {}, {"282": -1}, {}, {"301": -1}, {"150": 1}, {}, {"111": 1}, {"262": -1}, {"131": 1}, {"284": -1}, {}, {"327": -1}, {"107": 1}, {"307": -1}, {}, {"328": -1}, {}, {}, {"110": 2}, {"305": 0, "306": -1, "307": 0, "325": -1, "326": 0, "327": 0, "346": 0}, {"109": 1}, {"346": -1}, {"108": 1}, {"305": -1}, {"128": 1}, {}, {"87": 0, "89": 0, "107": 0, "108": 0, "109": 0, "128": 0, "129": 0}, {}, {"88": 1, "97": 1}, {"283": -1}, {}, {"262": 0, "263": 0, "264": 0, "282": 0, "283": 0, "284": 0, "304": 0}, {"116": 1}, {}, {"96": 1}, {"326": -1}, {"75": 0, "94": 0, "95": 0, "96": 0, "114": 0, "116": 0}, {"327": -1}, {"56": 1, "75": 1}], "beacon_updates": [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {"56": 1}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {"327": -1}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {"97": 1}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {"264": -1}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {"327": 0}, {}, {}, {}, {}, {}, {}, {}, {"326": -1}, {}, {}, {}, {}, {}, {"264": 0}, {"108": 1}, {}, {"97": 0}, {}, {}, {"283": -1}, {}, {}, {}, {"326": 0}, {"95": 1}, {}, {"56": 0}], "powerup_updates": [{}, {}, {}, {}, {"190": true, "220": true, "239": true, "281": true, "307": true, "312": true}, {}, {}, {}, {}, {}, {"307": false}, {}, {}, {}, {"47": true, "52": true, "83": true, "96": true}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {"109": true, "110": true, "122": true}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {"107": true, "112": true, "230": true}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {"181": true, "198": true, "289": true, "290": true}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {"82": true, "89": true, "90": true, "97": true}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {"341": true, "358": true, "362": true, "377": true}, {}, {}, {}, {}, {}, {}, {"96": false}, {}, {}, {"88": true, "91": true, "124": true, "135": true}, {}, {}, {}, {}, {"97": false}, {}, {}, {}, {}, {"29": true, "30": true, "368": true, "371": true}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {"66": true, "73": true, "170": true}, {}, {}, {}, {}, {}, {}, {"91": false, "112": false}, {}, {"89": false, "90": false}, {"247": true, "252": true, "287": true, "292": true}, {"109": false}, {}, {}, {}, {"88": false, "107": false}, {}, {}, {}, {"110": false}, {"106": true, "113": true, "365": true, "374": true}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {"45": true, "54": true, "109": true, "110": true, "281": false}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {"108": true, "111": true, "245": true, "254": true}, {}, {}, {"108": false}, {}, {}, {}, {}, {}, {}, {"202": true, "217": true}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {"67": true, "72": true, "138": true}, {}, {}, {}, {}, {}, {}, {}, {}, {}], "hill_updates": [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {"3": -1}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {"3": 0}, {}, {}, {}, {}, {}, {}, {}], "hill_mapping": [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0], [0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 0, 0, 0], [0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]], "walls": [[true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true], [true, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, true], [true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true], [true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true], [true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true], [true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, false], [false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, false, false], [false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, true, false, false, false], [false, false, false, true, true, true, true, true, true, true, false, true, true, true, true, true, false, false, false, false], [false, false, false, false, true, true, true, true, true, true, false, true, true, true, true, true, false, false, false, false], [false, false, false, false, true, true, true, true, true, true, false, true, true, true, true, true, false, false, false, false], [false, false, false, true, true, true, true, true, true, true, false, true, true, true, true, true, false, false, false, false], [false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, true, false, false, false], [false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, false, false], [true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, false], [true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true], [true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true], [true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true], [true, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, true], [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true]], "actions": ["NONE", [{"name": "Paint", "location": [1, 9]}, {"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [17, 10]}, {"name": "Move", "direction": "UP", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "DOWN", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [1, 11]}, {"name": "Move", "direction": "DOWN", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "UP", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [18, 9]}, {"name": "Move", "direction": "UP", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [16, 10]}, {"name": "Move", "direction": "UP", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [1, 12]}, {"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [1, 14]}, {"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [15, 9]}, {"name": "Move", "direction": "UP", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [14, 7]}, {"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Move", "direction": "DOWN", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [15, 6]}, {"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Move", "direction": "UP", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [13, 9]}, {"name": "Move", "direction": "UP", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "UP", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [1, 15]}, {"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Move", "direction": "DOWN", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [1, 16]}, {"name": "Move", "direction": "UP", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Move", "direction": "DOWN", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [1, 17]}, {"name": "Move", "direction": "DOWN", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [14, 8]}, {"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [2, 15]}, {"name": "Move", "direction": "UP", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [2, 16]}, {"name": "Move", "direction": "DOWN", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "DOWN", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [14, 10]}, {"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Move", "direction": "UP", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [13, 9]}, {"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [2, 18]}, {"name": "Move", "direction": "DOWN", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "DOWN", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [3, 18]}, {"name": "Move", "direction": "UP", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Move", "direction": "UP", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [3, 17]}, {"name": "Move", "direction": "DOWN", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Move", "direction": "DOWN", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [4, 16]}, {"name": "Move", "direction": "UP", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [13, 11]}, {"name": "Move", "direction": "DOWN", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [2, 17]}, {"name": "Move", "direction": "UP", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [15, 11]}, {"name": "Move", "direction": "DOWN", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "UP", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Move", "direction": "DOWN", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [14, 10]}, {"name": "Move", "direction": "DOWN", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [16, 8]}, {"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "UP", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [3, 15]}, {"name": "Move", "direction": "UP", "move_type": "REGULAR", "place_beacon": true, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [15, 7]}, {"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "UP", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "DOWN", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [1, 16]}, {"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Move", "direction": "DOWN", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [15, 8]}, {"name": "Move", "direction": "UP", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [2, 17]}, {"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [14, 8]}, {"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "DOWN", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [1, 17]}, {"name": "Move", "direction": "UP", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "DOWN", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "UP", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [16, 6]}, {"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "DOWN", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "UP", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [1, 16]}, {"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [1, 15]}, {"name": "Move", "direction": "DOWN", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [17, 7]}, {"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [2, 14]}, {"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [16, 5]}, {"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [2, 15]}, {"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [16, 7]}, {"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "UP", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [3, 17]}, {"name": "Move", "direction": "DOWN", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [14, 7]}, {"name": "Move", "direction": "DOWN", "move_type": "REGULAR", "place_beacon": true, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Move", "direction": "UP", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [15, 6]}, {"name": "Move", "direction": "UP", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "DOWN", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [3, 16]}, {"name": "Move", "direction": "DOWN", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "DOWN", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [17, 6]}, {"name": "Move", "direction": "DOWN", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "UP", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [4, 15]}, {"name": "Move", "direction": "UP", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [15, 6]}, {"name": "Move", "direction": "DOWN", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [3, 15]}, {"name": "Move", "direction": "DOWN", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "UP", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [16, 6]}, {"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "UP", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "DOWN", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Move", "direction": "DOWN", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [17, 4]}, {"name": "Move", "direction": "UP", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [15, 5]}, {"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [4, 18]}, {"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "UP", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "DOWN", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [16, 5]}, {"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [4, 17]}, {"name": "Move", "direction": "UP", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "DOWN", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [5, 17]}, {"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [15, 4]}, {"name": "Move", "direction": "UP", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [3, 18]}, {"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": true, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [3, 16]}, {"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [14, 4]}, {"name": "Move", "direction": "UP", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [4, 14]}, {"name": "Move", "direction": "DOWN", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [13, 5]}, {"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "UP", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [5, 14]}, {"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [12, 5]}, {"name": "Move", "direction": "UP", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [5, 13]}, {"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [12, 4]}, {"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Move", "direction": "DOWN", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [6, 12]}, {"name": "Move", "direction": "UP", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Move", "direction": "DOWN", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [4, 13]}, {"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "UP", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [13, 4]}, {"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [3, 11]}, {"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Move", "direction": "DOWN", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [12, 3]}, {"name": "Move", "direction": "DOWN", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [4, 9]}, {"name": "Move", "direction": "UP", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "UP", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [13, 3]}, {"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "UP", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "UP", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [2, 8]}, {"name": "Move", "direction": "DOWN", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "DOWN", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [4, 7]}, {"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "UP", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [12, 4]}, {"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [3, 9]}, {"name": "Move", "direction": "DOWN", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "DOWN", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [12, 3]}, {"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [5, 10]}, {"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "DOWN", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [12, 5]}, {"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [13, 3]}, {"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [6, 10]}, {"name": "Move", "direction": "UP", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "DOWN", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [13, 4]}, {"name": "Move", "direction": "DOWN", "move_type": "REGULAR", "place_beacon": true, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [6, 9]}, {"name": "Move", "direction": "UP", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "DOWN", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Move", "direction": "DOWN", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [7, 8]}, {"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Move", "direction": "UP", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [14, 2]}, {"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Move", "direction": "DOWN", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [15, 1]}, {"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [7, 10]}, {"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "UP", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [5, 11]}, {"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [13, 2]}, {"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [6, 11]}, {"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [14, 4]}, {"name": "Move", "direction": "UP", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Move", "direction": -1, "move_type": "BEACON_TRAVEL", "place_beacon": false, "beacon_target": [16, 7]}], [{"name": "Paint", "location": [5, 7]}, {"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "UP", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "DOWN", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [15, 7]}, {"name": "Move", "direction": "DOWN", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "UP", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [16, 8]}, {"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Move", "direction": "DOWN", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [5, 10]}, {"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [17, 5]}, {"name": "Move", "direction": "UP", "move_type": "REGULAR", "place_beacon": true, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "DOWN", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [5, 9]}, {"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [17, 6]}, {"name": "Move", "direction": "UP", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [5, 8]}, {"name": "Move", "direction": "DOWN", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [15, 5]}, {"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [6, 8]}, {"name": "Move", "direction": "UP", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Move", "direction": -1, "move_type": "BEACON_TRAVEL", "place_beacon": false, "beacon_target": [13, 4]}], [{"name": "Paint", "location": [6, 7]}, {"name": "Move", "direction": "UP", "move_type": "REGULAR", "place_beacon": true, "beacon_target": [-1, -1]}], [{"name": "Move", "direction": "DOWN", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [4, 8]}, {"name": "Move", "direction": -1, "move_type": "BEACON_TRAVEL", "place_beacon": false, "beacon_target": [4, 17]}], [{"name": "Paint", "location": [14, 3]}, {"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "DOWN", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [15, 2]}, {"name": "Move", "direction": "UP", "move_type": "REGULAR", "place_beacon": true, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [5, 16]}, {"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [4, 16]}, {"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Move", "direction": -1, "move_type": "BEACON_TRAVEL", "place_beacon": false, "beacon_target": [16, 6]}], [{"name": "Paint", "location": [3, 16]}, {"name": "Move", "direction": "LEFT", "move_type": "REGULAR", "place_beacon": true, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [16, 7]}, {"name": "Move", "direction": "DOWN", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "RIGHT", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}, {"name": "Move", "direction": "DOWN", "move_type": "REGULAR", "place_beacon": false, "beacon_target": [-1, -1]}], [{"name": "Paint", "location": [3, 15]}, {"name": "Move", "direction": -1, "move_type": "BEACON_TRAVEL", "place_beacon": false, "beacon_target": [2, 16]}, {"name": "Move", "direction": -1, "move_type": "BEACON_TRAVEL", "place_beacon": false, "beacon_target": [5, 8]}]], "turn_count": 162, "result": "PLAYER_2", "reason": "INVALID_TURN", "p1_err": "Invalid actions: ['Paint(location=Location(r=3, c=15))', 'Move(direction=None, move_type=2, place_beacon=False, beacon_target=Location(r=2, c=16))', 'Move(direction=None, move_type=2, place_beacon=False, beacon_target=Location(r=5, c=8))']", "p2_err": "", "p1_commentary": "", "p2_commentary": "", "map_string": "", "engine_version": "0.1.1", "cpu": "brand:Intel(R) Core(TM) Ultra 7 258V, arch: x86_64, processor: x86_64, platform: Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.31"}
+{
+  "p1_bid": 15,
+  "p2_bid": 15,
+  "p1_time_left": [
+    540.0, 539.9993074520025, 539.9993074520025, 539.9991070449905,
+    539.9991070449905, 539.9987829419842, 539.9987829419842, 539.9986266509804,
+    539.9986266509804, 539.9984536239936, 539.9984536239936, 539.998277214996,
+    539.998277214996, 539.9981323160027, 539.9981323160027, 539.997882257012,
+    539.997882257012, 539.9976868010126, 539.9976868010126, 539.9975292730232,
+    539.9975292730232, 539.9973412790278, 539.9973412790278, 539.997157647027,
+    539.997157647027, 539.9968858510256, 539.9968858510256, 539.9966784620192,
+    539.9966784620192, 539.9964737570117, 539.9964737570117, 539.9962380460202,
+    539.9962380460202, 539.996035676013, 539.996035676013, 539.995721379004,
+    539.995721379004, 539.9953969970084, 539.9953969970084, 539.995237250012,
+    539.995237250012, 539.9949602940178, 539.9949602940178, 539.9947983530146,
+    539.9947983530146, 539.9945685060084, 539.9945685060084, 539.994350789013,
+    539.994350789013, 539.9940778680175, 539.9940778680175, 539.9937442510127,
+    539.9937442510127, 539.9932083130116, 539.9932083130116, 539.9930310030177,
+    539.9930310030177, 539.9928308660164, 539.9928308660164, 539.9926232230209,
+    539.9926232230209, 539.9924293390213, 539.9924293390213, 539.9922233650141,
+    539.9922233650141, 539.9920017310069, 539.9920017310069, 539.9918431920087,
+    539.9918431920087, 539.9916454650083, 539.9916454650083, 539.9913687200169,
+    539.9913687200169, 539.9911124770151, 539.9911124770151, 539.9908913410181,
+    539.9908913410181, 539.9907432790205, 539.9907432790205, 539.9905685760314,
+    539.9905685760314, 539.9903189080214, 539.9903189080214, 539.9901389730221,
+    539.9901389730221, 539.9899287810113, 539.9899287810113, 539.9897728650103,
+    539.9897728650103, 539.9895816020144, 539.9895816020144, 539.9894355580182,
+    539.9894355580182, 539.9892719250201, 539.9892719250201, 539.9891357480228,
+    539.9891357480228, 539.988950214014, 539.988950214014, 539.9887745620217,
+    539.9887745620217, 539.9875756630208, 539.9875756630208, 539.9872425020294,
+    539.9872425020294, 539.9870825220278, 539.9870825220278, 539.9869175370259,
+    539.9869175370259, 539.986668882033, 539.986668882033, 539.9863273420342,
+    539.9863273420342, 539.9861677520385, 539.9861677520385, 539.985996308038,
+    539.985996308038, 539.9858596270351, 539.9858596270351, 539.9856888890354,
+    539.9856888890354, 539.9855309300474, 539.9855309300474, 539.9853266830469,
+    539.9853266830469, 539.9851610530604, 539.9851610530604, 539.9849871170591,
+    539.9849871170591, 539.9847426640627, 539.9847426640627, 539.9845025410614,
+    539.9845025410614, 539.9842986520525, 539.9842986520525, 539.9841172650486,
+    539.9841172650486, 539.9839018060447, 539.9839018060447, 539.9837546050403,
+    539.9837546050403, 539.9835864070483, 539.9835864070483, 539.983392668044,
+    539.983392668044, 539.9828474340466, 539.9828474340466, 539.982601137046,
+    539.982601137046, 539.982473976037, 539.982473976037, 539.9822458600247,
+    539.9822458600247, 539.9820379870216, 539.9820379870216, 539.9819123060297,
+    539.9819123060297, 539.9817427480157, 539.9817427480157, 539.9815841240197,
+    539.9815841240197, 539.9814128270227, 539.9814128270227, 539.9811638780229
+  ],
+  "p2_time_left": [
+    540.0, 540.0, 539.9995776539872, 539.9995776539872, 539.9993613279803,
+    539.9993613279803, 539.9992045609688, 539.9992045609688, 539.9990157099674,
+    539.9990157099674, 539.9988270049653, 539.9988270049653, 539.9986634559609,
+    539.9986634559609, 539.9984667459503, 539.9984667459503, 539.9982798339479,
+    539.9982798339479, 539.9980766469525, 539.9980766469525, 539.9979081629572,
+    539.9979081629572, 539.9977548949537, 539.9977548949537, 539.9975184399518,
+    539.9975184399518, 539.9973281469574, 539.9973281469574, 539.9971100659604,
+    539.9971100659604, 539.9969485179608, 539.9969485179608, 539.9967124929535,
+    539.9967124929535, 539.996492642953, 539.996492642953, 539.9963253729657,
+    539.9963253729657, 539.9961305099569, 539.9961305099569, 539.9959815309558,
+    539.9959815309558, 539.9957408789487, 539.9957408789487, 539.9955760109442,
+    539.9955760109442, 539.9953289319383, 539.9953289319383, 539.9951694709453,
+    539.9951694709453, 539.9949344809429, 539.9949344809429, 539.9945776489476,
+    539.9945776489476, 539.9944189099479, 539.9944189099479, 539.9941972079541,
+    539.9941972079541, 539.993807879946, 539.993807879946, 539.9936435809359,
+    539.9936435809359, 539.9934608019394, 539.9934608019394, 539.9932996969437,
+    539.9932996969437, 539.993133567943, 539.993133567943, 539.9929480529536,
+    539.9929480529536, 539.9928023199609, 539.9928023199609, 539.9926384479622,
+    539.9926384479622, 539.9924573539611, 539.9924573539611, 539.9923309219739,
+    539.9923309219739, 539.9921756539698, 539.9921756539698, 539.9919369659619,
+    539.9919369659619, 539.9917794479552, 539.9917794479552, 539.9916210909578,
+    539.9916210909578, 539.9914579839678, 539.9914579839678, 539.991264599972,
+    539.991264599972, 539.9911197839683, 539.9911197839683, 539.9908925519558,
+    539.9908925519558, 539.9907700819458, 539.9907700819458, 539.9906396129518,
+    539.9906396129518, 539.9904971479555, 539.9904971479555, 539.9902500779572,
+    539.9902500779572, 539.9899941479671, 539.9899941479671, 539.9898164059705,
+    539.9898164059705, 539.9896201279771, 539.9896201279771, 539.9894290739758,
+    539.9894290739758, 539.9892337989877, 539.9892337989877, 539.9890463699849,
+    539.9890463699849, 539.9888348409877, 539.9888348409877, 539.9885543249984,
+    539.9885543249984, 539.9883767439896, 539.9883767439896, 539.988186394985,
+    539.988186394985, 539.9880278619821, 539.9880278619821, 539.9878746749746,
+    539.9878746749746, 539.9876766119705, 539.9876766119705, 539.9874924579635,
+    539.9874924579635, 539.9872461779742, 539.9872461779742, 539.9870063379785,
+    539.9870063379785, 539.98671091898, 539.98671091898, 539.9863853729767,
+    539.9863853729767, 539.9860697759723, 539.9860697759723, 539.9858993719681,
+    539.9858993719681, 539.9857088589779, 539.9857088589779, 539.9855280069751,
+    539.9855280069751, 539.98531361598, 539.98531361598, 539.985106128981,
+    539.985106128981, 539.9848096299829, 539.9848096299829, 539.9846494889789,
+    539.9846494889789, 539.9844902459736, 539.9844902459736, 539.9842184089794,
+    539.9842184089794, 539.9840135209815, 539.9840135209815, 539.9838221079845,
+    539.9838221079845, 539.9836608529877, 539.9836608529877
+  ],
+  "p1_loc": [
+    [1, 10],
+    [1, 12],
+    [1, 12],
+    [1, 12],
+    [1, 12],
+    [1, 13],
+    [1, 13],
+    [1, 13],
+    [1, 13],
+    [1, 14],
+    [1, 14],
+    [1, 15],
+    [1, 15],
+    [2, 15],
+    [2, 15],
+    [2, 14],
+    [2, 14],
+    [2, 15],
+    [2, 15],
+    [2, 16],
+    [2, 16],
+    [1, 16],
+    [1, 16],
+    [2, 16],
+    [2, 16],
+    [1, 16],
+    [1, 16],
+    [3, 16],
+    [3, 16],
+    [3, 17],
+    [3, 17],
+    [2, 17],
+    [2, 17],
+    [4, 18],
+    [4, 18],
+    [3, 18],
+    [3, 18],
+    [4, 17],
+    [4, 17],
+    [3, 17],
+    [3, 17],
+    [2, 17],
+    [2, 17],
+    [3, 17],
+    [3, 17],
+    [3, 16],
+    [3, 16],
+    [2, 16],
+    [2, 16],
+    [2, 16],
+    [2, 16],
+    [2, 17],
+    [2, 17],
+    [2, 18],
+    [2, 18],
+    [2, 17],
+    [2, 17],
+    [1, 17],
+    [1, 17],
+    [1, 16],
+    [1, 16],
+    [2, 15],
+    [2, 15],
+    [2, 16],
+    [2, 16],
+    [2, 17],
+    [2, 17],
+    [3, 16],
+    [3, 16],
+    [2, 16],
+    [2, 16],
+    [4, 16],
+    [4, 16],
+    [3, 16],
+    [3, 16],
+    [3, 16],
+    [3, 16],
+    [4, 16],
+    [4, 16],
+    [4, 17],
+    [4, 17],
+    [4, 18],
+    [4, 18],
+    [4, 17],
+    [4, 17],
+    [4, 18],
+    [4, 18],
+    [4, 16],
+    [4, 16],
+    [4, 15],
+    [4, 15],
+    [5, 15],
+    [5, 15],
+    [5, 14],
+    [5, 14],
+    [5, 13],
+    [5, 13],
+    [6, 13],
+    [6, 13],
+    [5, 13],
+    [5, 13],
+    [4, 11],
+    [4, 11],
+    [4, 9],
+    [4, 9],
+    [5, 9],
+    [5, 9],
+    [3, 8],
+    [3, 8],
+    [5, 7],
+    [5, 7],
+    [4, 9],
+    [4, 9],
+    [6, 10],
+    [6, 10],
+    [7, 9],
+    [7, 9],
+    [7, 10],
+    [7, 10],
+    [7, 9],
+    [7, 9],
+    [7, 9],
+    [7, 9],
+    [7, 9],
+    [7, 9],
+    [6, 9],
+    [6, 9],
+    [7, 9],
+    [7, 9],
+    [6, 11],
+    [6, 11],
+    [6, 10],
+    [6, 10],
+    [6, 8],
+    [6, 8],
+    [6, 7],
+    [6, 7],
+    [6, 8],
+    [6, 8],
+    [6, 9],
+    [6, 9],
+    [6, 10],
+    [6, 10],
+    [6, 9],
+    [6, 9],
+    [6, 8],
+    [6, 8],
+    [7, 8],
+    [7, 8],
+    [6, 8],
+    [6, 8],
+    [5, 8],
+    [5, 8],
+    [4, 17],
+    [4, 17],
+    [4, 16],
+    [4, 16],
+    [4, 15],
+    [4, 15],
+    [4, 16],
+    [4, 16],
+    [4, 15],
+    [4, 15],
+    [2, 16]
+  ],
+  "p2_loc": [
+    [18, 10],
+    [18, 10],
+    [18, 10],
+    [18, 10],
+    [17, 10],
+    [17, 10],
+    [16, 10],
+    [16, 10],
+    [16, 9],
+    [16, 9],
+    [15, 7],
+    [15, 7],
+    [15, 7],
+    [15, 7],
+    [15, 9],
+    [15, 9],
+    [14, 9],
+    [14, 9],
+    [12, 9],
+    [12, 9],
+    [13, 9],
+    [13, 9],
+    [14, 9],
+    [14, 9],
+    [14, 8],
+    [14, 8],
+    [14, 9],
+    [14, 9],
+    [14, 10],
+    [14, 10],
+    [14, 9],
+    [14, 9],
+    [14, 10],
+    [14, 10],
+    [14, 11],
+    [14, 11],
+    [13, 11],
+    [13, 11],
+    [14, 11],
+    [14, 11],
+    [15, 10],
+    [15, 10],
+    [15, 10],
+    [15, 10],
+    [16, 9],
+    [16, 9],
+    [15, 8],
+    [15, 8],
+    [15, 7],
+    [15, 7],
+    [16, 7],
+    [16, 7],
+    [16, 8],
+    [16, 8],
+    [15, 8],
+    [15, 8],
+    [16, 7],
+    [16, 7],
+    [16, 8],
+    [16, 8],
+    [16, 7],
+    [16, 7],
+    [16, 6],
+    [16, 6],
+    [16, 6],
+    [16, 6],
+    [15, 7],
+    [15, 7],
+    [16, 6],
+    [16, 6],
+    [16, 6],
+    [16, 6],
+    [16, 6],
+    [16, 6],
+    [17, 6],
+    [17, 6],
+    [17, 5],
+    [17, 5],
+    [16, 5],
+    [16, 5],
+    [16, 6],
+    [16, 6],
+    [16, 5],
+    [16, 5],
+    [16, 4],
+    [16, 4],
+    [15, 5],
+    [15, 5],
+    [15, 4],
+    [15, 4],
+    [14, 5],
+    [14, 5],
+    [13, 5],
+    [13, 5],
+    [12, 3],
+    [12, 3],
+    [12, 4],
+    [12, 4],
+    [12, 5],
+    [12, 5],
+    [13, 5],
+    [13, 5],
+    [13, 2],
+    [13, 2],
+    [13, 3],
+    [13, 3],
+    [14, 3],
+    [14, 3],
+    [12, 4],
+    [12, 4],
+    [12, 3],
+    [12, 3],
+    [12, 4],
+    [12, 4],
+    [12, 4],
+    [12, 4],
+    [12, 3],
+    [12, 3],
+    [12, 4],
+    [12, 4],
+    [13, 2],
+    [13, 2],
+    [14, 2],
+    [14, 2],
+    [14, 1],
+    [14, 1],
+    [14, 1],
+    [14, 1],
+    [14, 3],
+    [14, 3],
+    [14, 2],
+    [14, 2],
+    [14, 3],
+    [14, 3],
+    [13, 4],
+    [13, 4],
+    [16, 7],
+    [16, 7],
+    [16, 7],
+    [16, 7],
+    [16, 6],
+    [16, 6],
+    [17, 6],
+    [17, 6],
+    [17, 5],
+    [17, 5],
+    [16, 5],
+    [16, 5],
+    [16, 6],
+    [16, 6],
+    [13, 4],
+    [13, 4],
+    [14, 4],
+    [14, 4],
+    [15, 3],
+    [15, 3],
+    [14, 4],
+    [14, 4],
+    [14, 3],
+    [14, 3],
+    [16, 6],
+    [16, 6],
+    [18, 7],
+    [18, 7]
+  ],
+  "p1_stamina": [
+    100, 60, 65, 40, 47, 47, 54, 29, 38, 23, 32, 32, 39, 39, 46, 46, 55, 55, 62,
+    47, 56, 41, 52, 37, 50, 35, 51, 26, 44, 44, 60, 60, 76, 31, 41, 26, 42, 17,
+    33, 18, 42, 27, 53, 53, 79, 79, 100, 55, 71, 46, 64, 64, 80, 80, 96, 81, 99,
+    54, 72, 27, 47, 22, 42, 27, 53, 38, 62, 37, 67, 67, 97, 100, 100, 85, 100,
+    75, 100, 100, 100, 100, 100, 55, 78, 33, 64, 49, 76, 51, 76, 61, 84, 69, 86,
+    41, 58, 43, 60, 60, 75, 30, 49, 74, 87, 100, 100, 100, 100, 55, 67, 92, 100,
+    55, 71, 61, 73, 48, 58, 58, 70, 25, 37, 12, 26, 1, 17, 17, 37, 37, 53, 8,
+    33, 18, 43, 18, 41, 41, 58, 48, 73, 73, 100, 100, 100, 55, 84, 39, 66, 51,
+    76, 61, 92, 77, 98, 83, 100, 100, 100, 85, 100, 85, 100, 85, 100, 75
+  ],
+  "p2_stamina": [
+    100, 100, 75, 82, 67, 76, 61, 72, 72, 83, 73, 80, 55, 64, 39, 52, 52, 63,
+    38, 47, 47, 58, 58, 71, 56, 74, 74, 90, 75, 91, 91, 100, 55, 71, 71, 85, 85,
+    97, 97, 100, 75, 95, 70, 92, 67, 89, 64, 88, 43, 63, 63, 83, 83, 100, 85,
+    100, 75, 97, 52, 82, 82, 100, 55, 77, 52, 76, 51, 81, 56, 70, 45, 62, 37,
+    56, 41, 56, 11, 28, 13, 34, 19, 44, 29, 52, 52, 71, 46, 71, 71, 92, 67, 90,
+    45, 64, 19, 32, 17, 32, 32, 49, 49, 72, 27, 42, 42, 63, 48, 74, 29, 51, 51,
+    73, 58, 80, 55, 77, 62, 84, 69, 91, 46, 64, 64, 82, 100, 100, 75, 89, 64,
+    93, 93, 116, 101, 132, 107, 138, 138, 140, 115, 140, 95, 130, 130, 140, 95,
+    114, 99, 124, 109, 140, 140, 140, 140, 140, 115, 140, 90, 100, 100, 100,
+    100, 100, 55, 55
+  ],
+  "p1_max_stamina": [
+    100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100,
+    100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100,
+    100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100,
+    100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100,
+    100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100,
+    100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100,
+    100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100,
+    100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100,
+    100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100,
+    100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100,
+    100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100
+  ],
+  "p2_max_stamina": [
+    100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100,
+    100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100,
+    100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100,
+    100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100,
+    100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100,
+    100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100,
+    100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100,
+    100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100,
+    100, 100, 100, 100, 100, 100, 140, 140, 140, 140, 140, 140, 140, 140, 140,
+    140, 140, 140, 140, 140, 140, 140, 140, 140, 140, 140, 140, 140, 140, 140,
+    140, 140, 140, 140, 140, 140, 100, 100, 100, 100, 100, 100, 100, 100
+  ],
+  "p1_territory": [
+    0, 1, 1, 2, 2, 2, 2, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 5, 6, 6, 7, 7,
+    8, 8, 9, 9, 9, 9, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 14, 14, 14,
+    14, 8, 8, 9, 9, 9, 9, 9, 9, 10, 10, 11, 11, 11, 11, 12, 12, 13, 13, 14, 14,
+    15, 15, 15, 15, 16, 16, 17, 17, 18, 18, 18, 18, 18, 18, 19, 19, 20, 20, 21,
+    21, 16, 16, 17, 17, 18, 18, 19, 19, 20, 20, 20, 20, 21, 21, 22, 22, 23, 23,
+    23, 23, 24, 24, 25, 25, 26, 26, 27, 27, 28, 28, 28, 28, 29, 29, 30, 30, 31,
+    31, 31, 31, 31, 31, 32, 32, 33, 33, 34, 34, 34, 34, 35, 35, 35, 35, 35, 35,
+    35, 35, 36, 36, 37, 37, 38, 38, 32, 32, 33, 33, 33, 33, 34, 34, 35, 35, 30,
+    30, 31
+  ],
+  "p2_territory": [
+    0, 0, 1, 1, 2, 2, 3, 3, 3, 3, 4, 4, 5, 5, 6, 6, 6, 6, 7, 7, 7, 7, 7, 7, 8,
+    8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 10, 10, 11, 11, 11, 11, 12, 12,
+    13, 13, 13, 13, 13, 13, 14, 14, 14, 14, 15, 15, 15, 15, 16, 16, 17, 17, 18,
+    18, 12, 12, 13, 13, 14, 14, 14, 14, 15, 15, 16, 16, 17, 17, 17, 17, 17, 17,
+    18, 18, 18, 18, 19, 19, 20, 20, 21, 21, 22, 22, 22, 22, 22, 22, 23, 23, 23,
+    23, 24, 24, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 23, 23, 23, 23,
+    23, 23, 24, 24, 25, 25, 25, 25, 26, 26, 27, 27, 27, 27, 28, 28, 29, 29, 29,
+    29, 25, 25, 26, 26, 27, 27, 27, 27, 27, 27, 28, 28, 22, 22, 22, 22, 22, 22,
+    23, 23
+  ],
+  "parity_playing": [
+    0, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1,
+    -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1,
+    -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1,
+    -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1,
+    -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1,
+    -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1,
+    -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1,
+    -1, 1, -1, 1, -1, 1, -1, 1, -1, 1
+  ],
+  "paint_updates": [
+    {},
+    { "29": 1 },
+    { "350": -1 },
+    { "31": 1 },
+    { "369": -1 },
+    {},
+    { "330": -1 },
+    { "32": 1 },
+    {},
+    { "34": 1 },
+    { "309": -1 },
+    {},
+    { "287": -1 },
+    {},
+    { "306": -1 },
+    {},
+    {},
+    {},
+    { "269": -1 },
+    { "35": 1 },
+    {},
+    { "36": 1 },
+    {},
+    { "37": 1 },
+    { "288": -1 },
+    { "55": 1 },
+    {},
+    { "56": 1 },
+    { "290": -1 },
+    {},
+    {},
+    {},
+    { "269": -2 },
+    { "58": 1 },
+    {},
+    { "78": 1 },
+    {},
+    { "77": 1 },
+    {},
+    { "96": 1 },
+    { "271": -1 },
+    { "57": 1 },
+    { "311": -1 },
+    {},
+    { "290": -2 },
+    {},
+    { "328": -1 },
+    { "35": 0, "36": 0, "37": 0, "55": 0, "56": 0, "57": 0, "77": 0 },
+    { "307": -1 },
+    { "36": 1 },
+    {},
+    {},
+    {},
+    {},
+    { "308": -1 },
+    { "57": 1 },
+    { "288": -2 },
+    { "37": 1 },
+    { "326": -1 },
+    { "36": 2 },
+    {},
+    { "35": 1 },
+    { "347": -1 },
+    { "54": 1 },
+    { "325": -1 },
+    { "55": 1 },
+    { "327": -1 },
+    { "77": 1 },
+    {
+      "287": -2,
+      "306": 0,
+      "307": 0,
+      "308": 0,
+      "326": 0,
+      "327": 0,
+      "328": 0,
+      "347": 0
+    },
+    {},
+    { "306": -1 },
+    { "76": 1 },
+    { "346": -1 },
+    { "95": 1 },
+    { "306": -2 },
+    { "75": 1 },
+    { "326": -1 },
+    {},
+    { "344": -1 },
+    {},
+    { "305": -1 },
+    { "98": 1 },
+    { "325": -2 },
+    { "97": 1 },
+    {},
+    { "117": 1 },
+    { "304": -1 },
+    { "76": 0, "77": 0, "96": 0, "97": 0, "98": 0, "117": 0 },
+    {},
+    { "76": 1 },
+    { "284": -1 },
+    { "94": 1 },
+    { "265": -1 },
+    { "114": 1 },
+    { "245": -1 },
+    { "113": 1 },
+    { "244": -1 },
+    {},
+    {},
+    { "132": 1 },
+    {},
+    { "93": 1 },
+    { "264": -1 },
+    { "71": 1 },
+    {},
+    {},
+    { "243": -1 },
+    { "89": 1 },
+    { "263": -1 },
+    { "48": 1 },
+    {},
+    { "87": 1 },
+    { "244": -2 },
+    { "69": 1 },
+    { "243": -2 },
+    { "110": 1 },
+    { "245": -2 },
+    {},
+    { "263": -2 },
+    { "130": 1 },
+    { "243": -1, "244": -1, "245": -1, "263": -1, "265": 0, "284": 0 },
+    { "129": 1 },
+    {},
+    { "148": 1 },
+    {},
+    {},
+    { "282": -1 },
+    {},
+    { "301": -1 },
+    { "150": 1 },
+    {},
+    { "111": 1 },
+    { "262": -1 },
+    { "131": 1 },
+    { "284": -1 },
+    {},
+    { "327": -1 },
+    { "107": 1 },
+    { "307": -1 },
+    {},
+    { "328": -1 },
+    {},
+    {},
+    { "110": 2 },
+    { "305": 0, "306": -1, "307": 0, "325": -1, "326": 0, "327": 0, "346": 0 },
+    { "109": 1 },
+    { "346": -1 },
+    { "108": 1 },
+    { "305": -1 },
+    { "128": 1 },
+    {},
+    { "87": 0, "89": 0, "107": 0, "108": 0, "109": 0, "128": 0, "129": 0 },
+    {},
+    { "88": 1, "97": 1 },
+    { "283": -1 },
+    {},
+    { "262": 0, "263": 0, "264": 0, "282": 0, "283": 0, "284": 0, "304": 0 },
+    { "116": 1 },
+    {},
+    { "96": 1 },
+    { "326": -1 },
+    { "75": 0, "94": 0, "95": 0, "96": 0, "114": 0, "116": 0 },
+    { "327": -1 },
+    { "56": 1, "75": 1 }
+  ],
+  "beacon_updates": [
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    { "56": 1 },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    { "327": -1 },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    { "97": 1 },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    { "264": -1 },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    { "327": 0 },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    { "326": -1 },
+    {},
+    {},
+    {},
+    {},
+    {},
+    { "264": 0 },
+    { "108": 1 },
+    {},
+    { "97": 0 },
+    {},
+    {},
+    { "283": -1 },
+    {},
+    {},
+    {},
+    { "326": 0 },
+    { "95": 1 },
+    {},
+    { "56": 0 }
+  ],
+  "powerup_updates": [
+    {},
+    {},
+    {},
+    {},
+    {
+      "190": true,
+      "220": true,
+      "239": true,
+      "281": true,
+      "307": true,
+      "312": true
+    },
+    {},
+    {},
+    {},
+    {},
+    {},
+    { "307": false },
+    {},
+    {},
+    {},
+    { "47": true, "52": true, "83": true, "96": true },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    { "109": true, "110": true, "122": true },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    { "107": true, "112": true, "230": true },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    { "181": true, "198": true, "289": true, "290": true },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    { "82": true, "89": true, "90": true, "97": true },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    { "341": true, "358": true, "362": true, "377": true },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    { "96": false },
+    {},
+    {},
+    { "88": true, "91": true, "124": true, "135": true },
+    {},
+    {},
+    {},
+    {},
+    { "97": false },
+    {},
+    {},
+    {},
+    {},
+    { "29": true, "30": true, "368": true, "371": true },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    { "66": true, "73": true, "170": true },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    { "91": false, "112": false },
+    {},
+    { "89": false, "90": false },
+    { "247": true, "252": true, "287": true, "292": true },
+    { "109": false },
+    {},
+    {},
+    {},
+    { "88": false, "107": false },
+    {},
+    {},
+    {},
+    { "110": false },
+    { "106": true, "113": true, "365": true, "374": true },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    { "45": true, "54": true, "109": true, "110": true, "281": false },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    { "108": true, "111": true, "245": true, "254": true },
+    {},
+    {},
+    { "108": false },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    { "202": true, "217": true },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    { "67": true, "72": true, "138": true },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {}
+  ],
+  "hill_updates": [
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    { "3": -1 },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    { "3": 0 },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {}
+  ],
+  "hill_mapping": [
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0],
+    [0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 0, 0, 0],
+    [0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  ],
+  "walls": [
+    [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    [
+      true,
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      true,
+      true
+    ],
+    [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      true
+    ],
+    [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      true
+    ],
+    [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      true
+    ],
+    [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      true,
+      false
+    ],
+    [
+      false,
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      true,
+      false,
+      false
+    ],
+    [
+      false,
+      false,
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      true,
+      false,
+      false,
+      false
+    ],
+    [
+      false,
+      false,
+      false,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      false,
+      true,
+      true,
+      true,
+      true,
+      true,
+      false,
+      false,
+      false,
+      false
+    ],
+    [
+      false,
+      false,
+      false,
+      false,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      false,
+      true,
+      true,
+      true,
+      true,
+      true,
+      false,
+      false,
+      false,
+      false
+    ],
+    [
+      false,
+      false,
+      false,
+      false,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      false,
+      true,
+      true,
+      true,
+      true,
+      true,
+      false,
+      false,
+      false,
+      false
+    ],
+    [
+      false,
+      false,
+      false,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      false,
+      true,
+      true,
+      true,
+      true,
+      true,
+      false,
+      false,
+      false,
+      false
+    ],
+    [
+      false,
+      false,
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      true,
+      false,
+      false,
+      false
+    ],
+    [
+      false,
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      true,
+      false,
+      false
+    ],
+    [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      true,
+      false
+    ],
+    [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      true
+    ],
+    [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      true
+    ],
+    [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      true
+    ],
+    [
+      true,
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      true,
+      true
+    ],
+    [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ]
+  ],
+  "actions": [
+    "NONE",
+    [
+      { "name": "Paint", "location": [1, 9] },
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [17, 10] },
+      {
+        "name": "Move",
+        "direction": "UP",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "DOWN",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [1, 11] },
+      {
+        "name": "Move",
+        "direction": "DOWN",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "UP",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [18, 9] },
+      {
+        "name": "Move",
+        "direction": "UP",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [16, 10] },
+      {
+        "name": "Move",
+        "direction": "UP",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [1, 12] },
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [1, 14] },
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [15, 9] },
+      {
+        "name": "Move",
+        "direction": "UP",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [14, 7] },
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      {
+        "name": "Move",
+        "direction": "DOWN",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [15, 6] },
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      {
+        "name": "Move",
+        "direction": "UP",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [13, 9] },
+      {
+        "name": "Move",
+        "direction": "UP",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "UP",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [1, 15] },
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      {
+        "name": "Move",
+        "direction": "DOWN",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [1, 16] },
+      {
+        "name": "Move",
+        "direction": "UP",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      {
+        "name": "Move",
+        "direction": "DOWN",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [1, 17] },
+      {
+        "name": "Move",
+        "direction": "DOWN",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [14, 8] },
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [2, 15] },
+      {
+        "name": "Move",
+        "direction": "UP",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [2, 16] },
+      {
+        "name": "Move",
+        "direction": "DOWN",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "DOWN",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [14, 10] },
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      {
+        "name": "Move",
+        "direction": "UP",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [13, 9] },
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [2, 18] },
+      {
+        "name": "Move",
+        "direction": "DOWN",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "DOWN",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [3, 18] },
+      {
+        "name": "Move",
+        "direction": "UP",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      {
+        "name": "Move",
+        "direction": "UP",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [3, 17] },
+      {
+        "name": "Move",
+        "direction": "DOWN",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      {
+        "name": "Move",
+        "direction": "DOWN",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [4, 16] },
+      {
+        "name": "Move",
+        "direction": "UP",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [13, 11] },
+      {
+        "name": "Move",
+        "direction": "DOWN",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [2, 17] },
+      {
+        "name": "Move",
+        "direction": "UP",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [15, 11] },
+      {
+        "name": "Move",
+        "direction": "DOWN",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "UP",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      {
+        "name": "Move",
+        "direction": "DOWN",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [14, 10] },
+      {
+        "name": "Move",
+        "direction": "DOWN",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [16, 8] },
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "UP",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [3, 15] },
+      {
+        "name": "Move",
+        "direction": "UP",
+        "move_type": "REGULAR",
+        "place_beacon": true,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [15, 7] },
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "UP",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "DOWN",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [1, 16] },
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      {
+        "name": "Move",
+        "direction": "DOWN",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [15, 8] },
+      {
+        "name": "Move",
+        "direction": "UP",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [2, 17] },
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [14, 8] },
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "DOWN",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [1, 17] },
+      {
+        "name": "Move",
+        "direction": "UP",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "DOWN",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "UP",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [16, 6] },
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "DOWN",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "UP",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [1, 16] },
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [1, 15] },
+      {
+        "name": "Move",
+        "direction": "DOWN",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [17, 7] },
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [2, 14] },
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [16, 5] },
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [2, 15] },
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [16, 7] },
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "UP",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [3, 17] },
+      {
+        "name": "Move",
+        "direction": "DOWN",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [14, 7] },
+      {
+        "name": "Move",
+        "direction": "DOWN",
+        "move_type": "REGULAR",
+        "place_beacon": true,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      {
+        "name": "Move",
+        "direction": "UP",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [15, 6] },
+      {
+        "name": "Move",
+        "direction": "UP",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "DOWN",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [3, 16] },
+      {
+        "name": "Move",
+        "direction": "DOWN",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "DOWN",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [17, 6] },
+      {
+        "name": "Move",
+        "direction": "DOWN",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "UP",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [4, 15] },
+      {
+        "name": "Move",
+        "direction": "UP",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [15, 6] },
+      {
+        "name": "Move",
+        "direction": "DOWN",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [3, 15] },
+      {
+        "name": "Move",
+        "direction": "DOWN",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "UP",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [16, 6] },
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "UP",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "DOWN",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      {
+        "name": "Move",
+        "direction": "DOWN",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [17, 4] },
+      {
+        "name": "Move",
+        "direction": "UP",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [15, 5] },
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [4, 18] },
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "UP",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "DOWN",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [16, 5] },
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [4, 17] },
+      {
+        "name": "Move",
+        "direction": "UP",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "DOWN",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [5, 17] },
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [15, 4] },
+      {
+        "name": "Move",
+        "direction": "UP",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [3, 18] },
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": true,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [3, 16] },
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [14, 4] },
+      {
+        "name": "Move",
+        "direction": "UP",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [4, 14] },
+      {
+        "name": "Move",
+        "direction": "DOWN",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [13, 5] },
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "UP",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [5, 14] },
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [12, 5] },
+      {
+        "name": "Move",
+        "direction": "UP",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [5, 13] },
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [12, 4] },
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      {
+        "name": "Move",
+        "direction": "DOWN",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [6, 12] },
+      {
+        "name": "Move",
+        "direction": "UP",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      {
+        "name": "Move",
+        "direction": "DOWN",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [4, 13] },
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "UP",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [13, 4] },
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [3, 11] },
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      {
+        "name": "Move",
+        "direction": "DOWN",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [12, 3] },
+      {
+        "name": "Move",
+        "direction": "DOWN",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [4, 9] },
+      {
+        "name": "Move",
+        "direction": "UP",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "UP",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [13, 3] },
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "UP",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "UP",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [2, 8] },
+      {
+        "name": "Move",
+        "direction": "DOWN",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "DOWN",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [4, 7] },
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "UP",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [12, 4] },
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [3, 9] },
+      {
+        "name": "Move",
+        "direction": "DOWN",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "DOWN",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [12, 3] },
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [5, 10] },
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "DOWN",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [12, 5] },
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [13, 3] },
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [6, 10] },
+      {
+        "name": "Move",
+        "direction": "UP",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "DOWN",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [13, 4] },
+      {
+        "name": "Move",
+        "direction": "DOWN",
+        "move_type": "REGULAR",
+        "place_beacon": true,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [6, 9] },
+      {
+        "name": "Move",
+        "direction": "UP",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "DOWN",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      {
+        "name": "Move",
+        "direction": "DOWN",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [7, 8] },
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      {
+        "name": "Move",
+        "direction": "UP",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [14, 2] },
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      {
+        "name": "Move",
+        "direction": "DOWN",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [15, 1] },
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [7, 10] },
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "UP",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [5, 11] },
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [13, 2] },
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [6, 11] },
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [14, 4] },
+      {
+        "name": "Move",
+        "direction": "UP",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      {
+        "name": "Move",
+        "direction": -1,
+        "move_type": "BEACON_TRAVEL",
+        "place_beacon": false,
+        "beacon_target": [16, 7]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [5, 7] },
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "UP",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "DOWN",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [15, 7] },
+      {
+        "name": "Move",
+        "direction": "DOWN",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "UP",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [16, 8] },
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      {
+        "name": "Move",
+        "direction": "DOWN",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [5, 10] },
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [17, 5] },
+      {
+        "name": "Move",
+        "direction": "UP",
+        "move_type": "REGULAR",
+        "place_beacon": true,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "DOWN",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [5, 9] },
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [17, 6] },
+      {
+        "name": "Move",
+        "direction": "UP",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [5, 8] },
+      {
+        "name": "Move",
+        "direction": "DOWN",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [15, 5] },
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [6, 8] },
+      {
+        "name": "Move",
+        "direction": "UP",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      {
+        "name": "Move",
+        "direction": -1,
+        "move_type": "BEACON_TRAVEL",
+        "place_beacon": false,
+        "beacon_target": [13, 4]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [6, 7] },
+      {
+        "name": "Move",
+        "direction": "UP",
+        "move_type": "REGULAR",
+        "place_beacon": true,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      {
+        "name": "Move",
+        "direction": "DOWN",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [4, 8] },
+      {
+        "name": "Move",
+        "direction": -1,
+        "move_type": "BEACON_TRAVEL",
+        "place_beacon": false,
+        "beacon_target": [4, 17]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [14, 3] },
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "DOWN",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [15, 2] },
+      {
+        "name": "Move",
+        "direction": "UP",
+        "move_type": "REGULAR",
+        "place_beacon": true,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [5, 16] },
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [4, 16] },
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      {
+        "name": "Move",
+        "direction": -1,
+        "move_type": "BEACON_TRAVEL",
+        "place_beacon": false,
+        "beacon_target": [16, 6]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [3, 16] },
+      {
+        "name": "Move",
+        "direction": "LEFT",
+        "move_type": "REGULAR",
+        "place_beacon": true,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [16, 7] },
+      {
+        "name": "Move",
+        "direction": "DOWN",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "RIGHT",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      },
+      {
+        "name": "Move",
+        "direction": "DOWN",
+        "move_type": "REGULAR",
+        "place_beacon": false,
+        "beacon_target": [-1, -1]
+      }
+    ],
+    [
+      { "name": "Paint", "location": [3, 15] },
+      {
+        "name": "Move",
+        "direction": -1,
+        "move_type": "BEACON_TRAVEL",
+        "place_beacon": false,
+        "beacon_target": [2, 16]
+      },
+      {
+        "name": "Move",
+        "direction": -1,
+        "move_type": "BEACON_TRAVEL",
+        "place_beacon": false,
+        "beacon_target": [5, 8]
+      }
+    ]
+  ],
+  "turn_count": 162,
+  "result": "PLAYER_2",
+  "reason": "INVALID_TURN",
+  "p1_err": "Invalid actions: ['Paint(location=Location(r=3, c=15))', 'Move(direction=None, move_type=2, place_beacon=False, beacon_target=Location(r=2, c=16))', 'Move(direction=None, move_type=2, place_beacon=False, beacon_target=Location(r=5, c=8))']",
+  "p2_err": "",
+  "p1_commentary": "",
+  "p2_commentary": "",
+  "map_string": "",
+  "engine_version": "0.1.1",
+  "cpu": "brand:Intel(R) Core(TM) Ultra 7 258V, arch: x86_64, processor: x86_64, platform: Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.31"
+}
