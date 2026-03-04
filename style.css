@@ -102,6 +102,9 @@ body {
 	border: 2px solid #333;
 	border-radius: 8px;
 }
+.pan-content {
+	padding: 40rem;
+}
 
 #canvas-container {
 	display: grid;

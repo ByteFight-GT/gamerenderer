@@ -174,15 +174,16 @@ function buildFramesFromMatch(match: any, width: number, height: number): GameRe
 
 interface GameRendererProps {
   initialData?: any | null;
+  currentTurn: number;
+  setCurrentTurn: React.Dispatch<React.SetStateAction<number>>;
   // This callback gives the parent the ability to push new dictionaries
   onRegisterUpdater?: (updater: (newDict: any) => void) => void;
 }
 
-export const GameRenderer = ({ initialData, onRegisterUpdater }: GameRendererProps) => {
+export const GameRenderer = (props: GameRendererProps) => {
   const canvasManager = useRef<CanvasManager | null>(null);
-  const [matchData, setMatchData] = useState<any | null>(initialData);
+  const [matchData, setMatchData] = useState<any | null>(props.initialData);
   const [frames, setFrames] = useState<GameRenderState[]>([]);
-  const [currentTurn, setCurrentTurn] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [playbackSpeed, setPlaybackSpeed] = useState(1);
 
@@ -214,10 +215,10 @@ export const GameRenderer = ({ initialData, onRegisterUpdater }: GameRendererPro
 
   // Give the update function to the parent component on mount
   useEffect(() => {
-    if (onRegisterUpdater) {
-      onRegisterUpdater(addMatchUpdate);
+    if (props.onRegisterUpdater) {
+      props.onRegisterUpdater(addMatchUpdate);
     }
-  }, [onRegisterUpdater]);
+  }, [props.onRegisterUpdater]);
 
   // Update frames whenever matchData changes
   useEffect(() => {
@@ -236,17 +237,17 @@ export const GameRenderer = ({ initialData, onRegisterUpdater }: GameRendererPro
     setFrames(allFrames);
 
     // If we were at the end of a live stream, auto-advance
-    if (isPlaying && currentTurn >= allFrames.length - 2) {
-      setCurrentTurn(allFrames.length - 1);
+    if (isPlaying && props.currentTurn >= allFrames.length - 2) {
+      props.setCurrentTurn && props.setCurrentTurn(allFrames.length - 1);
     }
   }, [matchData]);
 
   // --- Rendering Loop ---
   useEffect(() => {
     if (!canvasManager.current || frames.length === 0) return;
-    const clampedTurn = Math.max(0, Math.min(currentTurn, frames.length - 1));
+    const clampedTurn = Math.max(0, Math.min(props.currentTurn, frames.length - 1));
     canvasManager.current.drawGameState(frames[clampedTurn]);
-  }, [currentTurn, frames]);
+  }, [props.currentTurn, frames]);
 
 
   React.useEffect(() => {
@@ -259,7 +260,7 @@ export const GameRenderer = ({ initialData, onRegisterUpdater }: GameRendererPro
 
     const allFrames = buildFramesFromMatch(matchData, mapInfo.width, mapInfo.height);
     setFrames(allFrames);
-    setCurrentTurn(0);
+    props.setCurrentTurn && props.setCurrentTurn(0);
     setIsPlaying(false);
 
     // draw first frame (static map will be drawn automatically
@@ -277,9 +278,9 @@ export const GameRenderer = ({ initialData, onRegisterUpdater }: GameRendererPro
     if (!canvasManager.current || frames.length === 0) {
       return;
     }
-    const clampedTurn = Math.max(0, Math.min(currentTurn, frames.length - 1));
+    const clampedTurn = Math.max(0, Math.min(props.currentTurn, frames.length - 1));
     canvasManager.current.drawGameState(frames[clampedTurn]);
-  }, [currentTurn, frames]);
+  }, [props.currentTurn, frames]);
 
   // auto-play effect
   React.useEffect(() => {
@@ -290,7 +291,7 @@ export const GameRenderer = ({ initialData, onRegisterUpdater }: GameRendererPro
     const intervalDuration = 500 / Math.max(playbackSpeed, 0.25); // base 500ms at 1x
 
     const interval = window.setInterval(() => {
-      setCurrentTurn((prev) => {
+      props.setCurrentTurn?.((prev) => {
         if (frames.length === 0) {
           return prev;
         }
@@ -309,18 +310,14 @@ export const GameRenderer = ({ initialData, onRegisterUpdater }: GameRendererPro
     };
   }, [isPlaying, frames, playbackSpeed]);
 
-  const maxTurn = frames.length > 0 ? frames.length - 1 : 0;
-
   return (
-    <div className="app-root">
-      <TransformWrapper>
-        <TransformComponent wrapperClass="pan-container">
-          <div id="canvas-container">
-            <canvas id="background-canvas"></canvas>
-            <canvas id="sprite-canvas"></canvas>
-          </div>
-        </TransformComponent>
-      </TransformWrapper>
-    </div>
+    <TransformWrapper limitToBounds={false} minScale={0.1}>
+      <TransformComponent contentClass="pan-content" wrapperClass="pan-container">
+        <div id="canvas-container">
+          <canvas id="background-canvas"></canvas>
+          <canvas id="sprite-canvas"></canvas>
+        </div>
+      </TransformComponent>
+    </TransformWrapper>
   );
 };
