@@ -2,62 +2,66 @@
 export const PX_PER_TILE = 32;
 
 export enum Sprite {
-	PLAYER_GREEN,
-	PLAYER_BLUE,
+    PLAYER_GREEN,
+    PLAYER_BLUE,
 
-	TILE_LIGHT,
-	TILE_DARK,
-	HILL_LIGHT,
-	HILL_DARK,
-	WALL,
+    TILE_LIGHT,
+    TILE_DARK,
+    HILL_LIGHT,
+    HILL_DARK,
+    WALL,
 
-	BEACON_GREEN,
-	BEACON_BLUE,
+    BEACON_GREEN,
+    BEACON_BLUE,
 
-	POWERUP_HEALTH,
-	POWERUP_STAMINA,
+    POWERUP_HEALTH,
+    POWERUP_STAMINA,
 
-	FLOATING_PIECE_BOTTOM,
+    FLOATING_PIECE_BOTTOM,
 
-	WALL_TOP,
-	WALL_BOTTOM,
-	WALL_LEFT,
-	WALL_RIGHT,
-	WALL_TOP_LEFT,
-	WALL_TOP_RIGHT,
-	WALL_BOTTOM_LEFT,
-	WALL_BOTTOM_RIGHT,
+    WALL_TOP,
+    WALL_BOTTOM,
+    WALL_LEFT,
+    WALL_RIGHT,
+    WALL_TOP_LEFT,
+    WALL_TOP_RIGHT,
+    WALL_BOTTOM_LEFT,
+    WALL_BOTTOM_RIGHT,
 }
+
+// Helper to resolve paths relative to THIS file for Vite bundle/submodule discovery
+const resolveSprite = (path: string) => new URL(path, import.meta.url).href;
+
 /**
  * File paths for individual sprite images.
  * Each PNG in the `sprites/` folder has a semantic name, e.g. `blue_player.png`.
  */
 export const SPRITE_FILES = {
-	[Sprite.PLAYER_GREEN]: "./sprites/green_player.png",
-	[Sprite.PLAYER_BLUE]: "./sprites/blue_player.png",
+    [Sprite.PLAYER_GREEN]: resolveSprite("./sprites/green_player.png"),
+    [Sprite.PLAYER_BLUE]: resolveSprite("./sprites/blue_player.png"),
 
-	// neutral tile is used for both light and dark base tiles
-	[Sprite.TILE_LIGHT]: "./sprites/neutral_tile.png",
-	[Sprite.TILE_DARK]: "./sprites/neutral_tile.png",
+    // neutral tile is used for both light and dark base tiles
+    [Sprite.TILE_LIGHT]: resolveSprite("./sprites/neutral_tile.png"),
+    [Sprite.TILE_DARK]: resolveSprite("./sprites/neutral_tile.png"),
 
-	[Sprite.HILL_LIGHT]: "./sprites/hill_tile.png",
-	[Sprite.HILL_DARK]: "./sprites/hill_tile.png",
-	[Sprite.WALL]: "./sprites/wall_tile.png",
+    [Sprite.HILL_LIGHT]: resolveSprite("./sprites/hill_tile.png"),
+    [Sprite.HILL_DARK]: resolveSprite("./sprites/hill_tile.png"),
+    [Sprite.WALL]: resolveSprite("./sprites/wall_tile.png"),
 
-	// dedicated beacon / powerup sprites
-	[Sprite.BEACON_GREEN]: "./sprites/green_beacon.png",
-	[Sprite.BEACON_BLUE]: "./sprites/blue_beacon.png",
-	[Sprite.POWERUP_HEALTH]: "./sprites/power_cell.png",
-	[Sprite.POWERUP_STAMINA]: "./sprites/power_cell.png",
+    // dedicated beacon / powerup sprites
+    [Sprite.BEACON_GREEN]: resolveSprite("./sprites/green_beacon.png"),
+    [Sprite.BEACON_BLUE]: resolveSprite("./sprites/blue_beacon.png"),
+    [Sprite.POWERUP_HEALTH]: resolveSprite("./sprites/power_cell.png"),
+    [Sprite.POWERUP_STAMINA]: resolveSprite("./sprites/power_cell.png"),
 
-	[Sprite.FLOATING_PIECE_BOTTOM]: "./sprites/floating_piece_bottom.png",
-	[Sprite.WALL_TOP]: "./sprites/wall_top.png",
-	[Sprite.WALL_BOTTOM]: "./sprites/wall_bottom.png",
-	[Sprite.WALL_LEFT]: "./sprites/wall_left.png",
-	[Sprite.WALL_RIGHT]: "./sprites/wall_right.png",
+    [Sprite.FLOATING_PIECE_BOTTOM]: resolveSprite("./sprites/floating_piece_bottom.png"),
+    [Sprite.WALL_TOP]: resolveSprite("./sprites/wall_top.png"),
+    [Sprite.WALL_BOTTOM]: resolveSprite("./sprites/wall_bottom.png"),
+    [Sprite.WALL_LEFT]: resolveSprite("./sprites/wall_left.png"),
+    [Sprite.WALL_RIGHT]: resolveSprite("./sprites/wall_right.png"),
 
-	[Sprite.WALL_TOP_LEFT]: "./sprites/wall_top_left.png",
-	[Sprite.WALL_TOP_RIGHT]: "./sprites/wall_top_right.png",
-	[Sprite.WALL_BOTTOM_LEFT]: "./sprites/wall_bottom_left.png",
-	[Sprite.WALL_BOTTOM_RIGHT]: "./sprites/wall_bottom_right.png",
+    [Sprite.WALL_TOP_LEFT]: resolveSprite("./sprites/wall_top_left.png"),
+    [Sprite.WALL_TOP_RIGHT]: resolveSprite("./sprites/wall_top_right.png"),
+    [Sprite.WALL_BOTTOM_LEFT]: resolveSprite("./sprites/wall_bottom_left.png"),
+    [Sprite.WALL_BOTTOM_RIGHT]: resolveSprite("./sprites/wall_bottom_right.png"),
 } as const;
