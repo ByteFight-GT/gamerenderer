@@ -5,6 +5,8 @@ import {
 } from "./spritesheet";
 import { GameRenderState, MapInfo } from "./types";
 
+
+import { StaticImageData } from "next/image";
 /**
  * Handler for rendering game things onto a canvas element.
  */
@@ -135,24 +137,34 @@ export class CanvasManager {
 	preloadAssets() {
 		this.spriteCtx.imageSmoothingEnabled = false;
 		this.backgroundCtx.imageSmoothingEnabled = false;
-	
-		const entries = Object.entries(SPRITE_FILES) as [string, string][];
+
+		// Next.js imports return an object { src: string, ... }, so we cast accordingly
+		const entries = Object.entries(SPRITE_FILES) as unknown as [string, { src: string }][];
 		let loaded = 0;
-	
-		for (const [key, src] of entries) {
+
+		for (const [key, spriteData] of entries) {
 			const sprite = Number(key) as Sprite;
 			const img = new Image();
-	
+
 			img.onload = () => {
 				this.spriteImages[sprite] = img;
 				loaded++;
-	
+
 				if (loaded === entries.length) {
 					this.blitMap(); // draw once when everything is ready
 				}
 			};
-	
-			img.src = src;
+
+			// If a single image fails to load, the counter should still increment 
+			// to prevent the game from hanging on a blank screen forever.
+			img.onerror = () => {
+				console.error(`Failed to load sprite: ${key}`);
+				loaded++;
+				if (loaded === entries.length) this.blitMap();
+			};
+
+			// Access the .src property from the Next.js StaticImageData object
+			img.src = spriteData.src;
 		}
 	}
 
