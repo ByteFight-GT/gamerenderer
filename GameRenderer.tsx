@@ -29,9 +29,9 @@ export const GameRenderer = (props: GameRendererProps) => {
   return (
     <TransformWrapper limitToBounds={false} minScale={0.1} {...props.transformWrapperProps}>
       <TransformComponent {...props.transformComponentProps}>
-        <div id="canvas-container">
-          <canvas ref={backgroundCanvasRef} id="background-canvas" />
-          <canvas ref={spriteCanvasRef} id="sprite-canvas" />
+        <div className="grid">
+          <canvas ref={backgroundCanvasRef} className="col-start-1 row-start-1"/>
+          <canvas ref={spriteCanvasRef} className="col-start-1 row-start-1" />
         </div>
       </TransformComponent>
     </TransformWrapper>
