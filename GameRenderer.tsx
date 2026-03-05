@@ -1,9 +1,21 @@
 import React from "react";
 
-import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
+import { TransformWrapper, TransformComponent, ReactZoomPanPinchProps } from "react-zoom-pan-pinch";
 import { useGame } from "./useGame";
 
-export const GameRenderer = () => {
+type GameRendererProps = {
+  transformWrapperProps?: ReactZoomPanPinchProps;
+  transformComponentProps?: {
+    contentClass?: string;
+    wrapperClass?: string;
+    wrapperStyle?: React.CSSProperties;
+    contentStyle?: React.CSSProperties;
+    wrapperProps?: React.HTMLAttributes<HTMLDivElement>;
+    contentProps?: React.HTMLAttributes<HTMLDivElement>;
+  }
+}
+
+export const GameRenderer = (props: GameRendererProps) => {
 
   const { registerCanvases } = useGame();
 
@@ -15,8 +27,8 @@ export const GameRenderer = () => {
   }, []);
 
   return (
-    <TransformWrapper limitToBounds={false} minScale={0.1}>
-      <TransformComponent contentClass="pan-content" wrapperClass="pan-container">
+    <TransformWrapper limitToBounds={false} minScale={0.1} {...props.transformWrapperProps}>
+      <TransformComponent {...props.transformComponentProps}>
         <div id="canvas-container">
           <canvas ref={backgroundCanvasRef} id="background-canvas" />
           <canvas ref={spriteCanvasRef} id="sprite-canvas" />
