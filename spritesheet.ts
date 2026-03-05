@@ -33,31 +33,31 @@ export enum Sprite {
  * Each PNG in the `sprites/` folder has a semantic name, e.g. `blue_player.png`.
  */
 export const SPRITE_FILES = {
-	[Sprite.PLAYER_GREEN]: "./sprites/green_player.png",
-	[Sprite.PLAYER_BLUE]: "./sprites/blue_player.png",
+	[Sprite.PLAYER_GREEN]: "/sprites/green_player.png",
+	[Sprite.PLAYER_BLUE]: "/sprites/blue_player.png",
 
 	// neutral tile is used for both light and dark base tiles
-	[Sprite.TILE_LIGHT]: "./sprites/neutral_tile.png",
-	[Sprite.TILE_DARK]: "./sprites/neutral_tile.png",
+	[Sprite.TILE_LIGHT]: "/sprites/neutral_tile.png",
+	[Sprite.TILE_DARK]: "/sprites/neutral_tile.png",
 
-	[Sprite.HILL_LIGHT]: "./sprites/hill_tile.png",
-	[Sprite.HILL_DARK]: "./sprites/hill_tile.png",
-	[Sprite.WALL]: "./sprites/wall_tile.png",
+	[Sprite.HILL_LIGHT]: "/sprites/hill_tile.png",
+	[Sprite.HILL_DARK]: "/sprites/hill_tile.png",
+	[Sprite.WALL]: "/sprites/wall_tile.png",
 
 	// dedicated beacon / powerup sprites
-	[Sprite.BEACON_GREEN]: "./sprites/green_beacon.png",
-	[Sprite.BEACON_BLUE]: "./sprites/blue_beacon.png",
-	[Sprite.POWERUP_HEALTH]: "./sprites/power_cell.png",
-	[Sprite.POWERUP_STAMINA]: "./sprites/power_cell.png",
+	[Sprite.BEACON_GREEN]: "/sprites/green_beacon.png",
+	[Sprite.BEACON_BLUE]: "/sprites/blue_beacon.png",
+	[Sprite.POWERUP_HEALTH]: "/sprites/power_cell.png",
+	[Sprite.POWERUP_STAMINA]: "/sprites/power_cell.png",
 
-	[Sprite.FLOATING_PIECE_BOTTOM]: "./sprites/floating_piece_bottom.png",
-	[Sprite.WALL_TOP]: "./sprites/wall_top.png",
-	[Sprite.WALL_BOTTOM]: "./sprites/wall_bottom.png",
-	[Sprite.WALL_LEFT]: "./sprites/wall_left.png",
-	[Sprite.WALL_RIGHT]: "./sprites/wall_right.png",
+	[Sprite.FLOATING_PIECE_BOTTOM]: "/sprites/floating_piece_bottom.png",
+	[Sprite.WALL_TOP]: "/sprites/wall_top.png",
+	[Sprite.WALL_BOTTOM]: "/sprites/wall_bottom.png",
+	[Sprite.WALL_LEFT]: "/sprites/wall_left.png",
+	[Sprite.WALL_RIGHT]: "/sprites/wall_right.png",
 
-	[Sprite.WALL_TOP_LEFT]: "./sprites/wall_top_left.png",
-	[Sprite.WALL_TOP_RIGHT]: "./sprites/wall_top_right.png",
-	[Sprite.WALL_BOTTOM_LEFT]: "./sprites/wall_bottom_left.png",
-	[Sprite.WALL_BOTTOM_RIGHT]: "./sprites/wall_bottom_right.png",
+	[Sprite.WALL_TOP_LEFT]: "/sprites/wall_top_left.png",
+	[Sprite.WALL_TOP_RIGHT]: "/sprites/wall_top_right.png",
+	[Sprite.WALL_BOTTOM_LEFT]: "/sprites/wall_bottom_left.png",
+	[Sprite.WALL_BOTTOM_RIGHT]: "/sprites/wall_bottom_right.png",
 } as const;
