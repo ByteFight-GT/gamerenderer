@@ -26,6 +26,16 @@ export function mergeArrays<T>(arr1: T[], arr2: T[]): T[] {
   return [...arr1, ...arr2];
 }
 
+export const mergeArrayField = <T>(key: keyof T, dst: T, src: Partial<T>) => {
+  const newVal = src[key];
+  if (newVal !== undefined) {
+    dst[key] = mergeArrays(
+      dst[key] as any[],
+      newVal as any[]
+    ) as T[keyof T];
+  }
+};
+
 /**
  * THIS IS TEMPORARY - we should refactor the engine game output asap.
  * 

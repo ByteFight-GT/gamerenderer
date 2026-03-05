@@ -1,5 +1,5 @@
 import { BeaconOwner, GamePGN, GameRenderState, MapData, MapLoc, PowerupCellState, Symmetry } from "./types";
-import { applySymmetry, make2DArray, mergeArrays, oob } from "./utils";
+import { applySymmetry, make2DArray, mergeArrayField, mergeArrays, oob } from "./utils";
 
 import _EMPTY_GAME_PGN from "./defaults/EMPTY_GAME_PGN.json";
 const EMPTY_GAME_PGN = _EMPTY_GAME_PGN as GamePGN;
@@ -58,26 +58,34 @@ export class GamestateManager {
     return this.computedGameFrames[turn];
   }
 
-  updateGamePGN(newPGN: GamePGN): void {
+  updateGamePGN(newPGN: Partial<GamePGN>): void {
     if (!this.gamePGN) {
-      this.gamePGN = newPGN;
+      this.gamePGN = newPGN as GamePGN;
       return;
     }
+
+    const KEYS_TO_ARRAYMERGE = [
+      "p1_loc",
+      "p2_loc",
+      "paint_updates",
+      "beacon_updates",
+      "powerup_updates",
+      "p1_stamina",
+      "p2_stamina",
+      "p1_territory",
+      "p2_territory"
+    ] as (keyof GamePGN)[];
 
     // Merge arrays to support streaming history
     this.gamePGN = {
       ...this.gamePGN,
       ...newPGN,
       turn_count: newPGN.turn_count ?? this.gamePGN.turn_count,
-      p1_loc: mergeArrays(this.gamePGN.p1_loc, newPGN.p1_loc),
-      p2_loc: mergeArrays(this.gamePGN.p2_loc, newPGN.p2_loc),
-      paint_updates: mergeArrays(this.gamePGN.paint_updates, newPGN.paint_updates),
-      beacon_updates: mergeArrays(this.gamePGN.beacon_updates, newPGN.beacon_updates),
-      p1_stamina: mergeArrays(this.gamePGN.p1_stamina, newPGN.p1_stamina),
-      p2_stamina: mergeArrays(this.gamePGN.p2_stamina, newPGN.p2_stamina),
-      p1_territory: mergeArrays(this.gamePGN.p1_territory, newPGN.p1_territory),
-      p2_territory: mergeArrays(this.gamePGN.p2_territory, newPGN.p2_territory),
     };
+
+    for (const key of KEYS_TO_ARRAYMERGE) {
+      mergeArrayField(key, this.gamePGN, newPGN);
+    }
   }
 
   /** Reset the internal state. should be used once when starting to render a new game */
