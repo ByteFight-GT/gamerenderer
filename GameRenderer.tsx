@@ -420,9 +420,9 @@ export const GameRenderer = ({ initialData, onRegisterUpdater }: GameRendererPro
 
       <TransformWrapper>
         <TransformComponent wrapperClass="pan-container">
-          <div id="canvas-container">
-            <canvas id="background-canvas"></canvas>
-            <canvas id="sprite-canvas"></canvas>
+          <div id="canvas-container" className="grid">
+            <canvas id="background-canvas" className="col-start-1 row-start-1" />
+            <canvas id="sprite-canvas" className="col-start-1 row-start-1" />
           </div>
         </TransformComponent>
       </TransformWrapper>
