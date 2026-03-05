@@ -16,7 +16,7 @@ export type GameContextValue = {
 	registerCanvases: (spriteCanvas: HTMLCanvasElement, backgroundCanvas: HTMLCanvasElement) => void;
 	
 	/** Update match data (merge) with a new packet from python server. This is lazy and doesnt calc frames immediately, thats done on renderTurn (TODO: change?) */
-	updateGamePGN: (newPGN: GamePGN) => void;
+	updateGamePGN: (newPGN: Partial<GamePGN>) => void;
 
 	/**
 	 * Set the map and game data used by the renderer and game state manager. 
@@ -63,7 +63,7 @@ export function GameProvider(props: GameProviderProps) {
 		canvasManagerRef.current.registerCanvases(spriteCanvas, backgroundCanvas);
 	}, []);
 
-	const updateGamePGN = React.useCallback((newPGN: GamePGN) => {
+	const updateGamePGN = React.useCallback((newPGN: Partial<GamePGN>) => {
 		gameManagerRef.current.updateGamePGN(newPGN);
 	}, []);
 
@@ -94,22 +94,28 @@ export function GameProvider(props: GameProviderProps) {
 	// setRenderedGameFrame wrapper with extra checks/handlers
 	const setRenderedGameFrame = React.useCallback((frame: number) => {
 
-		// if no change, do nothing
-		if (frame === renderedGameFrameRef.current) return;
+		console.log(`[GameProvider:setRenderedGameFrame] requested to set renderedGameFrame to ${frame}`);
 
 		// clamp to max turn and turn off autoAdvance if we hit the end of the game
 		if (frame >= gameManagerRef.current.gamePGN.turn_count) {
+			console.log(`[GameProvider:setRenderedGameFrame] reached end of game (only ${gameManagerRef.current.gamePGN.turn_count} turns)!, clamping frame to ${gameManagerRef.current.gamePGN.turn_count - 1} and turning off autoAdvance`);
 			frame = gameManagerRef.current.gamePGN.turn_count - 1;
 			setAutoAdvance(false);
 		}
 
 		frame = Math.max(0, frame); // who would be stupid enough to do this....? (me)
 
+		// if no change, do nothing
+		if (frame === renderedGameFrameRef.current) return;
+
+		console.log(`[GameProvider:setRenderedGameFrame] rendering ${frame}!`)
+
 		renderFrame(frame);
 		_setRenderedGameFrame(frame);
 	}, []);
 	
 	const incrementRenderedGameFrame = React.useCallback((n: number) => {
+		console.log(`[GameProvider:incrementRenderedGameFrame] incrementing by ${n} from ${renderedGameFrameRef.current}`);
 		setRenderedGameFrame(renderedGameFrameRef.current + n);
 	}, []);
 
