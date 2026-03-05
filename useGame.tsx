@@ -100,7 +100,7 @@ export function GameProvider(props: GameProviderProps) {
 		if (frame >= gameManagerRef.current.gamePGN.turn_count) {
 			console.log(`[GameProvider:setRenderedGameFrame] reached end of game (only ${gameManagerRef.current.gamePGN.turn_count} turns)!, clamping frame to ${gameManagerRef.current.gamePGN.turn_count - 1} and turning off autoAdvance`);
 			frame = gameManagerRef.current.gamePGN.turn_count - 1;
-			setAutoAdvance(false);
+			// not actually disabling auto-advance - this allows live matches to run!
 		}
 
 		frame = Math.max(0, frame); // who would be stupid enough to do this....? (me)
@@ -124,7 +124,7 @@ export function GameProvider(props: GameProviderProps) {
 		if (!autoAdvance) return;
 
 		const interval = setInterval(() => {
-			setRenderedGameFrame(renderedGameFrameRef.current + 1);
+			incrementRenderedGameFrame(1);
 		}, BASE_PLAYBACK_INTERVAL_MS / playbackSpeed);
 
 		return () => clearInterval(interval);
