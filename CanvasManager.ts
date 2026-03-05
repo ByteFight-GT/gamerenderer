@@ -1,5 +1,6 @@
 import { PX_PER_TILE, Sprite, SPRITE_FILES } from "./spritesheet";
 import { GameRenderState, MapData } from "./types";
+
 import _DEFAULT_MAP_DATA from "./defaults/DEFAULT_MAP_DATA.json";
 const DEFAULT_MAP_DATA = _DEFAULT_MAP_DATA as MapData;
 
@@ -17,11 +18,11 @@ export class CanvasManager {
   public mapData: MapData;
 
   constructor(
-    mapInfo?: MapData,
+    mapData?: MapData,
     spriteCanvas?: HTMLCanvasElement,
     backgroundCanvas?: HTMLCanvasElement,
   ) {
-    this.mapData = mapInfo || DEFAULT_MAP_DATA;
+    this.mapData = mapData ?? DEFAULT_MAP_DATA;
 
     if (spriteCanvas && backgroundCanvas) {
       this.registerCanvases(spriteCanvas, backgroundCanvas);
