@@ -75,13 +75,7 @@ export class CanvasManager {
   drawGameState(state: GameRenderState) {
     this.ensureCanvasReady();
 
-    // clear dynamic layer
-    this.spriteCtx.clearRect(
-      0,
-      0,
-      this.spriteCanvas.width,
-      this.spriteCanvas.height,
-    );
+    this.clearSpriteCanvas();
 
     const { paint, beacons, powerups, p1Loc, p2Loc } = state;
 
@@ -264,6 +258,24 @@ export class CanvasManager {
     for (const { r, c } of this.mapData.hillLocs) {
       blitMapFeature(Sprite.HILL_LIGHT, r, c);
     }
+  }
+
+  reset(newMapData: MapData) {
+    this.ensureCanvasReady();
+    this.mapData = newMapData;
+    this.clearSpriteCanvas();
+    this.blitMap();
+  }
+
+  clearSpriteCanvas() {
+    this.ensureCanvasReady();
+
+    this.spriteCtx.clearRect(
+      0,
+      0,
+      this.spriteCanvas.width,
+      this.spriteCanvas.height,
+    );
   }
 
   blitTestSprites() {}

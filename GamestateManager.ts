@@ -3,6 +3,8 @@ import { applySymmetry, make2DArray, mergeArrays, oob } from "./utils";
 
 import _EMPTY_GAME_PGN from "./defaults/EMPTY_GAME_PGN.json";
 const EMPTY_GAME_PGN = _EMPTY_GAME_PGN as GamePGN;
+import _DEFAULT_MAP_DATA from "./defaults/DEFAULT_MAP_DATA.json";
+const DEFAULT_MAP_DATA = _DEFAULT_MAP_DATA as MapData;
 
 /**
  * Owns the state of the game and handles any live-update logic (for livestreamed games)
@@ -35,9 +37,9 @@ export class GamestateManager {
   gamePGN: GamePGN;
 
 
-  constructor(mapData: MapData, initPGN?: GamePGN) {
+  constructor(initMapData?: MapData, initPGN?: GamePGN) {
     this.gamePGN = initPGN ?? EMPTY_GAME_PGN;
-    this.mapData = mapData;
+    this.mapData = initMapData ?? DEFAULT_MAP_DATA;
 
     // can already initialize first frame since 0th turn is always NONE
     this.computedGameFrames[0] = GamestateManager.getInitialGameFrame(this.mapData);
@@ -76,6 +78,14 @@ export class GamestateManager {
       p1_territory: mergeArrays(this.gamePGN.p1_territory, newPGN.p1_territory),
       p2_territory: mergeArrays(this.gamePGN.p2_territory, newPGN.p2_territory),
     };
+  }
+
+  /** Reset the internal state. should be used once when starting to render a new game */
+  reset(newMapData: MapData, newInitPGN: GamePGN) {
+    this.mapData = newMapData;
+    this.gamePGN = newInitPGN;
+    this.computedGameFrames.length = 0; // clear cache
+    this.computedGameFrames[0] = GamestateManager.getInitialGameFrame(this.mapData);
   }
 
   /** get the initial empty board based on map data */

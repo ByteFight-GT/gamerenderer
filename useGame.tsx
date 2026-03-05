@@ -3,9 +3,6 @@ import { CanvasManager } from "./CanvasManager";
 import { GamestateManager } from "./GamestateManager";
 import { GamePGN, MapData } from "./types";
 
-import _DEFAULT_MAP_DATA from "./defaults/DEFAULT_MAP_DATA.json";
-const DEFAULT_MAP_DATA = _DEFAULT_MAP_DATA as MapData;
-
 const BASE_PLAYBACK_INTERVAL_MS = 500; // base time between autoplayed moves at 1x speed
 
 export type GameContextValue = {
@@ -18,11 +15,12 @@ export type GameContextValue = {
 	/** Update match data (merge) with a new packet from python server. This is lazy and doesnt calc frames immediately, thats done on renderTurn (TODO: change?) */
 	updateGamePGN: (newPGN: GamePGN) => void;
 
-	/** Fully replace (instead of merging) the current match data and make state changes so everythings valid (e.g. clamping renderedGameFrame) */
-	overwriteGamePGN: (replacementPGN: GamePGN) => void;
-
-	/** Set the map data used by the renderer and game state manager and stuff. Redraws immediately! */
-	updateMapData: (newMapData: MapData) => void;
+	/**
+	 * Set the map and game data used by the renderer and game state manager. 
+	 * This should really only be used when rendering an entirely new game!
+	 * This causes the canvases to redraw immediately, and causes GamestateManager to reset!
+	 */
+	reset: (newMapData: MapData, newInitPGN: GamePGN) => void;
 
 
 	// USER CONTROLS STUFF
@@ -43,15 +41,20 @@ export type GameContextValue = {
 	setPlaybackSpeed: React.Dispatch<React.SetStateAction<number>>;
 
 };
-
 const GameContext = React.createContext<GameContextValue | null>(null);
 
-export function GameProvider({ children }: { children: React.ReactNode }) {
+
+export type GameProviderProps = {
+	children: React.ReactNode;
+	initMapData?: MapData;
+	initPGN?: GamePGN;
+};
+export function GameProvider(props: GameProviderProps) {
 
 	// SETUP AND GAMESTATE STUFF
 	
-	const gameManagerRef = React.useRef<GamestateManager>(new GamestateManager(DEFAULT_MAP_DATA));
-	const canvasManagerRef = React.useRef<CanvasManager>(new CanvasManager());
+	const gameManagerRef = React.useRef<GamestateManager>(new GamestateManager(props.initMapData, props.initPGN));
+	const canvasManagerRef = React.useRef<CanvasManager>(new CanvasManager(props.initMapData));
 
 	const registerCanvases = React.useCallback((spriteCanvas: HTMLCanvasElement, backgroundCanvas: HTMLCanvasElement) => {
 		canvasManagerRef.current.registerCanvases(spriteCanvas, backgroundCanvas);
@@ -61,20 +64,13 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
 		gameManagerRef.current.updateGamePGN(newPGN);
 	}, []);
 
-	const overwriteGamePGN = React.useCallback((replacementPGN: GamePGN) => {
-		gameManagerRef.current.gamePGN = replacementPGN;
+	const reset = React.useCallback((newMapData: MapData, newInitPGN: GamePGN) => {
+		gameManagerRef.current.reset(newMapData, newInitPGN);
+		canvasManagerRef.current.reset(newMapData);
 
-		// if the current rendered frame is now out of bounds, clamp it and turn off autoAdvance
-		if (renderedGameFrameRef.current >= replacementPGN.turn_count) {
-			setRenderedGameFrame(replacementPGN.turn_count - 1);
-			setAutoAdvance(false);
-		}
-	}, []);
-
-	const updateMapData = React.useCallback((newMapData: MapData) => {
-		gameManagerRef.current.mapData = newMapData;
-		canvasManagerRef.current.mapData = newMapData;
-		canvasManagerRef.current.blitMap();
+		// reset controls except for playback speed cuz thats more of a user setting
+		setRenderedGameFrame(0);
+		setAutoAdvance(false);
 	}, []);
 
 	const renderFrame = React.useCallback((turn: number) => {
@@ -128,9 +124,8 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
 
 	const value = React.useMemo(() => ({
 		registerCanvases, 
-		updateGamePGN, 
-		overwriteGamePGN,
-		updateMapData,
+		updateGamePGN,
+		reset,
 
 		renderedGameFrame,
 		setRenderedGameFrame,
@@ -147,10 +142,11 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
 
 	return (
 		<GameContext.Provider value={value}>
-			{children}
+			{props.children}
 		</GameContext.Provider>
 	);
 }
+
 
 export function useGame() {
 	const ctx = React.useContext(GameContext);
