@@ -5,7 +5,7 @@ import { GamePGN } from "./types";
 
 const BASE_PLAYBACK_INTERVAL_MS = 500; // base time between autoplayed moves at 1x speed
 
-export type GamerendererContextValue = {
+export type GameContextValue = {
 
 	// SETUP AND GAMESTATE STUFF
 
@@ -31,9 +31,9 @@ export type GamerendererContextValue = {
 
 };
 
-const GamerendererContext = React.createContext<GamerendererContextValue | null>(null);
+const GameContext = React.createContext<GameContextValue | null>(null);
 
-export function GamerendererProvider({ children }: { children: React.ReactNode }) {
+export function GameProvider({ children }: { children: React.ReactNode }) {
 
 	// SETUP AND GAMESTATE STUFF
 	
@@ -103,21 +103,21 @@ export function GamerendererProvider({ children }: { children: React.ReactNode }
 		setAutoAdvance,
 		playbackSpeed,
 		setPlaybackSpeed
-	} satisfies GamerendererContextValue), [
+	} satisfies GameContextValue), [
 		renderedGameFrame,
 		autoAdvance,
 		playbackSpeed
 	]);
 
 	return (
-		<GamerendererContext.Provider value={value}>
+		<GameContext.Provider value={value}>
 			{children}
-		</GamerendererContext.Provider>
+		</GameContext.Provider>
 	);
 }
 
-export function useGamerenderer() {
-	const ctx = React.useContext(GamerendererContext);
-	if (!ctx) throw new Error("useGamerenderer must be used inside GamerendererProvider");
+export function useGame() {
+	const ctx = React.useContext(GameContext);
+	if (!ctx) throw new Error("useGame must be used inside GameProvider");
 	return ctx;
 }
