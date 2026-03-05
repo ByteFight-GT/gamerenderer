@@ -1,10 +1,9 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 
-// import smallMatch from "./matches_example/match.json";
-// import bigMatch from "./matches_example/big_match.json";
-import { useState } from "react";
+import smallMatch from "./matches_example/match.json";
+import bigMatch from "./matches_example/big_match.json";
 import { CanvasManager } from "./CanvasManager";
 import { GameRenderState, MapInfo, Symmetry, MapLoc } from "./types";
 
@@ -132,21 +131,7 @@ function buildFramesFromMatch(match: any, width: number, height: number): GameRe
         if (y < 0 || y >= height || x < 0 || x >= width) continue;
 
         const cell = powerups[y][x];
-
-        if (typeof raw === "string") {
-          const v = raw.toLowerCase();
-          cell.hasHealth = v.includes("health") || v.includes("hp");
-          cell.hasStamina = v.includes("stamina") || v.includes("stam");
-        } else if (typeof raw === "number") {
-          if (raw === 0) {
-            cell.hasHealth = false;
-            cell.hasStamina = false;
-          } else if (raw > 0) {
-            cell.hasStamina = true;
-          } else {
-            cell.hasHealth = true;
-          }
-        } else if (typeof raw === "boolean") {
+        if (typeof raw === "boolean") {
           if (raw) {
             cell.hasStamina = true;
           } else {
@@ -172,82 +157,15 @@ function buildFramesFromMatch(match: any, width: number, height: number): GameRe
   return frames;
 }
 
-interface GameRendererProps {
-  initialData?: any | null;
-  // This callback gives the parent the ability to push new dictionaries
-  onRegisterUpdater?: (updater: (newDict: any) => void) => void;
-}
+export function GameRenderer() {
+  const canvasManager = React.useRef<CanvasManager | null>(null);
+  const [frames, setFrames] = React.useState<GameRenderState[]>([]);
+  const [currentTurn, setCurrentTurn] = React.useState(0);
+  const [isPlaying, setIsPlaying] = React.useState(false);
+  const [playbackSpeed, setPlaybackSpeed] = React.useState(1); // 1x
+  const [selectedMatch, setSelectedMatch] = React.useState<"small" | "big">("small");
 
-export const GameRenderer = ({ initialData, onRegisterUpdater }: GameRendererProps) => {
-  const canvasManager = useRef<CanvasManager | null>(null);
-  const [matchData, setMatchData] = useState<any | null>(initialData);
-  const [frames, setFrames] = useState<GameRenderState[]>([]);
-  const [currentTurn, setCurrentTurn] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [playbackSpeed, setPlaybackSpeed] = useState(1);
-
-  // --- Data Management ---
-
-  // Update internal matchData when the parent provides a new dictionary (Local Client Mode)
-  const addMatchUpdate = (newDict: any) => {
-    setMatchData((prev: any) => {
-      if (!prev) return newDict;
-
-      // Merge arrays to support streaming history
-      const merge = (key: string) => [...(prev[key] || []), ...(newDict[key] || [])];
-
-      return {
-        ...prev,
-        ...newDict,
-        turn_count: newDict.turn_count ?? prev.turn_count,
-        p1_loc: merge("p1_loc"),
-        p2_loc: merge("p2_loc"),
-        paint_updates: merge("paint_updates"),
-        beacon_updates: merge("beacon_updates"),
-        p1_stamina: merge("p1_stamina"),
-        p2_stamina: merge("p2_stamina"),
-        p1_territory: merge("p1_territory"),
-        p2_territory: merge("p2_territory"),
-      };
-    });
-  };
-
-  // Give the update function to the parent component on mount
-  useEffect(() => {
-    if (onRegisterUpdater) {
-      onRegisterUpdater(addMatchUpdate);
-    }
-  }, [onRegisterUpdater]);
-
-  // Update frames whenever matchData changes
-  useEffect(() => {
-    if (!matchData) return;
-
-    const mapInfo = buildMapInfoFromMatch(matchData);
-    
-    // Initialize CanvasManager if it doesn't exist
-    if (!canvasManager.current) {
-      const spriteCanvas = document.getElementById("sprite-canvas") as HTMLCanvasElement;
-      const bgCanvas = document.getElementById("background-canvas") as HTMLCanvasElement;
-      canvasManager.current = new CanvasManager(mapInfo, spriteCanvas, bgCanvas);
-    }
-
-    const allFrames = buildFramesFromMatch(matchData, mapInfo.width, mapInfo.height);
-    setFrames(allFrames);
-
-    // If we were at the end of a live stream, auto-advance
-    if (isPlaying && currentTurn >= allFrames.length - 2) {
-      setCurrentTurn(allFrames.length - 1);
-    }
-  }, [matchData]);
-
-  // --- Rendering Loop ---
-  useEffect(() => {
-    if (!canvasManager.current || frames.length === 0) return;
-    const clampedTurn = Math.max(0, Math.min(currentTurn, frames.length - 1));
-    canvasManager.current.drawGameState(frames[clampedTurn]);
-  }, [currentTurn, frames]);
-
+  const matchData = selectedMatch === "big" ? bigMatch : smallMatch;
 
   React.useEffect(() => {
     const spriteCanvas = document.getElementById("sprite-canvas")! as HTMLCanvasElement;
@@ -324,7 +242,7 @@ export const GameRenderer = ({ initialData, onRegisterUpdater }: GameRendererPro
   return (
     <div className="app-root">
       <div className="controls">
-        {/* <label style={{ marginRight: 12, fontSize: 13 }}>
+        <label style={{ marginRight: 12, fontSize: 13 }}>
           <span style={{ marginRight: 4 }}>Match:</span>
           <select
             value={selectedMatch}
@@ -335,7 +253,7 @@ export const GameRenderer = ({ initialData, onRegisterUpdater }: GameRendererPro
             <option value="small">Small match</option>
             <option value="big">Big match</option>
           </select>
-        </label> */}
+        </label>
 
         <button
           type="button"
@@ -420,9 +338,9 @@ export const GameRenderer = ({ initialData, onRegisterUpdater }: GameRendererPro
 
       <TransformWrapper>
         <TransformComponent wrapperClass="pan-container">
-          <div id="canvas-container" className="grid">
-            <canvas id="background-canvas" className="col-start-1 row-start-1" />
-            <canvas id="sprite-canvas" className="col-start-1 row-start-1" />
+          <div id="canvas-container">
+            <canvas id="background-canvas"></canvas>
+            <canvas id="sprite-canvas"></canvas>
           </div>
         </TransformComponent>
       </TransformWrapper>
