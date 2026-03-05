@@ -37,9 +37,9 @@ export class GamestateManager {
   gamePGN: GamePGN;
 
 
-  constructor(mapData?: MapData) {
-    this.mapData = mapData ?? DEFAULT_MAP_DATA;
-    this.gamePGN = { ...EMPTY_GAME_PGN };
+  constructor(mapData: MapData, initPGN?: GamePGN) {
+    this.gamePGN = initPGN ?? EMPTY_GAME_PGN;
+    this.mapData = mapData;
 
     // can already initialize first frame since 0th turn is always NONE
     this.computedGameFrames[0] = GamestateManager.getInitialGameFrame(this.mapData);
@@ -60,7 +60,8 @@ export class GamestateManager {
 
   updateGamePGN(newPGN: GamePGN): void {
     if (!this.gamePGN) {
-      this.gamePGN = newPGN;      return;
+      this.gamePGN = newPGN;
+      return;
     }
 
     // Merge arrays to support streaming history
@@ -88,45 +89,6 @@ export class GamestateManager {
       beacons: make2DArray<BeaconOwner>(mapData.size.c, mapData.size.r, null),
       powerups: make2DArray<PowerupCellState>(mapData.size.c, mapData.size.r, { hasHealth: false, hasStamina: false }),
     }
-  }
-
-  static mapDataFromGamePGN(gamePGN: GamePGN): MapData {
-    const hillMapping: number[][] = gamePGN.hill_mapping ?? [];
-    const walls: boolean[][] = gamePGN.walls ?? [];
-  
-    const height = hillMapping.length || walls.length;
-    const width = hillMapping[0]?.length || walls[0]?.length || 0;
-  
-    const hillLocs: MapLoc[] = [];
-    for (let r = 0; r < hillMapping.length; r++) {
-      for (let c = 0; c < hillMapping[r].length; c++) {
-        if (hillMapping[r][c] !== 0) {
-          hillLocs.push({r, c});
-        }
-      }
-    }
-  
-    const wallLocs: MapLoc[] = [];
-    for (let r = 0; r < walls.length; r++) {
-      for (let c = 0; c < walls[r].length; c++) {
-        if (walls[r][c]) {
-          wallLocs.push({r, c});
-        }
-      }
-    }
-
-    return {
-      size: {r: height, c: width},
-      hillLocs,
-      wallLocs,
-      spawnpointGreen: gamePGN.p1_loc[0],
-      spawnpointBlue: gamePGN.p2_loc[0],
-
-      // TODO - parse these from gamePGN.mapString
-      symmetry: Symmetry.X,
-      powerupSpawnRate: 1,
-      powerupSpawnNum: 1,
-    };
   }
 
   /** populates computedGameFrames up to and including `turn`. Doesnt recompute already stored ones. */
