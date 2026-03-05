@@ -9,6 +9,9 @@ export type GameContextValue = {
 
 	// SETUP AND GAMESTATE STUFF
 
+	gameManagerRef: React.RefObject<GamestateManager>;
+	canvasManagerRef: React.RefObject<CanvasManager>;
+
 	/** Bind to canvases that the Gamestates will be drawn to */
 	registerCanvases: (spriteCanvas: HTMLCanvasElement, backgroundCanvas: HTMLCanvasElement) => void;
 	
@@ -123,6 +126,8 @@ export function GameProvider(props: GameProviderProps) {
 
 
 	const value = React.useMemo(() => ({
+		gameManagerRef,
+		canvasManagerRef,
 		registerCanvases, 
 		updateGamePGN,
 		reset,
