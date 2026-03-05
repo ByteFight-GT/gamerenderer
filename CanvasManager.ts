@@ -1,6 +1,6 @@
 import { PX_PER_TILE, Sprite, SPRITE_FILES } from "./spritesheet";
 import { GameRenderState, MapData } from "./types";
-import _DEFAULT_MAP_DATA from "./DEFAULT_MAP_DATA.json";
+import _DEFAULT_MAP_DATA from "./defaults/DEFAULT_MAP_DATA.json";
 const DEFAULT_MAP_DATA = _DEFAULT_MAP_DATA as MapData;
 
 /**
