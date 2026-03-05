@@ -6,7 +6,7 @@ import {
 import { GameRenderState, MapInfo } from "./types";
 
 
-import { StaticImageData } from "next/image";
+// import { StaticImageData } from "next/image";
 /**
  * Handler for rendering game things onto a canvas element.
  */
@@ -58,26 +58,25 @@ export class CanvasManager {
 					if (value === 0) continue;
 
 					const magnitude = Math.min(3, Math.abs(value));
-					const alpha = 0.2 + 0.2 * magnitude;
+
+					let sprite: Sprite;
 
 					if (value > 0) {
-						// positive -> blue player
-						this.spriteCtx.fillStyle = `rgba(30, 144, 255, ${alpha})`;
+						// blue player
+						if (magnitude === 1) sprite = Sprite.BLUE_TILE1;
+						else if (magnitude === 2) sprite = Sprite.BLUE_TILE2;
+						else sprite = Sprite.BLUE_TILE3;
 					} else {
-						// negative -> green player
-						this.spriteCtx.fillStyle = `rgba(0, 200, 0, ${alpha})`;
+						// green player
+						if (magnitude === 1) sprite = Sprite.GREEN_TILE1;
+						else if (magnitude === 2) sprite = Sprite.GREEN_TILE2;
+						else sprite = Sprite.GREEN_TILE3;
 					}
 
-					this.spriteCtx.fillRect(
-						x * PX_PER_TILE,
-						y * PX_PER_TILE,
-						PX_PER_TILE,
-						PX_PER_TILE
-					);
+					this.blitSpriteOnTile(sprite, x, y);
 				}
 			}
 		}
-
 		// draw beacons on top of paint
 		if (beacons) {
 			for (let y = 0; y < this.mapInfo.height; y++) {
@@ -135,7 +134,7 @@ export class CanvasManager {
 		this.backgroundCtx.imageSmoothingEnabled = false;
 
 		// Next.js imports return an object { src: string, ... }, so we cast accordingly
-		const entries = Object.entries(SPRITE_FILES) as unknown as [string, { src: string }][];
+		const entries = Object.entries(SPRITE_FILES) as [string, string][];
 		let loaded = 0;
 
 		for (const [key, spriteData] of entries) {
@@ -160,7 +159,7 @@ export class CanvasManager {
 			};
 
 			// Access the .src property from the Next.js StaticImageData object
-			img.src = spriteData.src;
+			img.src = spriteData;
 		}
 	}
 
@@ -232,10 +231,10 @@ export class CanvasManager {
 		}
 
 		// decorative floating pieces row just below the map
-		const decoY = this.mapInfo.height;
-		for (let x = 0; x < this.mapInfo.width; x++) {
-			blitMapFeature(Sprite.FLOATING_PIECE_BOTTOM, x, decoY);
-		}
+		// const decoY = this.mapInfo.height;
+		// for (let x = 0; x < this.mapInfo.width; x++) {
+		// 	blitMapFeature(Sprite.FLOATING_PIECE_BOTTOM, x, decoY);
+		// }
 
 		// drawing walls
 		// Build quick lookup for wall positions
@@ -264,4 +263,5 @@ export class CanvasManager {
 		this.spriteCanvas.height = PX_PER_TILE * (this.mapInfo.height + 1);
 		this.backgroundCanvas.height = PX_PER_TILE * (this.mapInfo.height + 1);
 	}
+
 }
