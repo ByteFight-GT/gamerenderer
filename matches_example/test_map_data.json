@@ -1,0 +1,21 @@
+{
+	"size": {"r": 20, "c": 20},
+	"hillLocs": [
+		{ "r": 5, "c": 5 },
+		{ "r": 12, "c": 8 },
+		{ "r": 7, "c": 3 }
+	],
+	"wallLocs": [
+		{ "r": 3, "c": 4 },
+		{ "r": 4, "c": 4 },
+		{ "r": 5, "c": 4 },
+		{ "r": 10, "c": 10 },
+		{ "r": 11, "c": 10 },
+		{ "r": 12, "c": 10 }
+	],
+	"spawnpointGreen": { "r": 1, "c": 1 },
+	"spawnpointBlue": { "r": 18, "c": 13 },
+	"symmetry": "XY",
+	"powerupSpawnRate": 1,
+	"powerupSpawnNum": 1
+}
