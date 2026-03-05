@@ -106,8 +106,6 @@ export class CanvasManager {
 							Sprite.POWERUP_HEALTH,
 							x,
 							y,
-							-PX_PER_TILE,
-							-PX_PER_TILE
 						);
 					}
 
@@ -116,8 +114,6 @@ export class CanvasManager {
 							Sprite.POWERUP_STAMINA,
 							x,
 							y,
-							PX_PER_TILE,
-							PX_PER_TILE
 						);
 					}
 				}
