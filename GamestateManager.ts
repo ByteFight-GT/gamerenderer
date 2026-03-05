@@ -1,8 +1,6 @@
 import { BeaconOwner, GamePGN, GameRenderState, MapData, MapLoc, PowerupCellState, Symmetry } from "./types";
 import { applySymmetry, make2DArray, mergeArrays, oob } from "./utils";
 
-import _DEFAULT_MAP_DATA from "./defaults/DEFAULT_MAP_DATA.json";
-const DEFAULT_MAP_DATA = _DEFAULT_MAP_DATA as MapData;
 import _EMPTY_GAME_PGN from "./defaults/EMPTY_GAME_PGN.json";
 const EMPTY_GAME_PGN = _EMPTY_GAME_PGN as GamePGN;
 
