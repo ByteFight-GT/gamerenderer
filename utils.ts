@@ -2,7 +2,7 @@ import { GamePGN, MapLoc, Symmetry_t } from "./types";
 
 export function make2DArray<T>(width: number, height: number, defaultValue: T): T[][] {
   return Array.from({ length: height }, () =>
-    Array.from({ length: width }, () => defaultValue)
+    Array.from({ length: width }, () => structuredClone(defaultValue))
   );
 }
 
