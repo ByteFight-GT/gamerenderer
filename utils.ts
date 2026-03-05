@@ -21,3 +21,7 @@ export function applySymmetry(mapLoc: MapLoc, symmetry: Symmetry_t, mapWidth: nu
       return { r: mapHeight - 1 - r, c: mapWidth - 1 - c };
   }
 }
+
+export function mergeArrays<T>(arr1: T[], arr2: T[]): T[] {
+  return [...arr1, ...arr2];
+}
