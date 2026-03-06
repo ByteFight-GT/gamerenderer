@@ -255,8 +255,10 @@ export class CanvasManager {
       blitMapFeature(Sprite.WALL, r, c);
     }
 
-    for (const { r, c } of this.mapData.hillLocs) {
-      blitMapFeature(Sprite.HILL_LIGHT, r, c);
+    for (const hillId in this.mapData.hillLocs) {
+      for (const { r, c } of this.mapData.hillLocs[hillId]) {
+        blitMapFeature(Sprite.HILL_LIGHT, r, c);
+      }
     }
   }
 

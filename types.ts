@@ -1,11 +1,19 @@
 type ValueType<T> = T[keyof T];
 
+export const TileType = {
+	EMPTY: 'EMPTY',
+	WALL: 'WALL',
+	HILL: 'HILL',
+	BLUE_SPAWN: 'BLUE_SPAWN',
+	GREEN_SPAWN: 'GREEN_SPAWN',
+} as const;
+
 export type MapLoc = {r: number; c: number};
 
 export const Symmetry = {
-	X: 'X',
-	Y: 'Y',
-	XY: 'XY',
+	Horizontal: 'Horizontal',
+	Vertical: 'Vertical',
+	Origin: 'Origin',
 } as const;
 export type Symmetry_t = ValueType<typeof Symmetry>;
 
@@ -130,11 +138,13 @@ export type GamePGN = {
  */
 export type MapData = {
 	size: MapLoc; // r, c (height, width)
-	hillLocs: MapLoc[];
+	hillLocs: {
+		[hillId: string]: MapLoc[];
+	};
 	wallLocs: MapLoc[];
-	spawnpointGreen: MapLoc;
 	spawnpointBlue: MapLoc;
-	powerupSpawnRate: number;
-	powerupSpawnNum: number;
+	spawnpointGreen: MapLoc;
 	symmetry: Symmetry_t;
+	powerupSpawnInterval: number;
+	powerupSpawnNum: number;
 }
