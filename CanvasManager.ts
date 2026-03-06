@@ -1,3 +1,4 @@
+import { StaticImageData } from "next/image";
 import { 
 	PX_PER_TILE, 
 	Sprite,
@@ -134,7 +135,8 @@ export class CanvasManager {
 		this.backgroundCtx.imageSmoothingEnabled = false;
 
 		// Next.js imports return an object { src: string, ... }, so we cast accordingly
-		const entries = Object.entries(SPRITE_FILES) as [string, string][];
+		
+		const entries = Object.entries(SPRITE_FILES) as [string, StaticImageData][];
 		let loaded = 0;
 
 		for (const [key, spriteData] of entries) {
@@ -159,7 +161,7 @@ export class CanvasManager {
 			};
 
 			// Access the .src property from the Next.js StaticImageData object
-			img.src = spriteData;
+			img.src = spriteData.src;
 		}
 	}
 
