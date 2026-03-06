@@ -66,6 +66,9 @@ export function GameProvider(props: GameProviderProps) {
 
 	const updateGamePGN = React.useCallback((diff: GamePGNDiff) => {
 		gameManagerRef.current.updateGamePGN(diff);
+		
+		// TEMP: during games, render immediately. we DO want this to happen, but doing it like this is a bit weird....
+		setRenderedGameFrame(gameManagerRef.current.gamePGN.turn_count);
 	}, []);
 
 	const reset = React.useCallback((newMapData: MapData, newInitPGN: GamePGN) => {
