@@ -87,22 +87,22 @@ export class CanvasManager {
           if (value === 0) continue;
 
           const magnitude = Math.min(3, Math.abs(value));
-          const alpha = 0.2 + 0.2 * magnitude;
+
+          let sprite: Sprite;
 
           if (value > 0) {
-            // positive -> blue player
-            this.spriteCtx.fillStyle = `rgba(30, 144, 255, ${alpha})`;
-          } else {
-            // negative -> green player
-            this.spriteCtx.fillStyle = `rgba(0, 200, 0, ${alpha})`;
-          }
+						// blue player
+						if (magnitude === 1) sprite = Sprite.BLUE_TILE_1;
+						else if (magnitude === 2) sprite = Sprite.BLUE_TILE_2;
+						else sprite = Sprite.BLUE_TILE_3;
+					} else {
+						// green player
+						if (magnitude === 1) sprite = Sprite.GREEN_TILE_1;
+						else if (magnitude === 2) sprite = Sprite.GREEN_TILE_2;
+						else sprite = Sprite.GREEN_TILE_3;
+					}
 
-          this.spriteCtx.fillRect(
-            c * PX_PER_TILE,
-            r * PX_PER_TILE,
-            PX_PER_TILE,
-            PX_PER_TILE,
-          );
+          this.blitSpriteOnTile(sprite, r, c);
         }
       }
     }
