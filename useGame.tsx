@@ -94,11 +94,11 @@ export function GameProvider(props: GameProviderProps) {
 	// setRenderedGameFrame wrapper with extra checks/handlers
 	const setRenderedGameFrame = React.useCallback((frame: number) => {
 
-		console.log(`[GameProvider:setRenderedGameFrame] requested ${frame}`);
+		// console.log(`[GameProvider:setRenderedGameFrame] requested ${frame}`);
 
 		// clamp to max turn and turn off autoAdvance if we hit the end of the game
 		if (frame >= gameManagerRef.current.gamePGN.turn_count) {
-			console.log(`[GameProvider:setRenderedGameFrame] requested ${frame} but only ${gameManagerRef.current.gamePGN.turn_count} turns!, clamping -> ${gameManagerRef.current.gamePGN.turn_count}`);
+			// console.log(`[GameProvider:setRenderedGameFrame] requested ${frame} but only ${gameManagerRef.current.gamePGN.turn_count} turns!, clamping -> ${gameManagerRef.current.gamePGN.turn_count}`);
 			frame = gameManagerRef.current.gamePGN.turn_count;
 			// not actually disabling auto-advance - this allows live matches to run!
 		}
@@ -108,7 +108,7 @@ export function GameProvider(props: GameProviderProps) {
 		// if no change, do nothing
 		if (frame === renderedGameFrameRef.current) return;
 
-		console.log(`[GameProvider:setRenderedGameFrame] rendering ${frame}!`)
+		// console.log(`[GameProvider:setRenderedGameFrame] rendering ${frame}!`)
 
 		renderFrame(frame);
 		_setRenderedGameFrame(frame);
