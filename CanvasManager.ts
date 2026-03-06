@@ -67,7 +67,7 @@ export class CanvasManager {
       !this.backgroundCtx
     ) {
       throw new Error(
-        "Canvas elements/contexts are not registered. Please report this!",
+        "Canvas elements/contexts are not registered. Try visiting the [Game] page.",
       );
     }
   }
