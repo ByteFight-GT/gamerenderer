@@ -6,6 +6,14 @@ import { clamp } from "./utils";
 
 const BASE_PLAYBACK_INTERVAL_MS = 500; // base time between autoplayed moves at 1x speed
 
+/** 
+ * max# of frames behind the latest turn we can be for updateGamePGN to autoadvance 
+ * Note that this isnt just a ux thing lol, keeping it at 1 breaks if moves come in too fast
+ * cuz the state cant update fast enough before another pgnDiff comes in and the rounds "run away"
+ * from the current frame lolll.
+ */
+const LIVE_GAME_AUTOADVANCE_LENIENCY = 5; 
+
 export type GameContextValue = {
 
 	// SETUP AND GAMESTATE STUFF
@@ -67,9 +75,8 @@ export function GameProvider(props: GameProviderProps) {
 	const updateGamePGN = React.useCallback((diff: GamePGNDiff) => {
 		gameManagerRef.current.updateGamePGN(diff);
 		
-		// TEMP: during games, render immediately if we are at head. we DO want this to happen, 
-		// but doing it like this is a bit annoying cuz we need a ref
-		if (renderedGameFrameRef.current === gameManagerRef.current.gamePGN.turn_count - 1) {
+		// TEMP: during games, render immediately if we are at head. we DO want this to happen but this feels weird idk.
+		if (renderedGameFrameRef.current >= gameManagerRef.current.gamePGN.turn_count - LIVE_GAME_AUTOADVANCE_LENIENCY) {
 			setRenderedGameFrame(gameManagerRef.current.gamePGN.turn_count);
 		}
 	}, []);
