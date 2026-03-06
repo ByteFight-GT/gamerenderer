@@ -217,6 +217,8 @@ export class CanvasManager {
       `Blitting map of size ${this.mapData.size.c}x${this.mapData.size.r}`,
     );
 
+    this.updateCanvasSize();
+
     const blitMapFeature = (
       featureName: Sprite,
       tileR: number,
