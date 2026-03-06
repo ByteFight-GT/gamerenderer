@@ -13,11 +13,11 @@ export function oob(loc: MapLoc, mapSize: MapLoc): boolean {
 export function applySymmetry(mapLoc: MapLoc, symmetry: Symmetry_t, mapWidth: number, mapHeight: number): MapLoc {
   const { r, c } = mapLoc;
   switch (symmetry) {
-    case 'X': // x (c) values are symmetric
+    case 'Vertical': // x (c) values are symmetric
       return { r, c: mapWidth - 1 - c };
-    case 'Y': // y (r) values are symmetric
+    case 'Horizontal': // y (r) values are symmetric
       return { r: mapHeight - 1 - r, c };
-    case 'XY': // both
+    case 'Origin': // both
       return { r: mapHeight - 1 - r, c: mapWidth - 1 - c };
   }
 }
