@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 
@@ -157,15 +157,22 @@ function buildFramesFromMatch(match: any, width: number, height: number): GameRe
   return frames;
 }
 
-export function GameRenderer() {
+interface GameRendererProps {
+  initialData?: any | null;
+  // This callback gives the parent the ability to push new dictionaries
+  onRegisterUpdater?: (updater: (newDict: any) => void) => void;
+}
+
+export const GameRenderer = ({ initialData, onRegisterUpdater }: GameRendererProps) => {
   const canvasManager = React.useRef<CanvasManager | null>(null);
   const [frames, setFrames] = React.useState<GameRenderState[]>([]);
   const [currentTurn, setCurrentTurn] = React.useState(0);
   const [isPlaying, setIsPlaying] = React.useState(false);
   const [playbackSpeed, setPlaybackSpeed] = React.useState(1); // 1x
-  const [selectedMatch, setSelectedMatch] = React.useState<"small" | "big">("small");
+  // const [selectedMatch, setSelectedMatch] = React.useState<"small" | "big">("small");
+  const [matchData, setMatchData] = useState<any | null>(initialData);
 
-  const matchData = selectedMatch === "big" ? bigMatch : smallMatch;
+  // const matchData = selectedMatch === "big" ? bigMatch : smallMatch;
 
   React.useEffect(() => {
     const spriteCanvas = document.getElementById("sprite-canvas")! as HTMLCanvasElement;
@@ -242,7 +249,7 @@ export function GameRenderer() {
   return (
     <div className="app-root">
       <div className="controls">
-        <label style={{ marginRight: 12, fontSize: 13 }}>
+        {/* <label style={{ marginRight: 12, fontSize: 13 }}>
           <span style={{ marginRight: 4 }}>Match:</span>
           <select
             value={selectedMatch}
@@ -253,7 +260,7 @@ export function GameRenderer() {
             <option value="small">Small match</option>
             <option value="big">Big match</option>
           </select>
-        </label>
+        </label> */}
 
         <button
           type="button"
