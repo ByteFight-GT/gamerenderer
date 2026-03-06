@@ -95,7 +95,7 @@ export function GameProvider(props: GameProviderProps) {
 	// setRenderedGameFrame wrapper with extra checks/handlers
 	const setRenderedGameFrame = React.useCallback((frame: number) => {
 		// clamp
-		frame = clamp(0, frame, gameManagerRef.current.gamePGN.turn_count);
+		frame = clamp(frame, 0, gameManagerRef.current.gamePGN.turn_count);
 
 		// if no change, do nothing
 		if (frame === renderedGameFrameRef.current) return;

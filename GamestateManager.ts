@@ -13,16 +13,15 @@ export class GamestateManager {
 
   /** 
    * Caches render-ready representations of the board (game pgn itself is just diffs). 
-   * The element at index [i] is the game frame AFTER turn i takes place.
-   * Note that as of writing this, turn 0 is always NONE so frame at index 0 will be the initial state.
+   * The element at index [i] is the game frame AFTER turn i takes place. Turn 0 is always the NONE turn.
    * CONTRACT: should always be contiguous from 0 to the current furthest computed turn.
    * ^ follow or else fired. THANK YOU FOR YOUR ATTENTION TO THIS MATTER. -President DOnald J Trump
    */
   computedGameFrames: GameRenderState[] = [];
 
   /**
-   * highest turn in the game that has been computed (stored in computedGameFrames and ready to render).
-   * only making this to avoid off-by-ones (computedGameFrames.length = 1 actually means 0 is the highest turn)
+   * highest frame in the game that has been computed (stored in computedGameFrames and ready to render).
+   * only making this to avoid off-by-ones (computedGameFrames.length = 1 actually means 0 is the highest frame)
    */
   get highestComputedTurn(): number {
     return this.computedGameFrames.length - 1;
@@ -46,16 +45,16 @@ export class GamestateManager {
   }
 
   /** 
-   * fetch the frame at the specified turn. 
+   * fetch the frame at the specified frame. Frame i = state of the game AFTER turn i. 
    * If jumping (e.g. only turns 1-50 have been computed, but we jump to round 1300),
    * then this will calculate and cache every frame in between before returning. 
    */
-  getGameFrame(turn: number): GameRenderState {
-    if (this.highestComputedTurn < turn) {
+  getGameFrame(frame: number): GameRenderState {
+    if (this.highestComputedTurn < frame) {
       // need to compute
-      this.computeGameUpTo(turn);
+      this.computeGameUpTo(frame);
     }
-    return this.computedGameFrames[turn];
+    return this.computedGameFrames[frame];
   }
 
   updateGamePGN(diff: GamePGNDiff): void {
@@ -96,23 +95,22 @@ export class GamestateManager {
   /** get the initial empty board based on map data */
   static getInitialGameFrame(mapData: MapData): GameRenderState {
     return {
-      p1Loc: mapData.spawnpointGreen,
-      p2Loc: applySymmetry(mapData.spawnpointGreen, mapData.symmetry, mapData.size.c, mapData.size.r),
+      p1Loc: mapData.spawnpointBlue,
+      p2Loc: mapData.spawnpointGreen,
       paint: make2DArray<number>(mapData.size.c, mapData.size.r, 0),
       beacons: make2DArray<BeaconOwner>(mapData.size.c, mapData.size.r, null),
       powerups: make2DArray<PowerupCellState>(mapData.size.c, mapData.size.r, { hasHealth: false, hasStamina: false }),
     }
   }
 
-  /** populates computedGameFrames up to and including `turn`. Doesnt recompute already stored ones. */
-  private computeGameUpTo(turn: number): void {
+  /** populates computedGameFrames up to and including `frame`. Doesnt recompute already stored ones. */
+  private computeGameUpTo(frame: number): void {
     const mapR = this.mapData.size.r;
     const mapC = this.mapData.size.c;
 
-    let prevState = this.computedGameFrames[this.highestComputedTurn];
+    let prevState = structuredClone(this.computedGameFrames[this.highestComputedTurn]);
 
-    for (let calcTurn = this.highestComputedTurn+1; calcTurn <= turn; calcTurn++) {
-
+    for (let calcTurn = this.highestComputedTurn+1; calcTurn <= frame; calcTurn++) {
       // paint
       const paintUpdates = this.gamePGN.paint_updates[calcTurn];
       if (paintUpdates) {
