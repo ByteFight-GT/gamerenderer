@@ -2,6 +2,7 @@ import React from "react";
 import { CanvasManager } from "./CanvasManager";
 import { GamestateManager } from "./GamestateManager";
 import { GamePGN, GamePGNDiff, MapData } from "./types";
+import { clamp } from "./utils";
 
 const BASE_PLAYBACK_INTERVAL_MS = 500; // base time between autoplayed moves at 1x speed
 
@@ -93,22 +94,11 @@ export function GameProvider(props: GameProviderProps) {
 	
 	// setRenderedGameFrame wrapper with extra checks/handlers
 	const setRenderedGameFrame = React.useCallback((frame: number) => {
-
-		// console.log(`[GameProvider:setRenderedGameFrame] requested ${frame}`);
-
-		// clamp to max turn and turn off autoAdvance if we hit the end of the game
-		if (frame >= gameManagerRef.current.gamePGN.turn_count) {
-			// console.log(`[GameProvider:setRenderedGameFrame] requested ${frame} but only ${gameManagerRef.current.gamePGN.turn_count} turns!, clamping -> ${gameManagerRef.current.gamePGN.turn_count}`);
-			frame = gameManagerRef.current.gamePGN.turn_count;
-			// not actually disabling auto-advance - this allows live matches to run!
-		}
-
-		frame = Math.max(0, frame); // who would be stupid enough to do this....? (me)
+		// clamp
+		frame = clamp(0, frame, gameManagerRef.current.gamePGN.turn_count);
 
 		// if no change, do nothing
 		if (frame === renderedGameFrameRef.current) return;
-
-		// console.log(`[GameProvider:setRenderedGameFrame] rendering ${frame}!`)
 
 		renderFrame(frame);
 		_setRenderedGameFrame(frame);

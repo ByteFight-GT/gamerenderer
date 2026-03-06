@@ -81,6 +81,8 @@ export class GamestateManager {
     this.gamePGN.powerup_updates.push(diff.powerup_updates);
 
     this.gamePGN.actions.push(diff.actions);
+
+    this.gamePGN.turn_count++;
   }
 
   /** Reset the internal state. should be used once when starting to render a new game */

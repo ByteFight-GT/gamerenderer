@@ -10,6 +10,10 @@ export function oob(loc: MapLoc, mapSize: MapLoc): boolean {
   return loc.r < 0 || loc.r >= mapSize.r || loc.c < 0 || loc.c >= mapSize.c;
 }
 
+export function clamp(value: number, min: number, max: number): number {
+  return Math.max(min, Math.min(max, value));
+}
+
 export function applySymmetry(mapLoc: MapLoc, symmetry: Symmetry_t, mapWidth: number, mapHeight: number): MapLoc {
   const { r, c } = mapLoc;
   switch (symmetry) {
