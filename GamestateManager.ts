@@ -86,8 +86,8 @@ export class GamestateManager {
 
   /** Reset the internal state. should be used once when starting to render a new game */
   reset(newMapData: MapData, newInitPGN: GamePGN) {
-    this.mapData = newMapData;
-    this.gamePGN = newInitPGN;
+    this.mapData = structuredClone(newMapData);
+    this.gamePGN = structuredClone(newInitPGN);
     this.computedGameFrames.length = 0; // clear cache
     this.computedGameFrames[0] = GamestateManager.getInitialGameFrame(this.mapData);
   }
