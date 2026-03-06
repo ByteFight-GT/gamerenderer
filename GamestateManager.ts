@@ -1,4 +1,4 @@
-import { BeaconOwner, GamePGN, GameRenderState, MapData, MapLoc, PowerupCellState, Symmetry } from "./types";
+import { BeaconOwner, GamePGN, GamePGNDiff, GameRenderState, MapData, MapLoc, PowerupCellState, Symmetry } from "./types";
 import { applySymmetry, make2DArray, mergeArrayField, mergeArrays, oob } from "./utils";
 
 import _EMPTY_GAME_PGN from "./defaults/EMPTY_GAME_PGN.json";
@@ -58,34 +58,29 @@ export class GamestateManager {
     return this.computedGameFrames[turn];
   }
 
-  updateGamePGN(newPGN: Partial<GamePGN>): void {
-    if (!this.gamePGN) {
-      this.gamePGN = newPGN as GamePGN;
-      return;
-    }
+  updateGamePGN(diff: GamePGNDiff): void {
+    this.gamePGN.p1_time_left.push(diff.p1_time_left);
+    this.gamePGN.p2_time_left.push(diff.p2_time_left);
 
-    const KEYS_TO_ARRAYMERGE = [
-      "p1_loc",
-      "p2_loc",
-      "paint_updates",
-      "beacon_updates",
-      "powerup_updates",
-      "p1_stamina",
-      "p2_stamina",
-      "p1_territory",
-      "p2_territory"
-    ] as (keyof GamePGN)[];
+    this.gamePGN.p1_loc.push({ r: diff.p1_loc[0], c: diff.p1_loc[1] });
+    this.gamePGN.p2_loc.push({ r: diff.p2_loc[0], c: diff.p2_loc[1] });
 
-    // Merge arrays to support streaming history
-    this.gamePGN = {
-      ...this.gamePGN,
-      ...newPGN,
-      turn_count: newPGN.turn_count ?? this.gamePGN.turn_count,
-    };
+    this.gamePGN.p1_stamina.push(diff.p1_stamina);
+    this.gamePGN.p2_stamina.push(diff.p2_stamina);
 
-    for (const key of KEYS_TO_ARRAYMERGE) {
-      mergeArrayField(key, this.gamePGN, newPGN);
-    }
+    this.gamePGN.p1_max_stamina.push(diff.p1_max_stamina);
+    this.gamePGN.p2_max_stamina.push(diff.p2_max_stamina);
+
+    this.gamePGN.p1_territory.push(diff.p1_territory);
+    this.gamePGN.p2_territory.push(diff.p2_territory);
+
+    this.gamePGN.parity_playing.push(diff.parity_playing);
+
+    this.gamePGN.paint_updates.push(diff.paint_updates);
+    this.gamePGN.beacon_updates.push(diff.beacon_updates);
+    this.gamePGN.powerup_updates.push(diff.powerup_updates);
+
+    this.gamePGN.actions.push(diff.actions);
   }
 
   /** Reset the internal state. should be used once when starting to render a new game */

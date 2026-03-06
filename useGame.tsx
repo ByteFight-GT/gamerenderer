@@ -1,7 +1,7 @@
 import React from "react";
 import { CanvasManager } from "./CanvasManager";
 import { GamestateManager } from "./GamestateManager";
-import { GamePGN, MapData } from "./types";
+import { GamePGN, GamePGNDiff, MapData } from "./types";
 
 const BASE_PLAYBACK_INTERVAL_MS = 500; // base time between autoplayed moves at 1x speed
 
@@ -16,7 +16,7 @@ export type GameContextValue = {
 	registerCanvases: (spriteCanvas: HTMLCanvasElement, backgroundCanvas: HTMLCanvasElement) => void;
 	
 	/** Update match data (merge) with a new packet from python server. This is lazy and doesnt calc frames immediately, thats done on renderTurn (TODO: change?) */
-	updateGamePGN: (newPGN: Partial<GamePGN>) => void;
+	updateGamePGN: (diff: GamePGNDiff) => void;
 
 	/**
 	 * Set the map and game data used by the renderer and game state manager. 
@@ -63,8 +63,8 @@ export function GameProvider(props: GameProviderProps) {
 		canvasManagerRef.current.registerCanvases(spriteCanvas, backgroundCanvas);
 	}, []);
 
-	const updateGamePGN = React.useCallback((newPGN: Partial<GamePGN>) => {
-		gameManagerRef.current.updateGamePGN(newPGN);
+	const updateGamePGN = React.useCallback((diff: GamePGNDiff) => {
+		gameManagerRef.current.updateGamePGN(diff);
 	}, []);
 
 	const reset = React.useCallback((newMapData: MapData, newInitPGN: GamePGN) => {
