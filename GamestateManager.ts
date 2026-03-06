@@ -2,9 +2,9 @@ import { BeaconOwner, GamePGN, GamePGNDiff, GameRenderState, MapData, MapLoc, Po
 import { applySymmetry, make2DArray, mergeArrayField, mergeArrays, oob } from "./utils";
 
 import _EMPTY_GAME_PGN from "./defaults/EMPTY_GAME_PGN.json";
-const EMPTY_GAME_PGN = _EMPTY_GAME_PGN as GamePGN;
+const EMPTY_GAME_PGN = _EMPTY_GAME_PGN as unknown as GamePGN;
 import _DEFAULT_MAP_DATA from "./defaults/DEFAULT_MAP_DATA.json";
-const DEFAULT_MAP_DATA = _DEFAULT_MAP_DATA as MapData;
+const DEFAULT_MAP_DATA = _DEFAULT_MAP_DATA as unknown as MapData;
 
 /**
  * Owns the state of the game and handles any live-update logic (for livestreamed games)
@@ -61,8 +61,8 @@ export class GamestateManager {
     this.gamePGN.p1_time_left.push(diff.p1_time_left);
     this.gamePGN.p2_time_left.push(diff.p2_time_left);
 
-    this.gamePGN.p1_loc.push({ r: diff.p1_loc[0], c: diff.p1_loc[1] });
-    this.gamePGN.p2_loc.push({ r: diff.p2_loc[0], c: diff.p2_loc[1] });
+    this.gamePGN.p1_loc.push(diff.p1_loc);
+    this.gamePGN.p2_loc.push(diff.p2_loc);
 
     this.gamePGN.p1_stamina.push(diff.p1_stamina);
     this.gamePGN.p2_stamina.push(diff.p2_stamina);
@@ -97,16 +97,16 @@ export class GamestateManager {
     return {
       p1Loc: mapData.spawnpointBlue,
       p2Loc: mapData.spawnpointGreen,
-      paint: make2DArray<number>(mapData.size.c, mapData.size.r, 0),
-      beacons: make2DArray<BeaconOwner>(mapData.size.c, mapData.size.r, null),
-      powerups: make2DArray<PowerupCellState>(mapData.size.c, mapData.size.r, { hasHealth: false, hasStamina: false }),
+      paint: make2DArray<number>(mapData.size[1], mapData.size[0], 0),
+      beacons: make2DArray<BeaconOwner>(mapData.size[1], mapData.size[0], null),
+      powerups: make2DArray<PowerupCellState>(mapData.size[1], mapData.size[0], { hasHealth: false, hasStamina: false }),
     }
   }
 
   /** populates computedGameFrames up to and including `frame`. Doesnt recompute already stored ones. */
   private computeGameUpTo(frame: number): void {
-    const mapR = this.mapData.size.r;
-    const mapC = this.mapData.size.c;
+    const mapR = this.mapData.size[0];
+    const mapC = this.mapData.size[1];
 
     let prevState = structuredClone(this.computedGameFrames[this.highestComputedTurn]);
 
@@ -138,7 +138,7 @@ export class GamestateManager {
           if (Number.isNaN(flatIndex)) continue;
           const r = Math.floor(flatIndex / mapR);
           const c = flatIndex % mapC;
-          if (oob({ r, c }, this.mapData.size)) continue;
+          if (oob([r, c], this.mapData.size)) continue;
 
           if (typeof raw === "boolean") {
             prevState.beacons[r][c] = raw && currentPlayer ? currentPlayer : null;
@@ -160,7 +160,7 @@ export class GamestateManager {
           if (Number.isNaN(flatIndex)) continue;
           const r = Math.floor(flatIndex / mapR);
           const c = flatIndex % mapC;
-          if (oob({ r, c }, this.mapData.size)) continue;
+          if (oob([r, c], this.mapData.size)) continue;
 
           // as of now, no health powerups
           prevState.powerups[r][c].hasStamina = raw;

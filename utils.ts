@@ -7,7 +7,7 @@ export function make2DArray<T>(width: number, height: number, defaultValue: T): 
 }
 
 export function oob(loc: MapLoc, mapSize: MapLoc): boolean {
-  return loc.r < 0 || loc.r >= mapSize.r || loc.c < 0 || loc.c >= mapSize.c;
+  return loc[0] < 0 || loc[0] >= mapSize[0] || loc[1] < 0 || loc[1] >= mapSize[1];
 }
 
 export function clamp(value: number, min: number, max: number): number {
@@ -15,14 +15,14 @@ export function clamp(value: number, min: number, max: number): number {
 }
 
 export function applySymmetry(mapLoc: MapLoc, symmetry: Symmetry_t, mapWidth: number, mapHeight: number): MapLoc {
-  const { r, c } = mapLoc;
+  const [r, c] = mapLoc;
   switch (symmetry) {
     case 'Vertical': // x (c) values are symmetric
-      return { r, c: mapWidth - 1 - c };
+      return [r, mapWidth - 1 - c];
     case 'Horizontal': // y (r) values are symmetric
-      return { r: mapHeight - 1 - r, c };
+      return [mapHeight - 1 - r, c];
     case 'Origin': // both
-      return { r: mapHeight - 1 - r, c: mapWidth - 1 - c };
+      return [mapHeight - 1 - r, mapWidth - 1 - c];
   }
 }
 

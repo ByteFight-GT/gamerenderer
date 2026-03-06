@@ -1,9 +1,9 @@
 {
-	"size": {"r": 20, "c": 20},
+	"size": [20, 20],
 	"hillLocs": {},
 	"wallLocs": [],
-	"spawnpointBlue": {"r": 1, "c": 1},
-	"spawnpointGreen": {"r": 18, "c": 18},
+	"spawnpointBlue": [1, 1],
+	"spawnpointGreen": [18, 18],
 	"symmetry": "Origin",
 	"powerupSpawnInterval": 1,
 	"powerupSpawnNum": 1

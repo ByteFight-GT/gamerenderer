@@ -2,7 +2,7 @@ import { PX_PER_TILE, Sprite, SPRITE_FILES } from "./spritesheet";
 import { GameRenderState, MapData } from "./types";
 
 import _DEFAULT_MAP_DATA from "./defaults/DEFAULT_MAP_DATA.json";
-const DEFAULT_MAP_DATA = _DEFAULT_MAP_DATA as MapData;
+const DEFAULT_MAP_DATA = _DEFAULT_MAP_DATA as unknown as MapData;
 
 /**
  * Handler for rendering game things onto a canvas element.
@@ -74,15 +74,14 @@ export class CanvasManager {
 
   drawGameState(state: GameRenderState) {
     this.ensureCanvasReady();
-
     this.clearSpriteCanvas();
 
     const { paint, beacons, powerups, p1Loc, p2Loc } = state;
 
     // draw paint as colored overlays
     if (paint) {
-      for (let r = 0; r < this.mapData.size.r; r++) {
-        for (let c = 0; c < this.mapData.size.c; c++) {
+      for (let r = 0; r < this.mapData.size[0]; r++) {
+        for (let c = 0; c < this.mapData.size[1]; c++) {
           const value = paint[r][c];
           if (value === 0) continue;
 
@@ -109,8 +108,8 @@ export class CanvasManager {
 
     // draw beacons on top of paint
     if (beacons) {
-      for (let r = 0; r < this.mapData.size.r; r++) {
-        for (let c = 0; c < this.mapData.size.c; c++) {
+      for (let r = 0; r < this.mapData.size[0]; r++) {
+        for (let c = 0; c < this.mapData.size[1]; c++) {
           const owner = beacons[r][c];
           if (!owner) continue;
 
@@ -125,8 +124,8 @@ export class CanvasManager {
 
     // draw powerups
     if (powerups) {
-      for (let r = 0; r < this.mapData.size.r; r++) {
-        for (let c = 0; c < this.mapData.size.c; c++) {
+      for (let r = 0; r < this.mapData.size[0]; r++) {
+        for (let c = 0; c < this.mapData.size[1]; c++) {
           const cell = powerups[r][c];
           if (!cell) continue;
 
@@ -154,8 +153,8 @@ export class CanvasManager {
     }
 
     // draw players last so they are on top
-    this.blitSpriteOnTile(Sprite.PLAYER_BLUE, p1Loc.r, p1Loc.c);
-    this.blitSpriteOnTile(Sprite.PLAYER_GREEN, p2Loc.r, p2Loc.c);
+    this.blitSpriteOnTile(Sprite.PLAYER_BLUE, p1Loc[0], p1Loc[1]);
+    this.blitSpriteOnTile(Sprite.PLAYER_GREEN, p2Loc[0], p2Loc[1]);
   }
 
   /**
@@ -198,6 +197,7 @@ export class CanvasManager {
 
     const img = this.spriteImages[name];
     if (!img) {
+      console.warn(`Tried to blit sprite ${Sprite[name]} but it was not loaded yet.`);
       return;
     }
 
@@ -212,11 +212,6 @@ export class CanvasManager {
 
   blitMap() {
     this.ensureCanvasReady();
-
-    console.log(
-      `Blitting map of size ${this.mapData.size.c}x${this.mapData.size.r}`,
-    );
-
     this.updateCanvasSize();
 
     const blitMapFeature = (
@@ -238,8 +233,8 @@ export class CanvasManager {
       );
     };
 
-    for (let r = this.mapData.size.r; --r >= 0; ) {
-      for (let c = this.mapData.size.c; --c >= 0; ) {
+    for (let r = this.mapData.size[0]; --r >= 0; ) {
+      for (let c = this.mapData.size[1]; --c >= 0; ) {
         if (c % 2 === r % 2) {
           blitMapFeature(Sprite.TILE_LIGHT, r, c);
         } else {
@@ -248,17 +243,17 @@ export class CanvasManager {
       }
     }
 
-    const decoR = this.mapData.size.r;
-    for (let c = 0; c < this.mapData.size.c; c++) {
+    const decoR = this.mapData.size[0];
+    for (let c = 0; c < this.mapData.size[1]; c++) {
       blitMapFeature(Sprite.FLOATING_PIECE_BOTTOM, decoR, c);
     }
 
-    for (const { r, c } of this.mapData.wallLocs) {
+    for (const [r, c] of this.mapData.wallLocs) {
       blitMapFeature(Sprite.WALL, r, c);
     }
 
     for (const hillId in this.mapData.hillLocs) {
-      for (const { r, c } of this.mapData.hillLocs[hillId]) {
+      for (const [r, c] of this.mapData.hillLocs[hillId]) {
         blitMapFeature(Sprite.HILL_LIGHT, r, c);
       }
     }
@@ -290,11 +285,11 @@ export class CanvasManager {
   updateCanvasSize() {
     this.ensureCanvasReady();
 
-    this.spriteCanvas.width = PX_PER_TILE * this.mapData.size.c;
-    this.backgroundCanvas.width = PX_PER_TILE * this.mapData.size.c;
+    this.spriteCanvas.width = PX_PER_TILE * this.mapData.size[1];
+    this.backgroundCanvas.width = PX_PER_TILE * this.mapData.size[1];
 
     // add one extra decorative row below the map
-    this.spriteCanvas.height = PX_PER_TILE * (this.mapData.size.r + 1);
-    this.backgroundCanvas.height = PX_PER_TILE * (this.mapData.size.r + 1);
+    this.spriteCanvas.height = PX_PER_TILE * (this.mapData.size[0] + 1);
+    this.backgroundCanvas.height = PX_PER_TILE * (this.mapData.size[0] + 1);
   }
 }

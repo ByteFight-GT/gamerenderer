@@ -82,6 +82,7 @@ export function GameProvider(props: GameProviderProps) {
 	}, []);
 
 	const reset = React.useCallback((newMapData: MapData, newInitPGN: GamePGN) => {
+		console.log(`[GameProvider.reset] resetting game with new map data and new init PGN`, {newMapData, newInitPGN});
 		gameManagerRef.current.reset(newMapData, newInitPGN);
 		canvasManagerRef.current.reset(newMapData);
 

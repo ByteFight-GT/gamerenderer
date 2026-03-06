@@ -11,7 +11,7 @@ const TEST_PGN = TEMP_convertRCArraysToObjects(_TEST_PGN) as GamePGN;
 
 import _TEST_MAP_DATA from "./matches_example/test_map_data.json";
 import { TEMP_convertRCArraysToObjects } from './utils';
-const TEST_MAP_DATA = _TEST_MAP_DATA as MapData;
+const TEST_MAP_DATA = _TEST_MAP_DATA as unknown as MapData;
 
 function DevTest() {
 
