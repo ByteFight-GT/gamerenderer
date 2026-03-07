@@ -50,7 +50,7 @@ export type VisualizerContextValue = {
 	 * Returns an unsubscribe function to remove the handler. is useful for subscribing to changes in the game state that come from live games, for example.
 	 */
 	subscribeToFrameChanges: <S>(
-		selector: (entirePGN: GamePGN) => S,
+		selector: (entirePGN: GamePGN, newCurrentFrame: number) => S,
 		callback: (selectedState: S) => void
 	) => (() => void);
 
@@ -95,7 +95,7 @@ export function VisualizerProvider(props: {children: React.ReactNode}) {
 
 	// SETUP AND GAMESTATE STUFF
 	
-	const subscribersRef = React.useRef<Set<(pgn: GamePGN) => void>>(new Set());
+	const subscribersRef = React.useRef<Set<(pgn: GamePGN, frame: number) => void>>(new Set());
 
 	const gameManagerRef = React.useRef<GamestateManager>(new GamestateManager(DEFAULT_MAP_DATA, EMPTY_GAME_PGN));
 	const canvasManagerRef = React.useRef<CanvasManager>(new CanvasManager(DEFAULT_MAP_DATA));
@@ -140,10 +140,10 @@ export function VisualizerProvider(props: {children: React.ReactNode}) {
 	}, []);
 
 	const subscribeToFrameChanges = React.useCallback(<S,>(
-		selector: (entirePGN: GamePGN) => S,
+		selector: (entirePGN: GamePGN, newCurrentFrame: number) => S,
 		callback: (selectedState: S) => void
 	) => {
-		const handler = (currentPGN: GamePGN) => callback(selector(currentPGN))
+		const handler = (currentPGN: GamePGN, currentFrame: number) => callback(selector(currentPGN, currentFrame));
 
 		subscribersRef.current.add(handler);
 		return () => subscribersRef.current.delete(handler); // unsubscriber
@@ -177,7 +177,7 @@ export function VisualizerProvider(props: {children: React.ReactNode}) {
 
 		// run subscribers
 		const currentPGN = gameManagerRef.current.gamePGN;
-		subscribersRef.current.forEach(handler => handler(currentPGN));
+		subscribersRef.current.forEach(handler => handler(currentPGN, frame));
 	}, []);
 	
 	const incrementRenderedGameFrame = React.useCallback((n: number) => {
