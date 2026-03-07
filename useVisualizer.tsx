@@ -22,7 +22,7 @@ const BASE_PLAYBACK_INTERVAL_MS = 500;
  */
 const LIVE_GAME_AUTOADVANCE_THRESHOLD = 0.995; 
 
-export type GameContextValue = {
+export type VisualizerContextValue = {
 
 	// SETUP AND GAMESTATE STUFF
 
@@ -38,7 +38,7 @@ export type GameContextValue = {
 
 	/**
 	 * Make the visualizer switch context to a new game from potentially a new match
-	 * This causes the canvases to redraw immediately, and causes GamestateManager to reset!
+	 * This causes the canvases to redraw immediately, resets states like the current frame
 	 */
 	setVisualizerState: (matchData: MatchMetadata, gamePGN: GamePGN, mapData: MapData) => void;
 
@@ -66,14 +66,14 @@ export type GameContextValue = {
 	setPlaybackSpeed: React.Dispatch<React.SetStateAction<number>>;
 
 };
-const GameContext = React.createContext<GameContextValue | null>(null);
+const VisualizerContext = React.createContext<VisualizerContextValue | null>(null);
 
 
 /**
- * Store that handles all things related to the game viewer, like
+ * Store that handles all things related to the game visualizer, like
  * current match, rendering logic, game state, user controls, etc.
  */
-export function GameProvider(props: {children: React.ReactNode}) {
+export function VisualizerProvider(props: {children: React.ReactNode}) {
 
 	// SETUP AND GAMESTATE STUFF
 	
@@ -178,7 +178,7 @@ export function GameProvider(props: {children: React.ReactNode}) {
 		setAutoAdvance,
 		playbackSpeed,
 		setPlaybackSpeed
-	} satisfies GameContextValue), [
+	} satisfies VisualizerContextValue), [
 		currentMatchData,
 		renderedGameFrame,
 		autoAdvance,
@@ -186,15 +186,15 @@ export function GameProvider(props: {children: React.ReactNode}) {
 	]);
 
 	return (
-		<GameContext.Provider value={value}>
+		<VisualizerContext.Provider value={value}>
 			{props.children}
-		</GameContext.Provider>
+		</VisualizerContext.Provider>
 	);
 }
 
 
-export function useGame() {
-	const ctx = React.useContext(GameContext);
-	if (!ctx) throw new Error("useGame must be used inside GameProvider");
+export function useVisualizer() {
+	const ctx = React.useContext(VisualizerContext);
+	if (!ctx) throw new Error("useVisualizer must be used inside VisualizerProvider");
 	return ctx;
 }

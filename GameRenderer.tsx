@@ -1,7 +1,7 @@
 import React from "react";
 
 import { TransformWrapper, TransformComponent, ReactZoomPanPinchProps } from "react-zoom-pan-pinch";
-import { useGame } from "./useGame";
+import { useVisualizer } from "./useVisualizer";
 
 type GameRendererProps = {
   transformWrapperProps?: ReactZoomPanPinchProps;
@@ -17,7 +17,7 @@ type GameRendererProps = {
 
 export const GameRenderer = (props: GameRendererProps) => {
 
-  const { registerCanvases } = useGame();
+  const {registerCanvases} = useVisualizer();
 
   const spriteCanvasRef = React.useRef<HTMLCanvasElement>(null);
   const backgroundCanvasRef = React.useRef<HTMLCanvasElement>(null);
