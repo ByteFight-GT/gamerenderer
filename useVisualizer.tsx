@@ -37,6 +37,24 @@ export type VisualizerContextValue = {
 	updateGamePGN: (diff: GamePGNDiff) => void;
 
 	/**
+	 * Add a selector and a callback to be called whenever the current rendered frame changes.
+	 * The selector will run on the current ENTIRE gamePGN (containing all game history and data),
+	 * then the handler will be called with the result of the selector.
+	 *
+	 * ### PLEASE DO NOT WRITE TO THE DATA IN THE SELECTOR OR CALLBACK, THESE SHOULD BE FOR READING ONLY!!!
+	 * ### THANK YOU FOR YOUR ATTENTION TO THIS MATTER. -President Donald J Trump
+	 *
+	 * We use a selector here cuz react wont rerender if we just return the entire gamePGN
+	 * every time since the reference remains the same.
+	 *
+	 * Returns an unsubscribe function to remove the handler. is useful for subscribing to changes in the game state that come from live games, for example.
+	 */
+	subscribeToFrameChanges: <S>(
+		selector: (entirePGN: GamePGN) => S,
+		callback: (selectedState: S) => void
+	) => (() => void);
+
+	/**
 	 * Make the visualizer switch context to a new game from potentially a new match
 	 * This causes the canvases to redraw immediately, resets states like the current frame
 	 */
@@ -77,6 +95,8 @@ export function VisualizerProvider(props: {children: React.ReactNode}) {
 
 	// SETUP AND GAMESTATE STUFF
 	
+	const subscribersRef = React.useRef<Set<(pgn: GamePGN) => void>>(new Set());
+
 	const gameManagerRef = React.useRef<GamestateManager>(new GamestateManager(DEFAULT_MAP_DATA, EMPTY_GAME_PGN));
 	const canvasManagerRef = React.useRef<CanvasManager>(new CanvasManager(DEFAULT_MAP_DATA));
 
@@ -119,6 +139,16 @@ export function VisualizerProvider(props: {children: React.ReactNode}) {
 		setAutoAdvance(false);
 	}, []);
 
+	const subscribeToFrameChanges = React.useCallback(<S,>(
+		selector: (entirePGN: GamePGN) => S,
+		callback: (selectedState: S) => void
+	) => {
+		const handler = (currentPGN: GamePGN) => callback(selector(currentPGN))
+
+		subscribersRef.current.add(handler);
+		return () => subscribersRef.current.delete(handler); // unsubscriber
+	}, []);
+
 	const renderFrame = React.useCallback((turn: number) => {
 		const frame = gameManagerRef.current.getGameFrame(turn);
 		canvasManagerRef.current.drawGameState(frame);
@@ -144,6 +174,10 @@ export function VisualizerProvider(props: {children: React.ReactNode}) {
 
 		renderFrame(frame);
 		_setRenderedGameFrame(frame);
+
+		// run subscribers
+		const currentPGN = gameManagerRef.current.gamePGN;
+		subscribersRef.current.forEach(handler => handler(currentPGN));
 	}, []);
 	
 	const incrementRenderedGameFrame = React.useCallback((n: number) => {
@@ -170,6 +204,7 @@ export function VisualizerProvider(props: {children: React.ReactNode}) {
 		updateGamePGN,
 		setVisualizerState,
 		clearVisualizerState,
+		subscribeToFrameChanges,
 
 		renderedGameFrame,
 		setRenderedGameFrame,
