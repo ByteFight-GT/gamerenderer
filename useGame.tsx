@@ -4,15 +4,23 @@ import { GamestateManager } from "./GamestateManager";
 import { GamePGN, GamePGNDiff, MapData } from "./types";
 import { clamp } from "./utils";
 
-const BASE_PLAYBACK_INTERVAL_MS = 500; // base time between autoplayed moves at 1x speed
+import _EMPTY_GAME_PGN from "./defaults/EMPTY_GAME_PGN.json";
+const EMPTY_GAME_PGN = _EMPTY_GAME_PGN as unknown as GamePGN;
+import _DEFAULT_MAP_DATA from "./defaults/DEFAULT_MAP_DATA.json";
+import { MatchMetadata } from "../../common/types";
+const DEFAULT_MAP_DATA = _DEFAULT_MAP_DATA as unknown as MapData;
+
+/** base ms between autoplayed moves at 1x speed */
+const BASE_PLAYBACK_INTERVAL_MS = 500; 
 
 /** 
- * max# of frames behind the latest turn we can be for updateGamePGN to autoadvance 
- * Note that this isnt just a ux thing lol, keeping it at 1 breaks if moves come in too fast
- * cuz the state cant update fast enough before another pgnDiff comes in and the rounds "run away"
- * from the current frame lolll.
+ * If current frame is above (turn_count * this), then updateGamePGN will automatically 
+ * push the rendered frame to newest whenever it gets called.
+ * Note that this isnt just a ux thing lol, trying to advance only if we are at the latest 
+ * frame breaks cuz the state cant update fast enough before another pgnDiff comes in and 
+ * the rounds end up "runing away" from the current frame.
  */
-const LIVE_GAME_AUTOADVANCE_LENIENCY = 5; 
+const LIVE_GAME_AUTOADVANCE_THRESHOLD = 0.995; 
 
 export type GameContextValue = {
 
@@ -20,6 +28,7 @@ export type GameContextValue = {
 
 	gameManagerRef: React.RefObject<GamestateManager>;
 	canvasManagerRef: React.RefObject<CanvasManager>;
+	currentMatchData: MatchMetadata | null;
 
 	/** Bind to canvases that the Gamestates will be drawn to */
 	registerCanvases: (spriteCanvas: HTMLCanvasElement, backgroundCanvas: HTMLCanvasElement) => void;
@@ -28,12 +37,16 @@ export type GameContextValue = {
 	updateGamePGN: (diff: GamePGNDiff) => void;
 
 	/**
-	 * Set the map and game data used by the renderer and game state manager. 
-	 * This should really only be used when rendering an entirely new game!
+	 * Make the visualizer switch context to a new game from potentially a new match
 	 * This causes the canvases to redraw immediately, and causes GamestateManager to reset!
 	 */
-	reset: (newMapData: MapData, newInitPGN: GamePGN) => void;
+	setVisualizerState: (matchData: MatchMetadata, gamePGN: GamePGN, mapData: MapData) => void;
 
+	/**
+	 * Blanks out the visualizer so that theres no match/game being viewed. The renderer
+	 * will switch to showing the default empty board.
+	 */
+	clearVisualizerState: () => void;
 
 	// USER CONTROLS STUFF
 
@@ -56,35 +69,50 @@ export type GameContextValue = {
 const GameContext = React.createContext<GameContextValue | null>(null);
 
 
-export type GameProviderProps = {
-	children: React.ReactNode;
-	initMapData?: MapData;
-	initPGN?: GamePGN;
-};
-export function GameProvider(props: GameProviderProps) {
+/**
+ * Store that handles all things related to the game viewer, like
+ * current match, rendering logic, game state, user controls, etc.
+ */
+export function GameProvider(props: {children: React.ReactNode}) {
 
 	// SETUP AND GAMESTATE STUFF
 	
-	const gameManagerRef = React.useRef<GamestateManager>(new GamestateManager(props.initMapData, props.initPGN));
-	const canvasManagerRef = React.useRef<CanvasManager>(new CanvasManager(props.initMapData));
+	const gameManagerRef = React.useRef<GamestateManager>(new GamestateManager(DEFAULT_MAP_DATA, EMPTY_GAME_PGN));
+	const canvasManagerRef = React.useRef<CanvasManager>(new CanvasManager(DEFAULT_MAP_DATA));
+
+	const [currentMatchData, setCurrentMatchData] = React.useState<MatchMetadata | null>(null);
 
 	const registerCanvases = React.useCallback((spriteCanvas: HTMLCanvasElement, backgroundCanvas: HTMLCanvasElement) => {
 		canvasManagerRef.current.registerCanvases(spriteCanvas, backgroundCanvas);
 	}, []);
 
 	const updateGamePGN = React.useCallback((diff: GamePGNDiff) => {
+		const shouldMoveToHeadFrame = renderedGameFrameRef.current >= (gameManagerRef.current.gamePGN.turn_count * LIVE_GAME_AUTOADVANCE_THRESHOLD);
+
 		gameManagerRef.current.updateGamePGN(diff);
 		
-		// TEMP: during games, render immediately if we are at head. we DO want this to happen but this feels weird idk.
-		if (renderedGameFrameRef.current >= gameManagerRef.current.gamePGN.turn_count - LIVE_GAME_AUTOADVANCE_LENIENCY) {
+		// TEMP: during games, render immediately if we are at head. we DO want this to happen but this impl feels weird idk.
+		if (shouldMoveToHeadFrame) {
 			setRenderedGameFrame(gameManagerRef.current.gamePGN.turn_count);
 		}
 	}, []);
 
-	const reset = React.useCallback((newMapData: MapData, newInitPGN: GamePGN) => {
-		console.log(`[GameProvider.reset] resetting game with new map data and new init PGN`, {newMapData, newInitPGN});
-		gameManagerRef.current.reset(newMapData, newInitPGN);
-		canvasManagerRef.current.reset(newMapData);
+	const setVisualizerState = React.useCallback((matchData: MatchMetadata, gamePGN: GamePGN, mapData: MapData) => {
+		console.log(`[GameProvider.setVisualizerState] changing context to match ID ${matchData.matchId}`);
+		gameManagerRef.current.reset(mapData, gamePGN);
+		canvasManagerRef.current.reset(mapData);
+		setCurrentMatchData(matchData);
+
+		// reset controls except for playback speed cuz thats more of a user setting
+		setRenderedGameFrame(0);
+		setAutoAdvance(false);
+	}, []);
+
+	const clearVisualizerState = React.useCallback(() => {
+		console.log(`[GameProvider.clearVisualizerState] restoring to default board`);
+		gameManagerRef.current.reset(DEFAULT_MAP_DATA, EMPTY_GAME_PGN);
+		canvasManagerRef.current.reset(DEFAULT_MAP_DATA);
+		setCurrentMatchData(null);
 
 		// reset controls except for playback speed cuz thats more of a user setting
 		setRenderedGameFrame(0);
@@ -137,9 +165,11 @@ export function GameProvider(props: GameProviderProps) {
 	const value = React.useMemo(() => ({
 		gameManagerRef,
 		canvasManagerRef,
+		currentMatchData,
 		registerCanvases, 
 		updateGamePGN,
-		reset,
+		setVisualizerState,
+		clearVisualizerState,
 
 		renderedGameFrame,
 		setRenderedGameFrame,
@@ -149,6 +179,7 @@ export function GameProvider(props: GameProviderProps) {
 		playbackSpeed,
 		setPlaybackSpeed
 	} satisfies GameContextValue), [
+		currentMatchData,
 		renderedGameFrame,
 		autoAdvance,
 		playbackSpeed
