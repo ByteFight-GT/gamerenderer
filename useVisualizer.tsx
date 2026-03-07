@@ -141,6 +141,9 @@ export function VisualizerProvider(props: {children: React.ReactNode}) {
 	const subscribeToGameOrFrameChanges = React.useCallback((
 		handler: (entirePGN: GamePGN, currentFrame: number) => void,
 	) => {
+		// give it initial notification
+		handler(gameManagerRef.current.gamePGN, renderedGameFrameRef.current);
+
 		subscribersRef.current.add(handler);
 		return () => subscribersRef.current.delete(handler); // unsubscriber
 	}, []);
