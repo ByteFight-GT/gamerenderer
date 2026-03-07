@@ -37,21 +37,15 @@ export type VisualizerContextValue = {
 	updateGamePGN: (diff: GamePGNDiff) => void;
 
 	/**
-	 * Add a selector and a callback to be called whenever the current rendered frame changes.
-	 * The selector will run on the current ENTIRE gamePGN (containing all game history and data),
-	 * then the handler will be called with the result of the selector.
+	 * Add a callback to be called whenever the game pgn or current frame changes.
 	 *
-	 * ### PLEASE DO NOT WRITE TO THE DATA IN THE SELECTOR OR CALLBACK, THESE SHOULD BE FOR READING ONLY!!!
+	 * ### PLEASE DO NOT WRITE TO THE DATA IN THE CALLBACK, THESE SHOULD BE FOR READING ONLY!!!
 	 * ### THANK YOU FOR YOUR ATTENTION TO THIS MATTER. -President Donald J Trump
 	 *
-	 * We use a selector here cuz react wont rerender if we just return the entire gamePGN
-	 * every time since the reference remains the same.
-	 *
-	 * Returns an unsubscribe function to remove the handler. is useful for subscribing to changes in the game state that come from live games, for example.
+	 * Returns an unsubscribe function to remove the handler.
 	 */
-	subscribeToFrameChanges: <S>(
-		selector: (entirePGN: GamePGN, newCurrentFrame: number) => S,
-		callback: (selectedState: S) => void
+	subscribeToGameOrFrameChanges: (
+		handler: (entirePGN: GamePGN, currentFrame: number) => void,
 	) => (() => void);
 
 	/**
@@ -68,8 +62,6 @@ export type VisualizerContextValue = {
 
 	// USER CONTROLS STUFF
 
-	/** Index of the game frame (state of game AFTER turn [i]) that is being rendered */
-	renderedGameFrame: number;
 	setRenderedGameFrame: (frame: number) => void;
 
 	/** Convenience func for moving n frames forward/backward */
@@ -97,6 +89,8 @@ export function VisualizerProvider(props: {children: React.ReactNode}) {
 	
 	const subscribersRef = React.useRef<Set<(pgn: GamePGN, frame: number) => void>>(new Set());
 
+	const renderedGameFrameRef = React.useRef(0);
+
 	const gameManagerRef = React.useRef<GamestateManager>(new GamestateManager(DEFAULT_MAP_DATA, EMPTY_GAME_PGN));
 	const canvasManagerRef = React.useRef<CanvasManager>(new CanvasManager(DEFAULT_MAP_DATA));
 
@@ -110,6 +104,7 @@ export function VisualizerProvider(props: {children: React.ReactNode}) {
 		const shouldMoveToHeadFrame = renderedGameFrameRef.current >= (gameManagerRef.current.gamePGN.turn_count * LIVE_GAME_AUTOADVANCE_THRESHOLD);
 
 		gameManagerRef.current.updateGamePGN(diff);
+		updateStateSubscribers();
 		
 		// TEMP: during games, render immediately if we are at head. we DO want this to happen but this impl feels weird idk.
 		if (shouldMoveToHeadFrame) {
@@ -122,10 +117,12 @@ export function VisualizerProvider(props: {children: React.ReactNode}) {
 		gameManagerRef.current.reset(mapData, gamePGN);
 		canvasManagerRef.current.reset(mapData);
 		setCurrentMatchData(matchData);
-
+		
 		// reset controls except for playback speed cuz thats more of a user setting
 		setRenderedGameFrame(0);
 		setAutoAdvance(false);
+
+		updateStateSubscribers();
 	}, []);
 
 	const clearVisualizerState = React.useCallback(() => {
@@ -137,16 +134,21 @@ export function VisualizerProvider(props: {children: React.ReactNode}) {
 		// reset controls except for playback speed cuz thats more of a user setting
 		setRenderedGameFrame(0);
 		setAutoAdvance(false);
+
+		updateStateSubscribers();
 	}, []);
 
-	const subscribeToFrameChanges = React.useCallback(<S,>(
-		selector: (entirePGN: GamePGN, newCurrentFrame: number) => S,
-		callback: (selectedState: S) => void
+	const subscribeToGameOrFrameChanges = React.useCallback((
+		handler: (entirePGN: GamePGN, currentFrame: number) => void,
 	) => {
-		const handler = (currentPGN: GamePGN, currentFrame: number) => callback(selector(currentPGN, currentFrame));
-
 		subscribersRef.current.add(handler);
 		return () => subscribersRef.current.delete(handler); // unsubscriber
+	}, []);
+
+	const updateStateSubscribers = React.useCallback(() => {
+		subscribersRef.current.forEach(
+			handler => handler(gameManagerRef.current.gamePGN, renderedGameFrameRef.current)
+		);
 	}, []);
 
 	const renderFrame = React.useCallback((turn: number) => {
@@ -154,15 +156,10 @@ export function VisualizerProvider(props: {children: React.ReactNode}) {
 		canvasManagerRef.current.drawGameState(frame);
 	}, []);
 
-
 	// USER CONTROLS STUFF
 
-	const [renderedGameFrame, _setRenderedGameFrame] = React.useState(0);
 	const [autoAdvance, setAutoAdvance] = React.useState(false);
 	const [playbackSpeed, setPlaybackSpeed] = React.useState(1);
-
-	const renderedGameFrameRef = React.useRef(renderedGameFrame); // need most updated value but we wanna keep setRenderedGameFrame stable
-	React.useEffect(() => {renderedGameFrameRef.current = renderedGameFrame}, [renderedGameFrame]);
 	
 	// setRenderedGameFrame wrapper with extra checks/handlers
 	const setRenderedGameFrame = React.useCallback((frame: number) => {
@@ -173,11 +170,8 @@ export function VisualizerProvider(props: {children: React.ReactNode}) {
 		if (frame === renderedGameFrameRef.current) return;
 
 		renderFrame(frame);
-		_setRenderedGameFrame(frame);
-
-		// run subscribers
-		const currentPGN = gameManagerRef.current.gamePGN;
-		subscribersRef.current.forEach(handler => handler(currentPGN, frame));
+		renderedGameFrameRef.current = frame;
+		updateStateSubscribers();
 	}, []);
 	
 	const incrementRenderedGameFrame = React.useCallback((n: number) => {
@@ -204,9 +198,7 @@ export function VisualizerProvider(props: {children: React.ReactNode}) {
 		updateGamePGN,
 		setVisualizerState,
 		clearVisualizerState,
-		subscribeToFrameChanges,
-
-		renderedGameFrame,
+		subscribeToGameOrFrameChanges,
 		setRenderedGameFrame,
 		incrementRenderedGameFrame,
 		autoAdvance,
@@ -215,7 +207,6 @@ export function VisualizerProvider(props: {children: React.ReactNode}) {
 		setPlaybackSpeed
 	} satisfies VisualizerContextValue), [
 		currentMatchData,
-		renderedGameFrame,
 		autoAdvance,
 		playbackSpeed
 	]);
