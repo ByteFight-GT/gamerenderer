@@ -35,20 +35,9 @@ const TEST_MATCH_DATA: MatchMetadata = {
 
 function DevTest() {
 
-  const {renderedGameFrame, incrementRenderedGameFrame, setVisualizerState} = useVisualizer();
-
   return (
     <div className='app-root'>
-      <div className='controls'>
-        <button onClick={() => {
-          setVisualizerState(TEST_MATCH_DATA, TEST_PGN, TEST_MAP_DATA);
-        }}>Load</button>
-        <h3>currentTurn: {renderedGameFrame}</h3>
-        <button onClick={() => incrementRenderedGameFrame(-1)}>(-)</button>
-        <button onClick={() => incrementRenderedGameFrame(1)}>(+)</button>
-      </div>
-
-      <GameRenderer />
+      Removed for  now otherwise client doesnt  build...
     </div>
   );
 }
