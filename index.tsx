@@ -6,6 +6,6 @@ import { GameRenderer } from './GameRenderer'
 
 import TEST_DATA from "./matches_example/match.json";
 
-createRoot(document.getElementById('root')!).render(
-  <GameRenderer initialData={TEST_DATA} />
+createRoot(document.getElementById('root')!).render(  
+  <GameRenderer initialData={TEST_DATA} player1Name='Tanishq' player2Name='Aliens'/>
 )

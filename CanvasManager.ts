@@ -161,7 +161,7 @@ export class CanvasManager {
 			};
 
 			// Access the .src property from the Next.js StaticImageData object
-			img.src = spriteData.src;
+			img.src = typeof spriteData === "string" ? spriteData : spriteData.src;
 		}
 	}
 

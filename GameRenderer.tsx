@@ -159,11 +159,13 @@ function buildFramesFromMatch(match: any, width: number, height: number): GameRe
 
 interface GameRendererProps {
   initialData?: any | null;
+  player1Name?: string;
+  player2Name?: string;
   // This callback gives the parent the ability to push new dictionaries
   onRegisterUpdater?: (updater: (newDict: any) => void) => void;
 }
 
-export const GameRenderer = ({ initialData, onRegisterUpdater }: GameRendererProps) => {
+export const GameRenderer = ({ initialData, player1Name, player2Name, onRegisterUpdater }: GameRendererProps) => {
   const canvasManager = React.useRef<CanvasManager | null>(null);
   const [frames, setFrames] = React.useState<GameRenderState[]>([]);
   const [currentTurn, setCurrentTurn] = React.useState(0);
@@ -245,7 +247,10 @@ export const GameRenderer = ({ initialData, onRegisterUpdater }: GameRendererPro
   const p2Territory = matchData.p2_territory?.[infoIndex] ?? null;
   const p1TimeLeft = matchData.p1_time_left?.[infoIndex] ?? null;
   const p2TimeLeft = matchData.p2_time_left?.[infoIndex] ?? null;
-
+  const currentPlayer = currentTurn % 2 === 0 ? 1 : 2;
+  const winner = matchData.result ?? null;
+  const gameEnd = currentTurn >= maxTurn;
+  const reasonEnded = matchData.reason;
   return (
     <div className="app-root">
       <div className="controls">
@@ -298,7 +303,18 @@ export const GameRenderer = ({ initialData, onRegisterUpdater }: GameRendererPro
           {">"}
         </button>
         <span>Turn {currentTurn} / {maxTurn}</span>
-
+        <input
+          type="range"
+          min={0}
+          max={maxTurn}
+          value={currentTurn}
+          onChange={(e) => {
+            setIsPlaying(false);
+            setCurrentTurn(Number(e.target.value));
+          }}
+          style={{ marginLeft: 12, width: 220, accentColor: "#ffd700" }}
+          disabled={frames.length === 0}
+        />
         <label style={{ marginLeft: 12, fontSize: 13 }}>
           <span style={{ marginRight: 4 }}>Speed:</span>
           <select
@@ -315,8 +331,26 @@ export const GameRenderer = ({ initialData, onRegisterUpdater }: GameRendererPro
       </div>
 
       <div className="info-panel">
-        <div className="player-info player-1">
-          <h3>Player 1 (Blue)</h3>
+        <div className={`player-info player-1 player-panel ${
+          gameEnd
+            ? winner === "PLAYER_1"
+              ? "active"
+              : "inactive"
+            : currentPlayer === 1
+            ? "active"
+            : "inactive"
+        }`}>
+          <h3>
+            {player1Name} (Blue)
+            {gameEnd && winner === "PLAYER_1" && (
+              <span className="winner-icon">👑</span>
+            )}
+          </h3>
+
+          {gameEnd && winner === "PLAYER_1" && (
+            <div className="win-reason">Win Reason: {reasonEnded.replace("_", " ")}</div>
+          )}
+          
           <div>Bid: {matchData.p1_bid}</div>
           {p1Stamina !== null && p1MaxStamina !== null && (
             <div>
@@ -328,8 +362,25 @@ export const GameRenderer = ({ initialData, onRegisterUpdater }: GameRendererPro
             <div>Time left: {p1TimeLeft.toFixed(3)}s</div>
           )}
         </div>
-        <div className="player-info player-2">
-          <h3>Player 2 (Green)</h3>
+        <div className={`player-info player-2 player-panel ${
+          gameEnd
+            ? winner === "PLAYER_2"
+              ? "active"
+              : "inactive"
+            : currentPlayer === 2
+            ? "active"
+            : "inactive"
+        }`}>
+          <h3>
+            {player2Name} (Green)
+            {gameEnd && winner === "PLAYER_2" && (
+              <span className="winner-icon">👑</span>
+            )}
+          </h3>
+
+          {gameEnd && winner === "PLAYER_2" && (
+            <div className="win-reason">Win Reason: {reasonEnded.replace("_", " ")}</div>
+          )}
           <div>Bid: {matchData.p2_bid}</div>
           {p2Stamina !== null && p2MaxStamina !== null && (
             <div>

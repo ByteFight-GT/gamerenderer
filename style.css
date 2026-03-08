@@ -114,3 +114,37 @@ canvas {
 	border-radius: 8px;
 	image-rendering: pixelated;
 }
+
+.player-panel {
+  background: #111;
+  border: 1px solid #2a2a2a;
+  border-radius: 10px;
+  padding: 10px;
+  transition: all 0.15s ease;
+}
+
+/* inactive player */
+.player-panel.inactive {
+  opacity: 0.6;
+}
+
+/* active player */
+.player-panel.active {
+  opacity: 1;
+  border-color: #6b5b2a;
+  box-shadow: 0 0 4px rgba(255, 215, 0, 0.15);
+}
+
+.win-reason {
+  font-size: 14px;
+  color: #d4af37;
+  opacity: 0.8;
+}
+
+.player-panel.inactive {
+  opacity: 0.55;
+}
+
+.player-panel.active {
+  opacity: 1;
+}
