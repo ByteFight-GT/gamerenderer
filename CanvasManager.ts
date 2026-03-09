@@ -2,6 +2,7 @@ import { PX_PER_TILE, Sprite, SPRITE_FILES } from "./spritesheet";
 import type { GameRenderState, MapData, MapLoc } from "../../common/types";
 
 import _DEFAULT_MAP_DATA from "./defaults/DEFAULT_MAP_DATA.json";
+import { oob } from "./utils";
 const DEFAULT_MAP_DATA = _DEFAULT_MAP_DATA as unknown as MapData;
 
 /**
@@ -53,11 +54,8 @@ export class CanvasManager {
     this.updateCanvasSize();
   }
 
-  /**
-   * returns [r, c] of a click based on the current canvas scaling/map data
-   * @param event event received from the onClick handler of the div that holds both canvases
-   */
-  getRCOfClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>): MapLoc {
+  /** returns [r, c] of a mouse event based on the current canvas scaling/map data */
+  getRCFromClientCoords(clientX: number, clientY: number): MapLoc {
     this.ensureCanvasReady();
 
     const rect = this.spriteCanvas.getBoundingClientRect();
@@ -66,8 +64,8 @@ export class CanvasManager {
     // IMPORTANT! spriteCanvas.width/height is FAKE NEWS here, since react-zoom-pan-pinch
     // uses some css transform or something that the canvas itself doesnt know about.
     // so we use rect instead. THANK YOU FOR YOUR ATTENTION TO THIS MATTER. -President Donald J Trump
-    const u = (event.clientX - rect.left) / rect.width;
-    const v = (event.clientY - rect.top) / rect.height;
+    const u = (clientX - rect.left) / rect.width;
+    const v = (clientY - rect.top) / rect.height;
 
     // using num of tiles in mapdata to calc, cuz the actual canvas can be zoom-pan-pinched
 
@@ -75,6 +73,26 @@ export class CanvasManager {
     const r = Math.floor(v * (this.mapData.size[0]+1)); // [!!] +1 for that decorative row at the bottom
 
     return [r, c];
+  }
+
+  /**
+   * Resolves mouse coords to a playable tile and returns that tile's center in local canvas pixels.
+   * Returns null when the cursor is outside the playable board (including the decorative bottom row).
+   */
+  clampClientCoordsToPlayableTile(clientX: number, clientY: number): { x: number; y: number } | null {
+    this.ensureCanvasReady();
+    
+    const rc = this.getRCFromClientCoords(clientX, clientY);
+
+    // reject decorative row and out-of-bounds indices
+    if (oob(rc, this.mapData.size)) {
+      return null;
+    }
+
+    return {
+      x: (rc[1] + 0.5) * PX_PER_TILE,
+      y: (rc[0] + 0.5) * PX_PER_TILE,
+    };
   }
 
   /** throws an error if any of the canvas things are unavailable */

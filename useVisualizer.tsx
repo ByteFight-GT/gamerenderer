@@ -81,7 +81,6 @@ export type VisualizerContextValue = {
 	/** Speed multipler for autoAdvance. base is 500ms (see BASE_PLAYBACK_INTERVAL_MS). DO NOT MAKE <= 0 OR ELSE!  */
 	playbackSpeed: number;
 	setPlaybackSpeed: React.Dispatch<React.SetStateAction<number>>;
-
 };
 const VisualizerContext = React.createContext<VisualizerContextValue | null>(null);
 
@@ -171,7 +170,7 @@ export function VisualizerProvider(props: {children: React.ReactNode}) {
 
 	const _updateClickSubscribers = React.useCallback(
 		(event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-			const mapLoc = canvasManagerRef.current.getRCOfClick(event);
+			const mapLoc = canvasManagerRef.current.getRCFromClientCoords(event.clientX, event.clientY);
 			clickSubscribersRef.current.forEach(
 				handler => handler(mapLoc, event)
 			);
@@ -232,11 +231,11 @@ export function VisualizerProvider(props: {children: React.ReactNode}) {
 		autoAdvance,
 		setAutoAdvance,
 		playbackSpeed,
-		setPlaybackSpeed
+		setPlaybackSpeed,
 	} satisfies VisualizerContextValue), [
 		currentMatchData,
 		autoAdvance,
-		playbackSpeed
+		playbackSpeed,
 	]);
 
 	return (
