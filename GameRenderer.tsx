@@ -87,8 +87,8 @@ export const GameRenderer = (props: GameRendererProps) => {
             </div>
           )}
 
-          <canvas ref={backgroundCanvasRef} className="col-start-1 row-start-1"/>
-          <canvas ref={spriteCanvasRef} className="col-start-1 row-start-1" />
+          <canvas ref={backgroundCanvasRef} style={{imageRendering: "pixelated"}} className="col-start-1 row-start-1"/>
+          <canvas ref={spriteCanvasRef} style={{imageRendering: "pixelated"}} className="col-start-1 row-start-1" />
         </div>
       </TransformComponent>
     </TransformWrapper>
