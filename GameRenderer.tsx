@@ -17,13 +17,13 @@ type GameRendererProps = {
 
 export const GameRenderer = (props: GameRendererProps) => {
 
-  const {registerCanvases, _updateClickSubscribers} = useVisualizer();
+  const {_registerCanvases, _updateClickSubscribers} = useVisualizer();
 
   const spriteCanvasRef = React.useRef<HTMLCanvasElement>(null);
   const backgroundCanvasRef = React.useRef<HTMLCanvasElement>(null);
 
   React.useEffect(() => {
-    registerCanvases(spriteCanvasRef.current!, backgroundCanvasRef.current!);
+    _registerCanvases(spriteCanvasRef.current!, backgroundCanvasRef.current!);
   }, []);
 
   return (

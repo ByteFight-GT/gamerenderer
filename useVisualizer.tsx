@@ -31,7 +31,7 @@ export type VisualizerContextValue = {
 	currentMatchData: MatchMetadata | null;
 
 	/** Bind to canvases that the Gamestates will be drawn to */
-	registerCanvases: (spriteCanvas: HTMLCanvasElement, backgroundCanvas: HTMLCanvasElement) => void;
+	_registerCanvases: (spriteCanvas: HTMLCanvasElement, backgroundCanvas: HTMLCanvasElement) => void;
 	
 	/** for internal use by gamerenderer onclick */
 	_updateClickSubscribers: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
@@ -104,7 +104,7 @@ export function VisualizerProvider(props: {children: React.ReactNode}) {
 
 	const [currentMatchData, setCurrentMatchData] = React.useState<MatchMetadata | null>(null);
 
-	const registerCanvases = React.useCallback((spriteCanvas: HTMLCanvasElement, backgroundCanvas: HTMLCanvasElement) => {
+	const _registerCanvases = React.useCallback((spriteCanvas: HTMLCanvasElement, backgroundCanvas: HTMLCanvasElement) => {
 		canvasManagerRef.current.registerCanvases(spriteCanvas, backgroundCanvas);
 	}, []);
 
@@ -220,7 +220,7 @@ export function VisualizerProvider(props: {children: React.ReactNode}) {
 		gameManagerRef,
 		canvasManagerRef,
 		currentMatchData,
-		registerCanvases, 
+		_registerCanvases, 
 		_updateClickSubscribers,
 		updateGamePGN,
 		setVisualizerState,
