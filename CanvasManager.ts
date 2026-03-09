@@ -1,5 +1,5 @@
 import { PX_PER_TILE, Sprite, SPRITE_FILES } from "./spritesheet";
-import { GameRenderState, MapData } from "./types";
+import type { GameRenderState, MapData, MapLoc } from "../../common/types";
 
 import _DEFAULT_MAP_DATA from "./defaults/DEFAULT_MAP_DATA.json";
 const DEFAULT_MAP_DATA = _DEFAULT_MAP_DATA as unknown as MapData;
@@ -51,6 +51,30 @@ export class CanvasManager {
 
     this.preloadAssets();
     this.updateCanvasSize();
+  }
+
+  /**
+   * returns [r, c] of a click based on the current canvas scaling/map data
+   * @param event event received from the onClick handler of the div that holds both canvases
+   */
+  getRCOfClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>): MapLoc {
+    this.ensureCanvasReady();
+
+    const rect = this.spriteCanvas.getBoundingClientRect();
+
+    // converted cr -> uv: [0-1] where 0,0=topleft, 1,1=bottomright
+    // IMPORTANT! spriteCanvas.width/height is FAKE NEWS here, since react-zoom-pan-pinch
+    // uses some css transform or something that the canvas itself doesnt know about.
+    // so we use rect instead. THANK YOU FOR YOUR ATTENTION TO THIS MATTER. -President Donald J Trump
+    const u = (event.clientX - rect.left) / rect.width;
+    const v = (event.clientY - rect.top) / rect.height;
+
+    // using num of tiles in mapdata to calc, cuz the actual canvas can be zoom-pan-pinched
+
+    const c = Math.floor(u * this.mapData.size[1]);
+    const r = Math.floor(v * (this.mapData.size[0]+1)); // [!!] +1 for that decorative row at the bottom
+
+    return [r, c];
   }
 
   /** throws an error if any of the canvas things are unavailable */

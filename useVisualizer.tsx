@@ -1,13 +1,13 @@
 import React from "react";
 import { CanvasManager } from "./CanvasManager";
 import { GamestateManager } from "./GamestateManager";
-import { GamePGN, GamePGNDiff, MapData } from "./types";
+import { GamePGN, GamePGNDiff, MapData, MapLoc } from "./types";
+import { MatchMetadata } from "../../common/types";
 import { clamp } from "./utils";
 
 import _EMPTY_GAME_PGN from "./defaults/EMPTY_GAME_PGN.json";
 const EMPTY_GAME_PGN = _EMPTY_GAME_PGN as unknown as GamePGN;
 import _DEFAULT_MAP_DATA from "./defaults/DEFAULT_MAP_DATA.json";
-import { MatchMetadata } from "../../common/types";
 const DEFAULT_MAP_DATA = _DEFAULT_MAP_DATA as unknown as MapData;
 
 /** base ms between autoplayed moves at 1x speed */
@@ -33,6 +33,9 @@ export type VisualizerContextValue = {
 	/** Bind to canvases that the Gamestates will be drawn to */
 	registerCanvases: (spriteCanvas: HTMLCanvasElement, backgroundCanvas: HTMLCanvasElement) => void;
 	
+	/** for internal use by gamerenderer onclick */
+	_updateClickSubscribers: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+
 	/** Update match data (merge) with a new packet from python server. This is lazy and doesnt calc frames immediately, thats done on renderTurn (TODO: change?) */
 	updateGamePGN: (diff: GamePGNDiff) => void;
 
@@ -46,6 +49,10 @@ export type VisualizerContextValue = {
 	 */
 	subscribeToGameOrFrameChanges: (
 		handler: (entirePGN: GamePGN, currentFrame: number) => void,
+	) => (() => void);
+
+	subscribeToCanvasClicks: (
+		handler: (mapLoc: MapLoc, event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
 	) => (() => void);
 
 	/**
@@ -87,7 +94,8 @@ export function VisualizerProvider(props: {children: React.ReactNode}) {
 
 	// SETUP AND GAMESTATE STUFF
 	
-	const subscribersRef = React.useRef<Set<(pgn: GamePGN, frame: number) => void>>(new Set());
+	const stateSubscribersRef = React.useRef<Set<(pgn: GamePGN, frame: number) => void>>(new Set());
+	const clickSubscribersRef = React.useRef<Set<(mapLoc: MapLoc, event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void>>(new Set());
 
 	const renderedGameFrameRef = React.useRef(0);
 
@@ -144,14 +152,29 @@ export function VisualizerProvider(props: {children: React.ReactNode}) {
 		// give it initial notification
 		handler(gameManagerRef.current.gamePGN, renderedGameFrameRef.current);
 
-		subscribersRef.current.add(handler);
-		return () => subscribersRef.current.delete(handler); // unsubscriber
+		stateSubscribersRef.current.add(handler);
+		return () => stateSubscribersRef.current.delete(handler); // unsubscriber
+	}, []);
+
+	const subscribeToCanvasClicks = React.useCallback((
+		handler: (mapLoc: MapLoc, event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
+	) => {
+		clickSubscribersRef.current.add(handler);
+		return () => clickSubscribersRef.current.delete(handler); // unsubscriber
 	}, []);
 
 	const updateStateSubscribers = React.useCallback(() => {
-		subscribersRef.current.forEach(
+		stateSubscribersRef.current.forEach(
 			handler => handler(gameManagerRef.current.gamePGN, renderedGameFrameRef.current)
 		);
+	}, []);
+
+	const _updateClickSubscribers = React.useCallback(
+		(event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+			const mapLoc = canvasManagerRef.current.getRCOfClick(event);
+			clickSubscribersRef.current.forEach(
+				handler => handler(mapLoc, event)
+			);
 	}, []);
 
 	const renderFrame = React.useCallback((turn: number) => {
@@ -198,10 +221,12 @@ export function VisualizerProvider(props: {children: React.ReactNode}) {
 		canvasManagerRef,
 		currentMatchData,
 		registerCanvases, 
+		_updateClickSubscribers,
 		updateGamePGN,
 		setVisualizerState,
 		clearVisualizerState,
 		subscribeToGameOrFrameChanges,
+		subscribeToCanvasClicks,
 		setRenderedGameFrame,
 		incrementRenderedGameFrame,
 		autoAdvance,

@@ -17,7 +17,7 @@ type GameRendererProps = {
 
 export const GameRenderer = (props: GameRendererProps) => {
 
-  const {registerCanvases} = useVisualizer();
+  const {registerCanvases, _updateClickSubscribers} = useVisualizer();
 
   const spriteCanvasRef = React.useRef<HTMLCanvasElement>(null);
   const backgroundCanvasRef = React.useRef<HTMLCanvasElement>(null);
@@ -29,7 +29,7 @@ export const GameRenderer = (props: GameRendererProps) => {
   return (
     <TransformWrapper centerOnInit limitToBounds={false} minScale={0.1} {...props.transformWrapperProps}>
       <TransformComponent {...props.transformComponentProps}>
-        <div className="grid">
+        <div onClick={_updateClickSubscribers} className="grid">
           <canvas ref={backgroundCanvasRef} className="col-start-1 row-start-1"/>
           <canvas ref={spriteCanvasRef} className="col-start-1 row-start-1" />
         </div>
