@@ -57,9 +57,16 @@ export type VisualizerContextValue = {
 
 	/**
 	 * Make the visualizer switch context to a new game from potentially a new match
-	 * This causes the canvases to redraw immediately, resets states like the current frame
+	 * This causes the canvases to redraw immediately, resets states like the current frame.
+	 * 
+	 * Any args not given (undefined) will be kept as their current state. Note that this means
+	 * setting matchData=null and not including it are different! (use null to explicitly clear it)
 	 */
-	setVisualizerState: (matchData: MatchMetadata, gamePGN: GamePGN, mapData: MapData) => void;
+	setVisualizerState: (states: {
+		matchData?: MatchMetadata | null,
+		gamePGN?: GamePGN,
+		mapData?: MapData
+	}) => void;
 
 	/**
 	 * Blanks out the visualizer so that theres no match/game being viewed. The renderer
@@ -119,12 +126,17 @@ export function VisualizerProvider(props: {children: React.ReactNode}) {
 		}
 	}, []);
 
-	const setVisualizerState = React.useCallback((matchData: MatchMetadata, gamePGN: GamePGN, mapData: MapData) => {
-		console.log(`[GameProvider.setVisualizerState] changing context to match ID ${matchData.matchId}`);
-		gameManagerRef.current.reset(mapData, gamePGN);
+	const setVisualizerState = React.useCallback(states => {
+		if (states.matchData !== undefined) {
+			setCurrentMatchData(states.matchData);
+		}
+
+		const mapData = states.mapData ?? gameManagerRef.current.mapData;
+		const gamePGN = states.gamePGN ?? gameManagerRef.current.gamePGN;
+
 		canvasManagerRef.current.reset(mapData);
-		setCurrentMatchData(matchData);
-		
+		gameManagerRef.current.reset(mapData, gamePGN);
+
 		// reset controls except for playback speed cuz thats more of a user setting
 		setRenderedGameFrame(0);
 		setAutoAdvance(false);
