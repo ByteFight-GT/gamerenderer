@@ -1,9 +1,9 @@
 import { PX_PER_TILE, Sprite, SPRITE_FILES } from "./spritesheet";
-import type { GameRenderState, MapData, MapLoc } from "../../common/types";
+import type { GameRenderState, MapDataOptionalSpawnpts, MapLoc } from "../../common/types";
 
 import _DEFAULT_MAP_DATA from "./defaults/DEFAULT_MAP_DATA.json";
+const DEFAULT_MAP_DATA = _DEFAULT_MAP_DATA as unknown as MapDataOptionalSpawnpts;
 import { oob } from "./utils";
-const DEFAULT_MAP_DATA = _DEFAULT_MAP_DATA as unknown as MapData;
 
 /**
  * Handler for rendering game things onto a canvas element.
@@ -16,7 +16,7 @@ export class CanvasManager {
 
   private spriteImages: Partial<Record<Sprite, HTMLImageElement>> = {};
 
-  public mapData: MapData;
+  public mapData: MapDataOptionalSpawnpts;
 
   /** whether spawnpoints will be rendered. During games probably not, but for the mapbuilder they should */
   public shouldShowSpawnpoints = false;
@@ -28,7 +28,7 @@ export class CanvasManager {
   }
 
   constructor(
-    mapData?: MapData,
+    mapData?: MapDataOptionalSpawnpts,
     spriteCanvas?: HTMLCanvasElement,
     backgroundCanvas?: HTMLCanvasElement,
     shouldShowSpawnpoints: boolean = false,
@@ -203,8 +203,12 @@ export class CanvasManager {
     }
 
     // draw players last so they are on top
-    this.blitSpriteOnTile(Sprite.PLAYER_BLUE, p1Loc[0], p1Loc[1]);
-    this.blitSpriteOnTile(Sprite.PLAYER_GREEN, p2Loc[0], p2Loc[1]);
+    if (p1Loc) {
+      this.blitSpriteOnTile(Sprite.PLAYER_BLUE, p1Loc[0], p1Loc[1]);
+    }
+    if (p2Loc) {
+      this.blitSpriteOnTile(Sprite.PLAYER_GREEN, p2Loc[0], p2Loc[1]);
+    }
   }
 
   /**
@@ -319,7 +323,7 @@ export class CanvasManager {
     }
   }
 
-  reset(newMapData: MapData) {
+  reset(newMapData: MapDataOptionalSpawnpts) {
     this.ensureCanvasReady();
     this.mapData = newMapData;
     this.clearSpriteCanvas();

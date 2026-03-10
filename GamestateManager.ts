@@ -1,10 +1,10 @@
-import { BeaconOwner, GamePGN, GamePGNDiff, GameRenderState, MapData, MapLoc, PowerupCellState, Symmetry } from "./types";
-import { applySymmetry, make2DArray, mergeArrayField, mergeArrays, oob } from "./utils";
+import type { BeaconOwner, GamePGN, GamePGNDiff, GameRenderState, MapDataOptionalSpawnpts, PowerupCellState } from "../../common/types";
+import { make2DArray, oob } from "./utils";
 
 import _EMPTY_GAME_PGN from "./defaults/EMPTY_GAME_PGN.json";
 const EMPTY_GAME_PGN = _EMPTY_GAME_PGN as unknown as GamePGN;
 import _DEFAULT_MAP_DATA from "./defaults/DEFAULT_MAP_DATA.json";
-const DEFAULT_MAP_DATA = _DEFAULT_MAP_DATA as unknown as MapData;
+const DEFAULT_MAP_DATA = _DEFAULT_MAP_DATA as unknown as MapDataOptionalSpawnpts;
 
 /**
  * Owns the state of the game and handles any live-update logic (for livestreamed games)
@@ -28,7 +28,7 @@ export class GamestateManager {
   }
 
   /** map that the game is being played on. */
-  mapData: MapData;
+  mapData: MapDataOptionalSpawnpts;
 
   /**
    * All the game data we have (can be partial in the case of livestreaming or can be full if we have it all)
@@ -36,7 +36,7 @@ export class GamestateManager {
   gamePGN: GamePGN;
 
 
-  constructor(initMapData?: MapData, initPGN?: GamePGN) {
+  constructor(initMapData?: MapDataOptionalSpawnpts, initPGN?: GamePGN) {
     this.gamePGN = initPGN ?? EMPTY_GAME_PGN;
     this.mapData = initMapData ?? DEFAULT_MAP_DATA;
 
@@ -85,7 +85,7 @@ export class GamestateManager {
   }
 
   /** Reset the internal state. should be used once when starting to render a new game */
-  reset(newMapData: MapData, newInitPGN: GamePGN) {
+  reset(newMapData: MapDataOptionalSpawnpts, newInitPGN: GamePGN) {
     this.mapData = structuredClone(newMapData);
     this.gamePGN = structuredClone(newInitPGN);
     this.computedGameFrames.length = 0; // clear cache
@@ -93,7 +93,7 @@ export class GamestateManager {
   }
 
   /** get the initial empty board based on map data */
-  static getInitialGameFrame(mapData: MapData): GameRenderState {
+  static getInitialGameFrame(mapData: MapDataOptionalSpawnpts): GameRenderState {
     return {
       p1Loc: mapData.spawnpointBlue,
       p2Loc: mapData.spawnpointGreen,

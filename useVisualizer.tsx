@@ -1,14 +1,13 @@
 import React from "react";
 import { CanvasManager } from "./CanvasManager";
 import { GamestateManager } from "./GamestateManager";
-import { GamePGN, GamePGNDiff, MapData, MapLoc } from "./types";
-import { MatchMetadata } from "../../common/types";
 import { clamp } from "./utils";
+import type { GamePGN, GamePGNDiff, MapDataOptionalSpawnpts, MapLoc, MatchMetadata } from "../../common/types";
 
 import _EMPTY_GAME_PGN from "./defaults/EMPTY_GAME_PGN.json";
 const EMPTY_GAME_PGN = _EMPTY_GAME_PGN as unknown as GamePGN;
 import _DEFAULT_MAP_DATA from "./defaults/DEFAULT_MAP_DATA.json";
-const DEFAULT_MAP_DATA = _DEFAULT_MAP_DATA as unknown as MapData;
+const DEFAULT_MAP_DATA = _DEFAULT_MAP_DATA as unknown as MapDataOptionalSpawnpts;
 
 /** base ms between autoplayed moves at 1x speed */
 const BASE_PLAYBACK_INTERVAL_MS = 500; 
@@ -65,7 +64,7 @@ export type VisualizerContextValue = {
 	setVisualizerState: (states: {
 		matchData?: MatchMetadata | null,
 		gamePGN?: GamePGN,
-		mapData?: MapData
+		mapData?: MapDataOptionalSpawnpts
 	}) => void;
 
 	/**

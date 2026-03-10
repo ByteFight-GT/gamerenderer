@@ -57,12 +57,12 @@ export const SPRITE_FILES = {
 	[Sprite.BLUE_TILE_1]: "/sprites/blue_tile_1.png",
 	[Sprite.BLUE_TILE_2]: "/sprites/blue_tile_2.png",
 	[Sprite.BLUE_TILE_3]: "/sprites/blue_tile_3.png",
-	[Sprite.BLUE_SPAWN]: "/sprites/BLUE_SPAWN.png",
+	[Sprite.BLUE_SPAWN]: "/mapbuilder/BLUE_SPAWN.png",
 
 	[Sprite.GREEN_TILE_1]: "/sprites/green_tile_1.png",
 	[Sprite.GREEN_TILE_2]: "/sprites/green_tile_2.png",
 	[Sprite.GREEN_TILE_3]: "/sprites/green_tile_3.png",
-	[Sprite.GREEN_SPAWN]: "/sprites/GREEN_SPAWN.png",
+	[Sprite.GREEN_SPAWN]: "/mapbuilder/GREEN_SPAWN.png",
 
 	// dedicated beacon / powerup sprites
 	[Sprite.BEACON_GREEN]: "/sprites/green_beacon.png",

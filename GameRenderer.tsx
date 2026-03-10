@@ -5,6 +5,7 @@ import { useVisualizer } from "./useVisualizer";
 import { PX_PER_TILE } from "./spritesheet";
 
 type GameRendererProps = {
+  shouldShowSpawnpoints?: boolean;
   hoverElementRenderer?: () => React.ReactNode;
   transformWrapperProps?: ReactZoomPanPinchProps;
   transformComponentProps?: {
@@ -34,6 +35,9 @@ export const GameRenderer = (props: GameRendererProps) => {
 
   React.useEffect(() => {
     _registerCanvases(spriteCanvasRef.current!, backgroundCanvasRef.current!);
+    if (props.shouldShowSpawnpoints !== undefined) {
+      canvasManagerRef.current.shouldShowSpawnPoints = props.shouldShowSpawnpoints;
+    }
   }, []);
 
   const handleMouseMove = React.useCallback((event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
