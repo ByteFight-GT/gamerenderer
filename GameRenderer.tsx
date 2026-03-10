@@ -34,7 +34,7 @@ const GamerendererDefaultHoverElement = () => (
 
 export const GameRenderer = (props: GameRendererProps) => {
 
-  const {canvasManagerRef, _registerCanvases, _updateClickSubscribers} = useVisualizer();
+  const {canvasManagerRef, _registerCanvases, _updateMouseSubscribers} = useVisualizer();
 
   const spriteCanvasRef = React.useRef<HTMLCanvasElement>(null);
   const backgroundCanvasRef = React.useRef<HTMLCanvasElement>(null);
@@ -49,35 +49,36 @@ export const GameRenderer = (props: GameRendererProps) => {
     }
   }, []);
 
-  const handleMouseMove = React.useCallback((event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+  const handleMouseEvent = React.useCallback((event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     if (!spriteCanvasRef.current) {
       setHoverElementPosition(null);
       return;
     }
 
     const clampedCenter = canvasManagerRef.current.clampClientCoordsToPlayableTile(event.clientX, event.clientY);
-    if (!clampedCenter) { 
-      // off the playable board
+    if (!clampedCenter) { // oob! dont even update subscribers cuz theyll be confused
       setHoverElementPosition(null);
       return;
     }
 
-    setHoverElementPosition(prev => {
-      // only rerender if changed cell
-      if (clampedCenter.x !== prev?.x || clampedCenter.y !== prev?.y) {
-        return clampedCenter;
-      }
-      return prev;
-    });
-  }, []);
+    _updateMouseSubscribers(event);
 
-  const handleMouseLeave = React.useCallback(() => {
-    setHoverElementPosition(null);
-  }, [setHoverElementPosition]);
+    // internal hovering logic
+    if (event.type === "mousemove") {
+      setHoverElementPosition(prev => {
+        if (clampedCenter.x !== prev?.x || clampedCenter.y !== prev?.y) {
+          return clampedCenter; // changed, switch to new
+        } else {
+          return prev; // no change yay
+        }
+      });
+    }
+  }, []);
 
 
   return (
     <TransformWrapper 
+    centerOnInit
     minScale={0.1} 
     maxScale={10}
     limitToBounds={false}
@@ -87,9 +88,11 @@ export const GameRenderer = (props: GameRendererProps) => {
     {...props.transformWrapperProps}>
       <TransformComponent {...props.transformComponentProps}>
         <div
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-        onClick={_updateClickSubscribers} 
+        onMouseMove={handleMouseEvent}
+        onMouseDown={handleMouseEvent}
+        onMouseUp={handleMouseEvent}
+        onClick={handleMouseEvent}
+        onMouseLeave={() => setHoverElementPosition(null)}
         className="relative grid">
 
           {hoverElementPos && (

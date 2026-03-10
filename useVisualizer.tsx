@@ -33,7 +33,7 @@ export type VisualizerContextValue = {
 	_registerCanvases: (spriteCanvas: HTMLCanvasElement, backgroundCanvas: HTMLCanvasElement) => void;
 	
 	/** for internal use by gamerenderer onclick */
-	_updateClickSubscribers: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+	_updateMouseSubscribers: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 
 	/** Update match data (merge) with a new packet from python server. This is lazy and doesnt calc frames immediately, thats done on renderTurn (TODO: change?) */
 	updateGamePGN: (diff: GamePGNDiff) => void;
@@ -50,7 +50,7 @@ export type VisualizerContextValue = {
 		handler: (entirePGN: GamePGN, currentFrame: number) => void,
 	) => (() => void);
 
-	subscribeToCanvasClicks: (
+	subscribeToCanvasMouseEvents: (
 		handler: (mapLoc: MapLoc, event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
 	) => (() => void);
 
@@ -166,7 +166,7 @@ export function VisualizerProvider(props: {children: React.ReactNode}) {
 		return () => stateSubscribersRef.current.delete(handler); // unsubscriber
 	}, []);
 
-	const subscribeToCanvasClicks = React.useCallback((
+	const subscribeToCanvasMouseEvents = React.useCallback((
 		handler: (mapLoc: MapLoc, event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
 	) => {
 		clickSubscribersRef.current.add(handler);
@@ -179,7 +179,7 @@ export function VisualizerProvider(props: {children: React.ReactNode}) {
 		);
 	}, []);
 
-	const _updateClickSubscribers = React.useCallback(
+	const _updateMouseSubscribers = React.useCallback(
 		(event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
 			const mapLoc = canvasManagerRef.current.getRCFromClientCoords(event.clientX, event.clientY);
 			clickSubscribersRef.current.forEach(
@@ -231,12 +231,12 @@ export function VisualizerProvider(props: {children: React.ReactNode}) {
 		canvasManagerRef,
 		currentMatchData,
 		_registerCanvases, 
-		_updateClickSubscribers,
+		_updateMouseSubscribers,
 		updateGamePGN,
 		setVisualizerState,
 		clearVisualizerState,
 		subscribeToGameOrFrameChanges,
-		subscribeToCanvasClicks,
+		subscribeToCanvasMouseEvents,
 		setRenderedGameFrame,
 		incrementRenderedGameFrame,
 		autoAdvance,
