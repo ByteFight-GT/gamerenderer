@@ -18,12 +18,23 @@ export class CanvasManager {
 
   public mapData: MapData;
 
+  /** whether spawnpoints will be rendered. During games probably not, but for the mapbuilder they should */
+  public shouldShowSpawnpoints = false;
+  set shouldShowSpawnPoints(value: boolean) {
+    this.shouldShowSpawnpoints = value;
+    if (this.backgroundCanvas) {
+      this.blitMap(); // update immediately on change
+    }
+  }
+
   constructor(
     mapData?: MapData,
     spriteCanvas?: HTMLCanvasElement,
     backgroundCanvas?: HTMLCanvasElement,
+    shouldShowSpawnpoints: boolean = false,
   ) {
     this.mapData = mapData ?? DEFAULT_MAP_DATA;
+    this.shouldShowSpawnpoints = shouldShowSpawnpoints;
 
     if (spriteCanvas && backgroundCanvas) {
       this.registerCanvases(spriteCanvas, backgroundCanvas);
@@ -294,6 +305,16 @@ export class CanvasManager {
     for (const hillId in this.mapData.hillLocs) {
       for (const [r, c] of this.mapData.hillLocs[hillId]) {
         blitMapFeature(Sprite.HILL_LIGHT, r, c);
+      }
+    }
+
+    // draw any spawnpoints as tiles if shouldShowSpawnpoints is true
+    if (this.shouldShowSpawnpoints) {
+      if (this.mapData.spawnpointBlue) {
+        blitMapFeature(Sprite.BLUE_SPAWN, ...this.mapData.spawnpointBlue);
+      }
+      if (this.mapData.spawnpointGreen) {
+        blitMapFeature(Sprite.GREEN_SPAWN, ...this.mapData.spawnpointGreen);
       }
     }
   }
