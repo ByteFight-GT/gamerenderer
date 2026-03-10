@@ -29,7 +29,7 @@ const PIXELATED_RENDER_THRESHOLD = 2;
 const GamerendererDefaultHoverElement = () => (
   <div 
   style={{width: PX_PER_TILE, height: PX_PER_TILE}} 
-  className="border-2 border-foreground" />
+  className="border-2 border-foreground backdrop-brightness-75" />
 );
 
 export const GameRenderer = (props: GameRendererProps) => {
