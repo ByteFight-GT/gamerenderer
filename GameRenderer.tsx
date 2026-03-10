@@ -4,8 +4,13 @@ import { TransformWrapper, TransformComponent, ReactZoomPanPinchProps } from "re
 import { useVisualizer } from "./useVisualizer";
 import { PX_PER_TILE } from "./spritesheet";
 
+import type { MapData } from "../../common/types";
+import _DEFAULT_MAP_DATA from './defaults/DEFAULT_MAP_DATA.json';
+const DEFAULT_MAP_DATA = _DEFAULT_MAP_DATA as unknown as MapData;
+
 type GameRendererProps = {
   shouldShowSpawnpoints?: boolean;
+  disablePanning?: boolean;
   hoverElementRenderer?: () => React.ReactNode;
   transformWrapperProps?: ReactZoomPanPinchProps;
   transformComponentProps?: {
@@ -73,9 +78,11 @@ export const GameRenderer = (props: GameRendererProps) => {
 
   return (
     <TransformWrapper 
-    centerOnInit 
     minScale={0.1} 
-    limitToBounds={false} 
+    maxScale={10}
+    limitToBounds={false}
+    doubleClick={{ disabled: true }}
+    panning={{ disabled: props.disablePanning }}
     onZoom={ref => setCurrZoomScale(ref.state.scale)} 
     {...props.transformWrapperProps}>
       <TransformComponent {...props.transformComponentProps}>
