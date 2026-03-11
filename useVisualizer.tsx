@@ -51,7 +51,10 @@ export type VisualizerContextValue = {
 	) => (() => void);
 
 	subscribeToCanvasMouseEvents: (
-		handler: (mapLoc: MapLoc, event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
+		handler: (
+			mapLoc: MapLoc,
+			event: React.MouseEvent<HTMLDivElement, MouseEvent>
+		) => void
 	) => (() => void);
 
 	/**

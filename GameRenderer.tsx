@@ -51,21 +51,13 @@ export const GameRenderer = (props: GameRendererProps) => {
       return;
     }
 
-    const clampedCenter = canvasManagerRef.current.clampClientCoordsToPlayableTile(event.clientX, event.clientY);
-    if (!clampedCenter) {
-      if (event.type === 'mouseleave') {
-        _updateMouseSubscribers(event); // still update if mouseleave
-      }
-      setHoverElementPosition(null);
-      return;
-    }
-
     _updateMouseSubscribers(event);
 
     // internal hovering logic. if not mouseleave then there WILL be a center
     if (event.type === "mousemove") {
+      const clampedCenter = canvasManagerRef.current.clampClientCoordsToPlayableTile(event.clientX, event.clientY);
       setHoverElementPosition(prev => {
-        if (clampedCenter.x !== prev?.x || clampedCenter.y !== prev?.y) {
+        if (clampedCenter?.x !== prev?.x || clampedCenter?.y !== prev?.y) {
           return clampedCenter; // changed, switch to new
         } else {
           return prev; // no change yay
