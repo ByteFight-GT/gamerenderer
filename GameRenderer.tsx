@@ -79,10 +79,12 @@ export const GameRenderer = (props: GameRendererProps) => {
     {...props.transformWrapperProps}>
       <TransformComponent {...props.transformComponentProps}>
         <div
-        onMouseMove={handleMouseEvent}
         onMouseDown={handleMouseEvent}
         onMouseUp={handleMouseEvent}
         onClick={handleMouseEvent}
+        onMouseMove={handleMouseEvent}
+        onMouseOver={handleMouseEvent}
+        onMouseOut={handleMouseEvent}
         onMouseEnter={handleMouseEvent}
         onMouseLeave={e => {
           handleMouseEvent(e);
