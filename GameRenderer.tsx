@@ -92,7 +92,11 @@ export const GameRenderer = (props: GameRendererProps) => {
         onMouseDown={handleMouseEvent}
         onMouseUp={handleMouseEvent}
         onClick={handleMouseEvent}
-        onMouseLeave={() => setHoverElementPosition(null)}
+        onMouseEnter={handleMouseEvent}
+        onMouseLeave={e => {
+          handleMouseEvent(e);
+          setHoverElementPosition(null);
+        }}
         className="relative grid">
 
           {hoverElementPos && (
