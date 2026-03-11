@@ -33,7 +33,7 @@ export class CanvasManager {
     backgroundCanvas?: HTMLCanvasElement,
     shouldShowSpawnpoints: boolean = false,
   ) {
-    this.mapData = mapData ?? DEFAULT_MAP_DATA;
+    this.mapData = structuredClone(mapData ?? DEFAULT_MAP_DATA);
     this.shouldShowSpawnpoints = shouldShowSpawnpoints;
 
     if (spriteCanvas && backgroundCanvas) {

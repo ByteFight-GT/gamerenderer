@@ -4,10 +4,6 @@ import { TransformWrapper, TransformComponent, ReactZoomPanPinchProps } from "re
 import { useVisualizer } from "./useVisualizer";
 import { PX_PER_TILE } from "./spritesheet";
 
-import type { MapData } from "../../common/types";
-import _DEFAULT_MAP_DATA from './defaults/DEFAULT_MAP_DATA.json';
-const DEFAULT_MAP_DATA = _DEFAULT_MAP_DATA as unknown as MapData;
-
 type GameRendererProps = {
   shouldShowSpawnpoints?: boolean;
   disablePanning?: boolean;

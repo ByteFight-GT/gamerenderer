@@ -37,8 +37,8 @@ export class GamestateManager {
 
 
   constructor(initMapData?: MapDataOptionalSpawnpts, initPGN?: GamePGN) {
-    this.gamePGN = initPGN ?? EMPTY_GAME_PGN;
-    this.mapData = initMapData ?? DEFAULT_MAP_DATA;
+    this.gamePGN = structuredClone(initPGN ?? EMPTY_GAME_PGN);
+    this.mapData = structuredClone(initMapData ?? DEFAULT_MAP_DATA);
 
     // can already initialize first frame since 0th turn is always NONE
     this.computedGameFrames[0] = GamestateManager.getInitialGameFrame(this.mapData);
