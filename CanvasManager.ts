@@ -65,7 +65,7 @@ export class CanvasManager {
     this.updateCanvasSize();
   }
 
-  /** returns [r, c] of a mouse event based on the current canvas scaling/map data */
+  /** returns [r, c] from CLIENT COORDS (pixels from top-left of VIEWPORT) */
   getRCFromClientCoords(clientX: number, clientY: number): MapLoc {
     this.ensureCanvasReady();
 
@@ -82,6 +82,16 @@ export class CanvasManager {
 
     const c = Math.floor(u * this.mapData.size[1]);
     const r = Math.floor(v * (this.mapData.size[0]+1)); // [!!] +1 for that decorative row at the bottom
+
+    return [r, c];
+  }
+
+  /** returns [r, c] from canvas pixel coords (pixels from top-left of CANVAS) */
+  getRCFromCanvasCoords(canvasX: number, canvasY: number): MapLoc {
+    this.ensureCanvasReady();
+
+    const c = Math.floor(canvasX / PX_PER_TILE);
+    const r = Math.floor(canvasY / PX_PER_TILE);
 
     return [r, c];
   }

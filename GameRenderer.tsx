@@ -3,11 +3,13 @@ import React from "react";
 import { TransformWrapper, TransformComponent, ReactZoomPanPinchProps } from "react-zoom-pan-pinch";
 import { useVisualizer } from "./useVisualizer";
 import { PX_PER_TILE } from "./spritesheet";
+import { MapLoc } from "../../common/types";
+import { DefaultHoverElement } from "./DefaultHoverElement";
 
 type GameRendererProps = {
   shouldShowSpawnpoints?: boolean;
   disablePanning?: boolean;
-  hoverElementRenderer?: () => React.ReactNode;
+  hoverElementRenderer?: React.ComponentType<{mapLoc: MapLoc}>;
   transformWrapperProps?: ReactZoomPanPinchProps;
   transformComponentProps?: {
     contentClass?: string;
@@ -22,14 +24,7 @@ type GameRendererProps = {
 /** scale at which to switch to pixelated rendering so pixel art looks better up close */
 const PIXELATED_RENDER_THRESHOLD = 2;
 
-const GamerendererDefaultHoverElement = () => (
-  <div 
-  style={{width: PX_PER_TILE, height: PX_PER_TILE}} 
-  className="border-2 border-foreground backdrop-brightness-75" />
-);
-
 export const GameRenderer = (props: GameRendererProps) => {
-
   const {canvasManagerRef, _registerCanvases, _updateMouseSubscribers} = useVisualizer();
 
   const spriteCanvasRef = React.useRef<HTMLCanvasElement>(null);
@@ -92,20 +87,21 @@ export const GameRenderer = (props: GameRendererProps) => {
         }}
         className="relative grid">
 
-          {hoverElementPos && (
-            <div
-            className="absolute left-0 top-0 pointer-events-none z-10"
-            style={{transform: `
-              translate(-50%, -50%)
-              translate(${hoverElementPos.x}px, ${hoverElementPos.y}px)
-            `}}>
-              {props.hoverElementRenderer?
-                props.hoverElementRenderer()
-              :
-                <GamerendererDefaultHoverElement />
-              }
-            </div>
-          )}
+          {hoverElementPos && (() => {
+            const HoverComponent = props.hoverElementRenderer ?? DefaultHoverElement;
+            const hoverElementRC = canvasManagerRef.current.getRCFromCanvasCoords(hoverElementPos.x, hoverElementPos.y);
+            return (
+              <div
+              className="absolute left-0 top-0 pointer-events-none z-10"
+              style={{transform: `
+                translate(-50%, -50%)
+                translate(${hoverElementPos.x}px, ${hoverElementPos.y}px)
+              `}}>
+                <HoverComponent mapLoc={hoverElementRC} />
+              </div>
+            );
+            })()
+          }
 
           <canvas 
           ref={backgroundCanvasRef} 
