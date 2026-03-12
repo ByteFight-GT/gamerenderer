@@ -145,26 +145,22 @@ export class CanvasManager {
     if (paint) {
       for (let r = 0; r < this.mapData.size[0]; r++) {
         for (let c = 0; c < this.mapData.size[1]; c++) {
-          const value = paint[r][c];
-          if (value === 0) continue;
 
-          const magnitude = Math.min(3, Math.abs(value));
+          let sprite: Sprite | null = null;
+          switch (paint[r][c]) {
+            case 1: sprite = Sprite.BLUE_TILE_1; break;
+            case 2: sprite = Sprite.BLUE_TILE_2; break;
+            case 3: sprite = Sprite.BLUE_TILE_3; break;
+            case 4: sprite = Sprite.BLUE_TILE_4; break;
+            case -1: sprite = Sprite.GREEN_TILE_1; break;
+            case -2: sprite = Sprite.GREEN_TILE_2; break;
+            case -3: sprite = Sprite.GREEN_TILE_3; break;
+            case -4: sprite = Sprite.GREEN_TILE_4; break;
+          }
 
-          let sprite: Sprite;
-
-          if (value > 0) {
-						// blue player
-						if (magnitude === 1) sprite = Sprite.BLUE_TILE_1;
-						else if (magnitude === 2) sprite = Sprite.BLUE_TILE_2;
-						else sprite = Sprite.BLUE_TILE_3;
-					} else {
-						// green player
-						if (magnitude === 1) sprite = Sprite.GREEN_TILE_1;
-						else if (magnitude === 2) sprite = Sprite.GREEN_TILE_2;
-						else sprite = Sprite.GREEN_TILE_3;
-					}
-
-          this.blitSpriteOnTile(sprite, r, c);
+          if (sprite) {
+            this.blitSpriteOnTile(sprite, r, c);
+          }
         }
       }
     }
