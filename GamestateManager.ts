@@ -118,7 +118,7 @@ export class GamestateManager {
           const flatIndex = Number(key);
           if (Number.isNaN(flatIndex)) continue;
           const value = paintUpdates[key as `${number}`];
-          const r = Math.floor(flatIndex / mapR);
+          const r = Math.floor(flatIndex / mapC);
           const c = flatIndex % mapC;
           if (r >= 0 && r < mapR && c >= 0 && c < mapC) {
             prevState.paint[r][c] = value;
@@ -136,7 +136,7 @@ export class GamestateManager {
         for (const [key, raw] of Object.entries(beaconUpdates)) {
           const flatIndex = Number(key);
           if (Number.isNaN(flatIndex)) continue;
-          const r = Math.floor(flatIndex / mapR);
+          const r = Math.floor(flatIndex / mapC);
           const c = flatIndex % mapC;
           if (oob([r, c], this.mapData.size)) continue;
 
@@ -158,7 +158,7 @@ export class GamestateManager {
         for (const [key, raw] of Object.entries(powerupUpdates)) {
           const flatIndex = Number(key);
           if (Number.isNaN(flatIndex)) continue;
-          const r = Math.floor(flatIndex / mapR);
+          const r = Math.floor(flatIndex / mapC);
           const c = flatIndex % mapC;
           if (oob([r, c], this.mapData.size)) continue;
 
