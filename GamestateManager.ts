@@ -1,4 +1,4 @@
-import type { BeaconOwner, GamePGN, GamePGNDiff, GameRenderState, MapDataOptionalSpawnpts, PowerupCellState } from "../../common/types";
+import type { BeaconOwner, GamePGN, GamePGNDiff, GameRenderState, MapDataOptionalSpawnpts, PowerupCellState } from "./types";
 import { make2DArray, oob } from "./utils";
 
 import _EMPTY_GAME_PGN from "./defaults/EMPTY_GAME_PGN.json";

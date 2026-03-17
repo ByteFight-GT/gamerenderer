@@ -1,5 +1,5 @@
 import { PX_PER_TILE } from "./spritesheet";
-import { MapLoc } from "../../common/types";
+import { MapLoc } from "./types";
 import { useVisualizer } from "./useVisualizer";
 
 export function DefaultHoverElement(props: {mapLoc: MapLoc}) {

@@ -1,9 +1,9 @@
 import { PX_PER_TILE, Sprite, SPRITE_FILES } from "./spritesheet";
-import type { GameRenderState, MapDataOptionalSpawnpts, MapLoc } from "../../common/types";
+import type { GameRenderState, MapDataOptionalSpawnpts, MapLoc } from "./types";
+import { oob } from "./utils";
 
 import _DEFAULT_MAP_DATA from "./defaults/DEFAULT_MAP_DATA.json";
 const DEFAULT_MAP_DATA = _DEFAULT_MAP_DATA as unknown as MapDataOptionalSpawnpts;
-import { oob } from "./utils";
 
 /**
  * Handler for rendering game things onto a canvas element.

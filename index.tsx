@@ -1,10 +1,9 @@
 import React from 'react'
 import { createRoot } from 'react-dom/client'
-import './style.css'
 
 import { GameRenderer } from './GameRenderer'
 import { VisualizerProvider, useVisualizer } from './useVisualizer';
-import type { MatchMetadata, GamePGN, MapData } from '../../common/types';
+import type { MatchMetadata, GamePGN, MapData } from './types';
 
 import _TEST_PGN from "./matches_example/match.json";
 const TEST_PGN = _TEST_PGN as unknown as GamePGN;

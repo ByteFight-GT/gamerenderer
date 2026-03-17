@@ -1,3 +1,64 @@
+export type Settings = Record<string, {
+	value: any;
+	[key: `__${string}`]: any; // for __type, __desc, __placeholder, other meta stuff.
+}>; 
+
+export type Team_t = 'blue' | 'green';
+
+export type MatchStatus =
+	| 'queued' // in queue, stored by frontend
+	| 'in-progress' // currently running on the backend
+	| 'terminated' // (end state) manually terminated or killed
+	| 'errored' // (end state) process error, probably not caused by user
+	| 'completed'; // (end state) game finished successfully
+
+export type GameResult = {
+	winner: Team_t | 'draw' | null;
+	numRounds: number | null; // how many rounds the game lasted, if known
+	reason: string | null; // reason for game end, if known (e.g. "time limit exceeded", "player 1 crashed", "max rounds reached", "player 2 wins by territory control", etc.)
+}
+
+/**
+ * All information about a match (which can have multiple games),
+ * except for the actual game data (like gamestates, moves, etc.).
+ *
+ * can also be used to represent queued or in-progress matches.
+ */
+export type MatchMetadata = {
+	matchId: string;
+	queuedTimestamp: number; // when the match entered the queue (ms)
+	startTimestamp: number | null; // start time (ms) of first game
+	finishTimestamp: number | null; // end time (ms) of last game or termination
+	notes: string; // user-written notes for their reference!
+
+	maps: string[]; // names of maps played (or to play)
+
+	outputDir: string | null; // folder where game pgns are stored (each one is <map name>.json)
+
+	teamGreen: string; // green bot name
+	teamBlue: string; // blue bot name
+	greenWins: {
+		[map: string]: {
+			reason: string, 
+			numRounds: number
+		}
+	};
+	blueWins: {
+		[map: string]: {
+			reason: string, 
+			numRounds: number
+		}
+	};
+	draws: {
+		[map: string]: {
+			reason: string, 
+			numRounds: number
+		}
+	};
+
+	status: MatchStatus;
+}
+
 type ValueType<T> = T[keyof T];
 
 export const TileType = {
@@ -7,6 +68,7 @@ export const TileType = {
 	BLUE_SPAWN: 'BLUE_SPAWN',
 	GREEN_SPAWN: 'GREEN_SPAWN',
 } as const;
+export type TileType_t = ValueType<typeof TileType>;
 
 export type MapLoc = [number, number];
 
@@ -36,8 +98,8 @@ export type PowerupCellState = {
 export type PowerupMatrix = PowerupCellState[][];
 
 export type GameRenderState = {
-	p1Loc: MapLoc;
-	p2Loc: MapLoc;
+	p1Loc: MapLoc | null;
+	p2Loc: MapLoc | null;
 	paint: PaintMatrix;
 	beacons: BeaconMatrix;
 	powerups: PowerupMatrix;
@@ -132,13 +194,13 @@ export type GamePGN = {
 	cpu: string; // cpu info of how the game was run
 }
 
-/** the type that the python server sends to us each round. Used to update GamePGNs! */
+/** Game diff data coming directly from the python server, used to update GamePGNs */
 export type GamePGNDiff = {
 	p1_time_left: number;
 	p2_time_left: number;
 
-	p1_loc: MapLoc; // rc
-	p2_loc: MapLoc; // rc
+	p1_loc: MapLoc;
+	p2_loc: MapLoc;
 
 	p1_stamina: number;
 	p2_stamina: number;
@@ -165,7 +227,6 @@ export type GamePGNDiff = {
 /**
  * Represents all data about a map.
  * Map features like hills, walls, spawnpoints, etc. are all specified
- * No computation necessary
  */
 export type MapData = {
 	size: MapLoc; // r, c (height, width)
@@ -175,6 +236,20 @@ export type MapData = {
 	wallLocs: MapLoc[];
 	spawnpointBlue: MapLoc;
 	spawnpointGreen: MapLoc;
+	symmetry: Symmetry_t;
+	powerupSpawnInterval: number;
+	powerupSpawnNum: number;
+}
+
+/** Same as MapData but used for the editor, where the spawnpoints might be unplaced */
+export type MapDataOptionalSpawnpts = {
+	size: MapLoc; // r, c (height, width)
+	hillLocs: {
+		[hillId: string]: MapLoc[];
+	};
+	wallLocs: MapLoc[];
+	spawnpointBlue: MapLoc | null;
+	spawnpointGreen: MapLoc | null;
 	symmetry: Symmetry_t;
 	powerupSpawnInterval: number;
 	powerupSpawnNum: number;

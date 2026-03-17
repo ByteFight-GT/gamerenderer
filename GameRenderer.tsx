@@ -2,8 +2,7 @@ import React from "react";
 
 import { TransformWrapper, TransformComponent, ReactZoomPanPinchProps } from "react-zoom-pan-pinch";
 import { useVisualizer } from "./useVisualizer";
-import { PX_PER_TILE } from "./spritesheet";
-import { MapLoc } from "../../common/types";
+import { MapLoc } from "./types";
 import { DefaultHoverElement } from "./DefaultHoverElement";
 
 type GameRendererProps = {

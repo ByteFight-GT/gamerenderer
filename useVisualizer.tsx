@@ -2,7 +2,7 @@ import React from "react";
 import { CanvasManager } from "./CanvasManager";
 import { GamestateManager } from "./GamestateManager";
 import { clamp } from "./utils";
-import type { GamePGN, GamePGNDiff, MapDataOptionalSpawnpts, MapLoc, MatchMetadata } from "../../common/types";
+import type { GamePGN, GamePGNDiff, MapDataOptionalSpawnpts, MapLoc, MatchMetadata } from "./types";
 
 import _EMPTY_GAME_PGN from "./defaults/EMPTY_GAME_PGN.json";
 const EMPTY_GAME_PGN = _EMPTY_GAME_PGN as unknown as GamePGN;
@@ -128,23 +128,24 @@ export function VisualizerProvider(props: {children: React.ReactNode}) {
 		}
 	}, []);
 
-	const setVisualizerState = React.useCallback(states => {
-		if (states.matchData !== undefined) {
-			setCurrentMatchData(states.matchData);
-		}
+	const setVisualizerState: VisualizerContextValue["setVisualizerState"] = 
+		React.useCallback(states => {
+			if (states.matchData !== undefined) {
+				setCurrentMatchData(states.matchData);
+			}
 
-		const mapData = states.mapData ?? gameManagerRef.current.mapData;
-		const gamePGN = states.gamePGN ?? gameManagerRef.current.gamePGN;
+			const mapData = states.mapData ?? gameManagerRef.current.mapData;
+			const gamePGN = states.gamePGN ?? gameManagerRef.current.gamePGN;
 
-		canvasManagerRef.current.reset(mapData);
-		gameManagerRef.current.reset(mapData, gamePGN);
+			canvasManagerRef.current.reset(mapData);
+			gameManagerRef.current.reset(mapData, gamePGN);
 
-		// reset controls except for playback speed cuz thats more of a user setting
-		setRenderedGameFrame(0);
-		setAutoAdvance(false);
+			// reset controls except for playback speed cuz thats more of a user setting
+			setRenderedGameFrame(0);
+			setAutoAdvance(false);
 
-		updateStateSubscribers();
-	}, []);
+			updateStateSubscribers();
+		}, []);
 
 	const clearVisualizerState = React.useCallback(() => {
 		console.log(`[GameProvider.clearVisualizerState] restoring to default board`);
