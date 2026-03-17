@@ -1,4 +1,4 @@
-import { GamePGN, MapLoc, Symmetry_t } from "./types";
+import type { MapLoc } from "./types";
 
 export function make2DArray<T>(width: number, height: number, defaultValue: T): T[][] {
   return Array.from({ length: height }, () =>
@@ -12,66 +12,4 @@ export function oob(loc: MapLoc, mapSize: MapLoc): boolean {
 
 export function clamp(value: number, min: number, max: number): number {
   return Math.max(min, Math.min(max, value));
-}
-
-export function applySymmetry(mapLoc: MapLoc, symmetry: Symmetry_t, mapWidth: number, mapHeight: number): MapLoc {
-  const [r, c] = mapLoc;
-  switch (symmetry) {
-    case 'Vertical': // x (c) values are symmetric
-      return [r, mapWidth - 1 - c];
-    case 'Horizontal': // y (r) values are symmetric
-      return [mapHeight - 1 - r, c];
-    case 'Origin': // both
-      return [mapHeight - 1 - r, mapWidth - 1 - c];
-  }
-}
-
-export function mergeArrays<T>(arr1: T[], arr2: T[]): T[] {
-  return [...arr1, ...arr2];
-}
-
-export const mergeArrayField = <T>(key: keyof T, dst: T, src: Partial<T>) => {
-  const newVal = src[key];
-  if (newVal !== undefined) {
-    dst[key] = mergeArrays(
-      dst[key] as any[],
-      newVal as any[]
-    ) as T[keyof T];
-  }
-};
-
-/**
- * THIS IS TEMPORARY - we should refactor the engine game output asap.
- * 
- * right now the game pgns outputted by the python engine define coords as arrays
- * of [r, c], but in typescript we have explicit {r, c} keys to prevent confusion.
- * 
- * This just takes in data thats ALMOST the correct type (GamePGN), but just with
- * the following keys as [r, c] arrays that need to be converted:
- * - p1_loc[:] and p2_loc[:]
- * - actions[:][:].location
- * - actions[:][:].beacon_target
- */
-export function TEMP_convertRCArraysToObjects(dataFromPython: any): GamePGN {
-  const ret = { ...dataFromPython };
-  
-  // convert all elements of p1_loc and p2_loc from [r, c] to {r, c}
-  ret.p1_loc = dataFromPython.p1_loc.map((loc: number[]) => ({ r: loc[0], c: loc[1] }));
-  ret.p2_loc = dataFromPython.p2_loc.map((loc: number[]) => ({ r: loc[0], c: loc[1] }));
-
-  // for all actions[i] that are arrays:
-  for (const turnActions of ret.actions) {
-    // for all action objects in each of these arrays
-    for (const actionObj of turnActions) {
-      // change .location or .beacon_target if it exists
-      if (actionObj.location) {
-        actionObj.location = { r: actionObj.location[0], c: actionObj.location[1] };
-      }
-      if (actionObj.beacon_target) {
-        actionObj.beacon_target = { r: actionObj.beacon_target[0], c: actionObj.beacon_target[1] };
-      }
-    }
-  }
-
-  return ret;
 }
