@@ -349,7 +349,7 @@ export const GameRenderer = ({
             }}
           >
             <Download size={14} />
-            Dowload Match Json
+            Download Match JSON
           </button>
         )}
       </div>
