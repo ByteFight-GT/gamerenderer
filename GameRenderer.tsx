@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
+import { Download } from "lucide-react";
 
 import smallMatch from "./matches_example/match.json";
 import bigMatch from "./matches_example/big_match.json";
@@ -161,11 +162,18 @@ interface GameRendererProps {
   initialData?: any | null;
   player1Name?: string;
   player2Name?: string;
+  onDownloadMatchJson?: () => void;
   // This callback gives the parent the ability to push new dictionaries
   onRegisterUpdater?: (updater: (newDict: any) => void) => void;
 }
 
-export const GameRenderer = ({ initialData, player1Name, player2Name, onRegisterUpdater }: GameRendererProps) => {
+export const GameRenderer = ({
+  initialData,
+  player1Name,
+  player2Name,
+  onDownloadMatchJson,
+  onRegisterUpdater,
+}: GameRendererProps) => {
   const canvasManager = React.useRef<CanvasManager | null>(null);
   const [frames, setFrames] = React.useState<GameRenderState[]>([]);
   const [currentTurn, setCurrentTurn] = React.useState(0);
@@ -328,6 +336,22 @@ export const GameRenderer = ({ initialData, player1Name, player2Name, onRegister
             <option value={4}>4x</option>
           </select>
         </label>
+        {onDownloadMatchJson && (
+          <button
+            type="button"
+            onClick={onDownloadMatchJson}
+            title="Download complete match JSON"
+            style={{
+              marginLeft: 12,
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 6,
+            }}
+          >
+            <Download size={14} />
+            Dowload Match Json
+          </button>
+        )}
       </div>
 
       <div className="info-panel">
