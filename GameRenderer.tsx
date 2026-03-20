@@ -264,7 +264,7 @@ export const GameRenderer = ({ initialData, player1Name, player2Name }: any) => 
           padding: 16,
           textAlign: "center",
           background: "#1e1e1e",
-          border: currentTurn % 2 === 0 ? "2px solid #FFD700" : "none",
+          border: currentTurn % 2 === 0 ? "2px solid #3b82f6" : "2px solid transparent",
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-around"
@@ -273,8 +273,8 @@ export const GameRenderer = ({ initialData, player1Name, player2Name }: any) => 
             margin: 0,
             fontWeight: "bold",
             fontSize: 20,
-            background: currentTurn % 2 === 0 ? "#fff" : "transparent",
-            color: currentTurn % 2 === 0 ? "#1e1e1e" : "#fff",
+            background: currentTurn % 2 === 0 ? "#3b82f6" : "transparent",
+            color: "#fff",
             borderRadius: 4,
             padding: "4px 6px"
           }}>{player1Name || "Player 1"}</h3>
@@ -300,7 +300,6 @@ export const GameRenderer = ({ initialData, player1Name, player2Name }: any) => 
         <div ref={containerRef} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 12, position: "relative" }}>
           {/* GAME CANVAS + WINNER BANNER */}
           <div style={{ position: "relative", display: "grid" }}>
-            {/* Added currentTurn === maxTurn condition here */}
             {winner && currentTurn === maxTurn && (
               <div style={{
                 position: "absolute",
@@ -396,7 +395,7 @@ export const GameRenderer = ({ initialData, player1Name, player2Name }: any) => 
           padding: 16,
           textAlign: "center",
           background: "#1e1e1e",
-          border: currentTurn % 2 === 1 ? "2px solid #FFD700" : "none",
+          border: currentTurn % 2 === 1 ? "2px solid #10b981" : "2px solid transparent",
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-around"
@@ -405,8 +404,8 @@ export const GameRenderer = ({ initialData, player1Name, player2Name }: any) => 
             margin: 0,
             fontWeight: "bold",
             fontSize: 20,
-            background: currentTurn % 2 === 1 ? "#fff" : "transparent",
-            color: currentTurn % 2 === 1 ? "#1e1e1e" : "#fff",
+            background: currentTurn % 2 === 1 ? "#10b981" : "transparent",
+            color: "#fff",
             borderRadius: 4,
             padding: "4px 6px"
           }}>{player2Name || "Player 2"}</h3>
