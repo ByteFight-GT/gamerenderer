@@ -69,14 +69,7 @@ function buildFramesFromMatch(match: any, width: number, height: number): GameRe
       }))
   );
 
-  const totalSteps = Math.min(
-    (match.turn_count ?? 0) + 1,
-    match.p1_loc?.length ?? 0,
-    match.p2_loc?.length ?? 0,
-    match.paint_updates?.length ?? 0,
-    match.beacon_updates?.length ?? Number.MAX_SAFE_INTEGER,
-    match.powerup_updates?.length ?? Number.MAX_SAFE_INTEGER
-  );
+  const totalSteps = match.actions.length;
 
   for (let i = 0; i < totalSteps; i++) {
     // paint
