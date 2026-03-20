@@ -6,8 +6,6 @@ import {
 } from "./spritesheet";
 import { GameRenderState, MapInfo } from "./types";
 
-
-// import { StaticImageData } from "next/image";
 /**
  * Handler for rendering game things onto a canvas element.
  */
@@ -35,7 +33,6 @@ export class CanvasManager {
 		const _backgroundCtx = backgroundCanvas.getContext("2d");
 
 		if (!_spriteCtx || !_backgroundCtx) {
-			// TODO - is there a way to handle this?
 			throw new Error("Couldn't load canvas2d context!");
 		}
 		
@@ -51,7 +48,7 @@ export class CanvasManager {
 
 		const { paint, beacons, powerups, p1Loc, p2Loc } = state;
 
-		// draw paint as colored overlays
+		// draw paint
 		if (paint) {
 			for (let y = 0; y < this.mapInfo.height; y++) {
 				for (let x = 0; x < this.mapInfo.width; x++) {
@@ -63,12 +60,10 @@ export class CanvasManager {
 					let sprite: Sprite;
 
 					if (value > 0) {
-						// blue player
 						if (magnitude === 1) sprite = Sprite.BLUE_TILE1;
 						else if (magnitude === 2) sprite = Sprite.BLUE_TILE2;
 						else sprite = Sprite.BLUE_TILE3;
 					} else {
-						// green player
 						if (magnitude === 1) sprite = Sprite.GREEN_TILE1;
 						else if (magnitude === 2) sprite = Sprite.GREEN_TILE2;
 						else sprite = Sprite.GREEN_TILE3;
@@ -78,7 +73,8 @@ export class CanvasManager {
 				}
 			}
 		}
-		// draw beacons on top of paint
+
+		// draw beacons
 		if (beacons) {
 			for (let y = 0; y < this.mapInfo.height; y++) {
 				for (let x = 0; x < this.mapInfo.width; x++) {
@@ -102,40 +98,30 @@ export class CanvasManager {
 					if (!cell) continue;
 
 					if (cell.hasHealth) {
-						this.blitSpriteOnTile(
-							Sprite.POWERUP_HEALTH,
-							x,
-							y,
-						);
+						this.blitSpriteOnTile(Sprite.POWERUP_HEALTH, x, y);
 					}
 
 					if (cell.hasStamina) {
-						this.blitSpriteOnTile(
-							Sprite.POWERUP_STAMINA,
-							x,
-							y,
-						);
+						this.blitSpriteOnTile(Sprite.POWERUP_STAMINA, x, y);
 					}
 				}
 			}
 		}
 
-		// draw players last so they are on top
+		// ✅ NEW: draw hill borders on top of everything
+		for (const { x, y } of this.mapInfo.hillCenters) {
+			this.blitSpriteOnTile(Sprite.HILL_BORDER, x, y);
+		}
+
+		// draw players last (top-most)
 		this.blitSpriteOnTile(Sprite.PLAYER_BLUE, p1Loc.x, p1Loc.y);
 		this.blitSpriteOnTile(Sprite.PLAYER_GREEN, p2Loc.x, p2Loc.y);
 	}
 
-	/**
-	 * preloads assets for the game (sprites, map textures, etc.).
-	 * 
-	 * Doesnt actually do anything on screen, but this helps with performance, i think.
-	 */
 	preloadAssets() {
 		this.spriteCtx.imageSmoothingEnabled = false;
 		this.backgroundCtx.imageSmoothingEnabled = false;
 
-		// Next.js imports return an object { src: string, ... }, so we cast accordingly
-		
 		const entries = Object.entries(SPRITE_FILES) as [string, StaticImageData][];
 		let loaded = 0;
 
@@ -148,31 +134,20 @@ export class CanvasManager {
 				loaded++;
 
 				if (loaded === entries.length) {
-					this.blitMap(); // draw once when everything is ready
+					this.blitMap();
 				}
 			};
 
-			// If a single image fails to load, the counter should still increment 
-			// to prevent the game from hanging on a blank screen forever.
 			img.onerror = () => {
 				console.error(`Failed to load sprite: ${key}`);
 				loaded++;
 				if (loaded === entries.length) this.blitMap();
 			};
 
-			// Access the .src property from the Next.js StaticImageData object
 			img.src = typeof spriteData === "string" ? spriteData : spriteData.src;
 		}
 	}
 
-	/**
-	 * Blit a sprite centered at the center of the tile (tileX, tileY) (0-indexed).
-	 * ### X,Y in Bytefight are row,col based (like a 2D array), meaning TOP LEFT IS (0,0)!
-	 * 
-	 * Can optionally specify dx, dy, which are offsets by actual pixels on the canvas
-	 * 
-	 * Only use if spritesheet is loaded! (check is omitted for efficiency i love premature optimization)
-	 */
 	blitSpriteOnTile(
 		name: Sprite,
 		tileX: number, 
@@ -181,9 +156,7 @@ export class CanvasManager {
 		dy: number = 0
 	) {
 		const img = this.spriteImages[name];
-		if (!img) {
-			return;
-		}
+		if (!img) return;
 
 		this.spriteCtx.drawImage(
 			img,
@@ -194,23 +167,12 @@ export class CanvasManager {
 		);
 	}
 
-	/**
-	 * Draws the base map data screen, ie all static stuff like tiles, walls, hills, spawnpoints.
-	 * Doing this with a simple loop instead of using patterns or whatever cuz im lazy
-	 * and we should only be doing this once on load, so it dont matter
-	 * 
-	 * Only use if spritesheet is loaded!
-	 */
 	blitMap() {
-
 		console.log(`Blitting map of size ${this.mapInfo.width}x${this.mapInfo.height}`);
 
-		// helper function
 		const blitMapFeature = (featureName: Sprite, tileX: number, tileY: number) => {
 			const img = this.spriteImages[featureName];
-			if (!img) {
-				return;
-			}
+			if (!img) return;
 
 			this.backgroundCtx.drawImage(
 				img,
@@ -221,7 +183,7 @@ export class CanvasManager {
 			);
 		};
 
-		// draw main board tiles
+		// base tiles ONLY (neutral)
 		for (let y = this.mapInfo.height; --y >= 0;) {
 			for (let x = this.mapInfo.width; --x >= 0;) {
 				if (x % 2 === y % 2) {
@@ -232,38 +194,19 @@ export class CanvasManager {
 			}
 		}
 
-		// decorative floating pieces row just below the map
-		// const decoY = this.mapInfo.height;
-		// for (let x = 0; x < this.mapInfo.width; x++) {
-		// 	blitMapFeature(Sprite.FLOATING_PIECE_BOTTOM, x, decoY);
-		// }
-
-		// drawing walls
-		// Build quick lookup for wall positions
+		// walls
 		for (const { x, y } of this.mapInfo.wallLocs) {
 			blitMapFeature(Sprite.WALL, x, y);
 		}
 
-		// drawing hills
-		for (const {x, y} of this.mapInfo.hillCenters) {
-			blitMapFeature(Sprite.HILL_LIGHT, x, y);
-		}
+		// ❌ REMOVED: hill base tiles (no HILL_LIGHT anymore)
 	}
 
-	blitTestSprites() {
-
-	}
-
-	/**
-	 * Update the canvas elements' sizes based on map size
-	 */
 	updateCanvasSize() {
 		this.spriteCanvas.width = PX_PER_TILE * this.mapInfo.width;
 		this.backgroundCanvas.width = PX_PER_TILE * this.mapInfo.width;
 
-		// add one extra decorative row below the map
 		this.spriteCanvas.height = PX_PER_TILE * (this.mapInfo.height + 1);
 		this.backgroundCanvas.height = PX_PER_TILE * (this.mapInfo.height + 1);
 	}
-
 }

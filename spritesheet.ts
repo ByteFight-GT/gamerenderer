@@ -22,6 +22,7 @@ import blueTile3Src from "./sprites/blue_tile_3.png";
 import greenTile1Src from "./sprites/green_tile_1.png";
 import greenTile2Src from "./sprites/green_tile_2.png";
 import greenTile3Src from "./sprites/green_tile_3.png";
+import hillBorder from "./sprites/hill_border.png";
 
 export const PX_PER_TILE = 32;
 
@@ -52,6 +53,8 @@ export enum Sprite {
     GREEN_TILE1,
     GREEN_TILE2,
     GREEN_TILE3,
+
+    HILL_BORDER,
 }
 
 // 2. Assign the imported variables directly
@@ -89,4 +92,6 @@ export const SPRITE_FILES = {
     [Sprite.GREEN_TILE1]: greenTile1Src,
     [Sprite.GREEN_TILE2]: greenTile2Src,
     [Sprite.GREEN_TILE3]: greenTile3Src,
+
+    [Sprite.HILL_BORDER]: hillBorder,
 } as const;

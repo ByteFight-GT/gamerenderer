@@ -1,13 +1,14 @@
-import React, { useState } from "react";
-
-import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
-import { Download } from "lucide-react";
-
-import smallMatch from "./matches_example/match.json";
-import bigMatch from "./matches_example/big_match.json";
+import React, { useState, useEffect, useRef } from "react";
 import { CanvasManager } from "./CanvasManager";
 import { GameRenderState, MapInfo, Symmetry, MapLoc } from "./types";
 
+/* ---------------- SAFE STAT ---------------- */
+function getSafeStat(arr: any[] | undefined, index: number) {
+  if (!Array.isArray(arr) || arr.length === 0) return null;
+  return arr[Math.min(index, arr.length - 1)] ?? null;
+}
+
+/* ---------------- MAP ---------------- */
 function buildMapInfoFromMatch(match: any): MapInfo {
   const hillMapping: number[][] = match.hill_mapping ?? [];
   const walls: boolean[][] = match.walls ?? [];
@@ -158,35 +159,25 @@ function buildFramesFromMatch(match: any, width: number, height: number): GameRe
   return frames;
 }
 
-interface GameRendererProps {
-  initialData?: any | null;
-  player1Name?: string;
-  player2Name?: string;
-  onDownloadMatchJson?: () => void;
-  // This callback gives the parent the ability to push new dictionaries
-  onRegisterUpdater?: (updater: (newDict: any) => void) => void;
-}
 
-export const GameRenderer = ({
-  initialData,
-  player1Name,
-  player2Name,
-  onDownloadMatchJson,
-  onRegisterUpdater,
-}: GameRendererProps) => {
-  const canvasManager = React.useRef<CanvasManager | null>(null);
-  const [frames, setFrames] = React.useState<GameRenderState[]>([]);
-  const [currentTurn, setCurrentTurn] = React.useState(0);
-  const [isPlaying, setIsPlaying] = React.useState(false);
-  const [playbackSpeed, setPlaybackSpeed] = React.useState(1); // 1x
-  // const [selectedMatch, setSelectedMatch] = React.useState<"small" | "big">("small");
-  const [matchData, setMatchData] = useState<any | null>(initialData);
+/* ---------------- COMPONENT ---------------- */
+export const GameRenderer = ({ initialData, player1Name, player2Name }: any) => {
+  const canvasManager = useRef<CanvasManager | null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
 
-  // const matchData = selectedMatch === "big" ? bigMatch : smallMatch;
+  const [frames, setFrames] = useState<GameRenderState[]>([]);
+  const [currentTurn, setCurrentTurn] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [playbackSpeed, setPlaybackSpeed] = useState(1);
+  const [matchData, setMatchData] = useState(initialData);
+  const [scale, setScale] = useState(1);
 
-  React.useEffect(() => {
-    const spriteCanvas = document.getElementById("sprite-canvas")! as HTMLCanvasElement;
-    const backgroundCanvas = document.getElementById("background-canvas")! as HTMLCanvasElement;
+  /* INIT */
+  useEffect(() => {
+    if (!matchData) return;
+
+    const spriteCanvas = document.getElementById("sprite-canvas") as HTMLCanvasElement;
+    const backgroundCanvas = document.getElementById("background-canvas") as HTMLCanvasElement;
 
     const mapInfo = buildMapInfoFromMatch(matchData);
     const cm = new CanvasManager(mapInfo, spriteCanvas, backgroundCanvas);
@@ -197,235 +188,251 @@ export const GameRenderer = ({
     setCurrentTurn(0);
     setIsPlaying(false);
 
-    // draw first frame (static map will be drawn automatically
-    // once all tile images are loaded inside CanvasManager.preloadAssets)
     if (allFrames.length > 0) {
       cm.drawGameState(allFrames[0]);
     }
-
-    return () => {
-      canvasManager.current = null;
-    };
   }, [matchData]);
 
-  React.useEffect(() => {
-    if (!canvasManager.current || frames.length === 0) {
-      return;
-    }
-    const clampedTurn = Math.max(0, Math.min(currentTurn, frames.length - 1));
-    canvasManager.current.drawGameState(frames[clampedTurn]);
+  /* DRAW */
+  useEffect(() => {
+    if (!canvasManager.current || frames.length === 0) return;
+    canvasManager.current.drawGameState(frames[currentTurn]);
   }, [currentTurn, frames]);
 
-  // auto-play effect
-  React.useEffect(() => {
-    if (!isPlaying || frames.length === 0) {
-      return;
-    }
+  /* PLAY */
+  useEffect(() => {
+    if (!isPlaying) return;
 
-    const intervalDuration = 500 / Math.max(playbackSpeed, 0.25); // base 500ms at 1x
-
-    const interval = window.setInterval(() => {
+    const interval = setInterval(() => {
       setCurrentTurn((prev) => {
-        if (frames.length === 0) {
-          return prev;
-        }
-        const max = frames.length - 1;
-        if (prev >= max) {
-          // reached the end, stop playing
+        if (prev >= frames.length - 1) {
           setIsPlaying(false);
           return prev;
         }
         return prev + 1;
       });
-    }, intervalDuration);
+    }, 500 / playbackSpeed);
 
-    return () => {
-      window.clearInterval(interval);
-    };
-  }, [isPlaying, frames, playbackSpeed]);
+    return () => clearInterval(interval);
+  }, [isPlaying, playbackSpeed, frames]);
 
-  const maxTurn = frames.length > 0 ? frames.length - 1 : 0;
-  const infoIndex = Math.max(0, Math.min(currentTurn, maxTurn));
+  /* AUTO SCALE */
+  useEffect(() => {
+    function updateScale() {
+      const container = containerRef.current;
+      const canvas = document.getElementById("background-canvas") as HTMLCanvasElement;
+      if (!container || !canvas) return;
 
-  const p1Stamina = matchData.p1_stamina?.[infoIndex] ?? null;
-  const p2Stamina = matchData.p2_stamina?.[infoIndex] ?? null;
-  const p1MaxStamina = matchData.p1_max_stamina?.[infoIndex] ?? null;
-  const p2MaxStamina = matchData.p2_max_stamina?.[infoIndex] ?? null;
-  const p1Territory = matchData.p1_territory?.[infoIndex] ?? null;
-  const p2Territory = matchData.p2_territory?.[infoIndex] ?? null;
-  const p1TimeLeft = matchData.p1_time_left?.[infoIndex] ?? null;
-  const p2TimeLeft = matchData.p2_time_left?.[infoIndex] ?? null;
-  const currentPlayer = currentTurn % 2 === 0 ? 1 : 2;
-  const winner = matchData.result ?? null;
-  const gameEnd = currentTurn >= maxTurn;
-  const reasonEnded = matchData.reason;
+      const scaleX = container.clientWidth / canvas.width;
+      const scaleY = container.clientHeight / canvas.height;
+
+      setScale(Math.min(scaleX, scaleY, 1));
+    }
+
+    updateScale();
+    window.addEventListener("resize", updateScale);
+    return () => window.removeEventListener("resize", updateScale);
+  }, [frames]);
+
+  const maxTurn = frames.length - 1;
+  const idx = Math.max(0, Math.min(currentTurn, maxTurn));
+
+  const p1Stamina = getSafeStat(matchData.p1_stamina, idx);
+  const p2Stamina = getSafeStat(matchData.p2_stamina, idx);
+  const p1Territory = getSafeStat(matchData.p1_territory, idx);
+  const p2Territory = getSafeStat(matchData.p2_territory, idx);
+  const p1TimeLeft = getSafeStat(matchData.p1_time_left, idx);
+  const p2TimeLeft = getSafeStat(matchData.p2_time_left, idx);
+  const p1Bid = matchData.p1_bid;
+  const p2Bid = matchData.p2_bid;
+
+  const speedOptions = [1, 2, 4, 8];
+  const winner = matchData.result;
+  const reason = matchData.reason;
+
   return (
-    <div className="app-root">
-      <div className="controls">
-        {/* <label style={{ marginRight: 12, fontSize: 13 }}>
-          <span style={{ marginRight: 4 }}>Match:</span>
-          <select
-            value={selectedMatch}
-            onChange={(e) =>
-              setSelectedMatch(e.target.value === "big" ? "big" : "small")
-            }
-          >
-            <option value="small">Small match</option>
-            <option value="big">Big match</option>
-          </select>
-        </label> */}
+    <div style={{
+      height: "100vh",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      background: "#111",
+      fontFamily: "'Cascadia Mono', monospace",
+      color: "#fff"
+    }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 24 }}>
 
-        <button
-          type="button"
-          onClick={() =>
-            setCurrentTurn((prev) => Math.max(0, Math.min(maxTurn, prev - 1)))
-          }
-          disabled={currentTurn <= 0}
-        >
-          {"<"}
-        </button>
-        <button
-          type="button"
-          onClick={() => {
-            if (!isPlaying) {
-              // if we're at the end, restart from the beginning
-              if (currentTurn >= maxTurn && maxTurn > 0) {
-                setCurrentTurn(0);
-              }
-              setIsPlaying(true);
-            } else {
-              setIsPlaying(false);
-            }
-          }}
-          disabled={frames.length === 0}
-        >
-          {isPlaying ? "Pause" : "Play"}
-        </button>
-        <button
-          type="button"
-          onClick={() =>
-            setCurrentTurn((prev) => Math.max(0, Math.min(maxTurn, prev + 1)))
-          }
-          disabled={currentTurn >= maxTurn}
-        >
-          {">"}
-        </button>
-        <span>Turn {currentTurn} / {maxTurn}</span>
-        <input
-          type="range"
-          min={0}
-          max={maxTurn}
-          value={currentTurn}
-          onChange={(e) => {
-            setIsPlaying(false);
-            setCurrentTurn(Number(e.target.value));
-          }}
-          style={{ marginLeft: 12, width: 220, accentColor: "#ffd700" }}
-          disabled={frames.length === 0}
-        />
-        <label style={{ marginLeft: 12, fontSize: 13 }}>
-          <span style={{ marginRight: 4 }}>Speed:</span>
-          <select
-            value={playbackSpeed}
-            onChange={(e) => setPlaybackSpeed(Number(e.target.value))}
-          >
-            <option value={0.5}>0.5x</option>
-            <option value={1}>1x</option>
-            <option value={2}>2x</option>
-            <option value={4}>4x</option>
-            <option value={8}>8x</option>
-          </select>
-        </label>
-        {onDownloadMatchJson && (
-          <button
-            type="button"
-            onClick={onDownloadMatchJson}
-            title="Download complete match JSON"
-            style={{
-              marginLeft: 12,
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 6,
-            }}
-          >
-            <Download size={14} />
-            Download Match JSON
-          </button>
-        )}
-      </div>
-
-      <div className="info-panel">
-        <div className={`player-info player-1 player-panel ${
-          gameEnd
-            ? winner === "PLAYER_1"
-              ? "active"
-              : "inactive"
-            : currentPlayer === 1
-            ? "active"
-            : "inactive"
-        }`}>
-          <h3>
-            {player1Name} (Blue)
-            {gameEnd && winner === "PLAYER_1" && (
-              <span className="winner-icon">👑</span>
-            )}
-          </h3>
-
-          {gameEnd && winner === "PLAYER_1" && (
-            <div className="win-reason">Win Reason: {reasonEnded.replace("_", " ")}</div>
-          )}
-          
-          <div>Bid: {matchData.p1_bid}</div>
-          {p1Stamina !== null && p1MaxStamina !== null && (
-            <div>
-              Stamina: {p1Stamina} / {p1MaxStamina}
-            </div>
-          )}
-          {p1Territory !== null && <div>Territory: {p1Territory}</div>}
-          {p1TimeLeft !== null && (
-            <div>Time left: {p1TimeLeft.toFixed(3)}s</div>
-          )}
-        </div>
-        <div className={`player-info player-2 player-panel ${
-          gameEnd
-            ? winner === "PLAYER_2"
-              ? "active"
-              : "inactive"
-            : currentPlayer === 2
-            ? "active"
-            : "inactive"
-        }`}>
-          <h3>
-            {player2Name} (Green)
-            {gameEnd && winner === "PLAYER_2" && (
-              <span className="winner-icon">👑</span>
-            )}
-          </h3>
-
-          {gameEnd && winner === "PLAYER_2" && (
-            <div className="win-reason">Win Reason: {reasonEnded.replace("_", " ")}</div>
-          )}
-          <div>Bid: {matchData.p2_bid}</div>
-          {p2Stamina !== null && p2MaxStamina !== null && (
-            <div>
-              Stamina: {p2Stamina} / {p2MaxStamina}
-            </div>
-          )}
-          {p2Territory !== null && <div>Territory: {p2Territory}</div>}
-          {p2TimeLeft !== null && (
-            <div>Time left: {p2TimeLeft.toFixed(3)}s</div>
-          )}
-        </div>
-      </div>
-
-      <TransformWrapper>
-        <TransformComponent wrapperClass="pan-container">
-          <div id="canvas-container" className="grid">
-            <canvas id="background-canvas" className="col-start-1 row-start-1" />
-            <canvas id="sprite-canvas" className="col-start-1 row-start-1" />
+        {/* LEFT PANEL */}
+        <div style={{
+          width: 240,
+          height: 300,
+          borderRadius: 12,
+          padding: 16,
+          textAlign: "center",
+          background: "#1e1e1e",
+          border: currentTurn % 2 === 0 ? "2px solid #FFD700" : "none",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-around"
+        }}>
+          <h3 style={{
+            margin: 0,
+            fontWeight: "bold",
+            fontSize: 20,
+            background: currentTurn % 2 === 0 ? "#fff" : "transparent",
+            color: currentTurn % 2 === 0 ? "#1e1e1e" : "#fff",
+            borderRadius: 4,
+            padding: "4px 6px"
+          }}>{player1Name || "Player 1"}</h3>
+          <div>
+            <div style={{ fontSize: 36, fontWeight: "bold", color: "#fff" }}>{p1Bid ?? 0}</div>
+            <div style={{ fontSize: 14, color: "#ccc" }}>Bid</div>
           </div>
-        </TransformComponent>
-      </TransformWrapper>
+          <div>
+            <div style={{ fontSize: 36, fontWeight: "bold", color: "#fff" }}>{p1Stamina ?? "-"}</div>
+            <div style={{ fontSize: 14, color: "#ccc" }}>Stamina</div>
+          </div>
+          <div>
+            <div style={{ fontSize: 36, fontWeight: "bold", color: "#fff" }}>{p1Territory ?? "-"}</div>
+            <div style={{ fontSize: 14, color: "#ccc" }}>Territory</div>
+          </div>
+          <div>
+            <div style={{ fontSize: 36, fontWeight: "bold", color: "#fff" }}>{p1TimeLeft ? p1TimeLeft.toFixed(2) : "-"}</div>
+            <div style={{ fontSize: 14, color: "#ccc" }}>Time Left</div>
+          </div>
+        </div>
+
+        {/* CENTER COLUMN */}
+        <div ref={containerRef} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 12, position: "relative" }}>
+          {/* GAME CANVAS + WINNER BANNER */}
+          <div style={{ position: "relative", display: "grid" }}>
+            {winner && (
+              <div style={{
+                position: "absolute",
+                top: -40,
+                left: "50%",
+                transform: "translateX(-50%)",
+                background: "#1e1e1e",
+                padding: "6px 12px",
+                borderRadius: 6,
+                textAlign: "center",
+                zIndex: 10
+              }}>
+                <div style={{ color: "#FFD700", fontWeight: "bold", fontSize: 16 }}>
+                  Winner: {winner}
+                </div>
+                <div style={{ color: "#ccc", fontSize: 14 }}>
+                  Reason: {reason}
+                </div>
+              </div>
+            )}
+            <div style={{ transform: `scale(${scale})`, transformOrigin: "top center", display: "grid" }}>
+              <canvas id="background-canvas" style={{ gridArea: "1 / 1" }} />
+              <canvas id="sprite-canvas" style={{ gridArea: "1 / 1" }} />
+            </div>
+          </div>
+
+          {/* CONTROLS */}
+          <div style={{ display: "flex", gap: 12, alignItems: "center", justifyContent: "center", flexWrap: "wrap" }}>
+            <button style={{ borderRadius: 8, padding: "6px 14px", background: "#222", color: "#fff", border: "none", cursor: "pointer" }}
+              onClick={() => setCurrentTurn(Math.max(currentTurn - 1, 0))}>{"<"}</button>
+
+            <button style={{ borderRadius: 8, padding: "6px 14px", background: "#FFD700", color: "#111", border: "none", cursor: "pointer" }}
+              onClick={() => setIsPlaying(prev => !prev)}>{isPlaying ? "Pause" : "Play"}</button>
+
+            <button style={{ borderRadius: 8, padding: "6px 14px", background: "#222", color: "#fff", border: "none", cursor: "pointer" }}
+              onClick={() => setCurrentTurn(Math.min(currentTurn + 1, maxTurn))}>{">"}</button>
+
+            {/* Slider */}
+            <input type="range" min={0} max={maxTurn} value={currentTurn}
+              onChange={(e) => setCurrentTurn(Number(e.target.value))}
+              style={{
+                width: 220,
+                background: "transparent",
+                border: "1px solid #444",
+                WebkitAppearance: "none",
+                height: 6,
+                borderRadius: 2,
+              }}
+            />
+            <style>{`
+              input[type=range]::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                height: 24px;
+                width: 8px;
+                background: #FFD700;
+                cursor: pointer;
+                border-radius: 4px;
+              }
+              input[type=range]::-moz-range-thumb {
+                height: 24px;
+                width: 8px;
+                background: #FFD700;
+                cursor: pointer;
+                border-radius: 4px;
+              }
+            `}</style>
+
+            {/* Speed Grid */}
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 6 }}>
+              {[0.5, 1, 4, 8].map(s => (
+                <div key={s} style={{
+                  padding: "6px 0",
+                  textAlign: "center",
+                  cursor: "pointer",
+                  color: playbackSpeed === s ? "#FFD700" : "#fff",
+                  fontWeight: playbackSpeed === s ? "bold" : "normal",
+                  borderRadius: 4,
+                  background: playbackSpeed === s ? "#222" : "transparent"
+                }} onClick={() => setPlaybackSpeed(s)}>
+                  {s}x
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* RIGHT PANEL */}
+        <div style={{
+          width: 240,
+          height: 300,
+          borderRadius: 12,
+          padding: 16,
+          textAlign: "center",
+          background: "#1e1e1e",
+          border: currentTurn % 2 === 1 ? "2px solid #FFD700" : "none",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-around"
+        }}>
+          <h3 style={{
+            margin: 0,
+            fontWeight: "bold",
+            fontSize: 20,
+            background: currentTurn % 2 === 1 ? "#fff" : "transparent",
+            color: currentTurn % 2 === 1 ? "#1e1e1e" : "#fff",
+            borderRadius: 4,
+            padding: "4px 6px"
+          }}>{player2Name || "Player 2"}</h3>
+          <div>
+            <div style={{ fontSize: 36, fontWeight: "bold", color: "#fff" }}>{p2Bid ?? 0}</div>
+            <div style={{ fontSize: 14, color: "#ccc" }}>Bid</div>
+          </div>
+          <div>
+            <div style={{ fontSize: 36, fontWeight: "bold", color: "#fff" }}>{p2Stamina ?? "-"}</div>
+            <div style={{ fontSize: 14, color: "#ccc" }}>Stamina</div>
+          </div>
+          <div>
+            <div style={{ fontSize: 36, fontWeight: "bold", color: "#fff" }}>{p2Territory ?? "-"}</div>
+            <div style={{ fontSize: 14, color: "#ccc" }}>Territory</div>
+          </div>
+          <div>
+            <div style={{ fontSize: 36, fontWeight: "bold", color: "#fff" }}>{p2TimeLeft ? p2TimeLeft.toFixed(2) : "-"}</div>
+            <div style={{ fontSize: 14, color: "#ccc" }}>Time Left</div>
+          </div>
+        </div>
+
+      </div>
     </div>
   );
 };
