@@ -1,9 +1,6 @@
 import React from "react";
-
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 
-import smallMatch from "./matches_example/match.json";
-import bigMatch from "./matches_example/big_match.json";
 import { CanvasManager } from "./CanvasManager";
 import { GameRenderState, MapInfo, Symmetry, MapLoc } from "./types";
 
@@ -118,7 +115,7 @@ function buildFramesFromMatch(match: any, width: number, height: number): GameRe
       }
     }
 
-    // powerups (none in current example, but wired generically)
+    // powerups
     const powerupUpdates = match.powerup_updates?.[i] as
       | Record<string, unknown>
       | undefined;
@@ -157,17 +154,18 @@ function buildFramesFromMatch(match: any, width: number, height: number): GameRe
   return frames;
 }
 
-export function GameRenderer() {
+export function GameRenderer({ initialData, player1Name = "Player 1", player2Name = "Player 2" }: any) {
   const canvasManager = React.useRef<CanvasManager | null>(null);
   const [frames, setFrames] = React.useState<GameRenderState[]>([]);
   const [currentTurn, setCurrentTurn] = React.useState(0);
   const [isPlaying, setIsPlaying] = React.useState(false);
   const [playbackSpeed, setPlaybackSpeed] = React.useState(1); // 1x
-  const [selectedMatch, setSelectedMatch] = React.useState<"small" | "big">("small");
 
-  const matchData = selectedMatch === "big" ? bigMatch : smallMatch;
+  const matchData = initialData;
 
   React.useEffect(() => {
+    if (!matchData) return;
+
     const spriteCanvas = document.getElementById("sprite-canvas")! as HTMLCanvasElement;
     const backgroundCanvas = document.getElementById("background-canvas")! as HTMLCanvasElement;
 
@@ -180,8 +178,7 @@ export function GameRenderer() {
     setCurrentTurn(0);
     setIsPlaying(false);
 
-    // draw first frame (static map will be drawn automatically
-    // once all tile images are loaded inside CanvasManager.preloadAssets)
+    // draw first frame
     if (allFrames.length > 0) {
       cm.drawGameState(allFrames[0]);
     }
@@ -227,6 +224,10 @@ export function GameRenderer() {
     };
   }, [isPlaying, frames, playbackSpeed]);
 
+  if (!matchData) {
+    return <div>Loading match data...</div>;
+  }
+
   const maxTurn = frames.length > 0 ? frames.length - 1 : 0;
   const infoIndex = Math.max(0, Math.min(currentTurn, maxTurn));
 
@@ -242,19 +243,6 @@ export function GameRenderer() {
   return (
     <div className="app-root">
       <div className="controls">
-        <label style={{ marginRight: 12, fontSize: 13 }}>
-          <span style={{ marginRight: 4 }}>Match:</span>
-          <select
-            value={selectedMatch}
-            onChange={(e) =>
-              setSelectedMatch(e.target.value === "big" ? "big" : "small")
-            }
-          >
-            <option value="small">Small match</option>
-            <option value="big">Big match</option>
-          </select>
-        </label>
-
         <button
           type="button"
           onClick={() =>
@@ -309,7 +297,7 @@ export function GameRenderer() {
 
       <div className="info-panel">
         <div className="player-info player-1">
-          <h3>Player 1 (Blue)</h3>
+          <h3>{player1Name} (Blue)</h3>
           <div>Bid: {matchData.p1_bid}</div>
           {p1Stamina !== null && p1MaxStamina !== null && (
             <div>
@@ -322,7 +310,7 @@ export function GameRenderer() {
           )}
         </div>
         <div className="player-info player-2">
-          <h3>Player 2 (Green)</h3>
+          <h3>{player2Name} (Green)</h3>
           <div>Bid: {matchData.p2_bid}</div>
           {p2Stamina !== null && p2MaxStamina !== null && (
             <div>
@@ -346,4 +334,4 @@ export function GameRenderer() {
       </TransformWrapper>
     </div>
   );
-};
+}
