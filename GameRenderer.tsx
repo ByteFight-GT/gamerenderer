@@ -113,7 +113,7 @@ function buildFramesFromMatch(match: any, width: number, height: number): GameRe
       }
     }
 
-    // powerups (none in current example, but wired generically)
+    // powerups
     const powerupUpdates = match.powerup_updates?.[i] as
       | Record<string, unknown>
       | undefined;
@@ -257,8 +257,9 @@ export const GameRenderer = ({ initialData, player1Name, player2Name }: any) => 
 
         {/* LEFT PANEL */}
         <div style={{
-          width: 240,
-          height: 300,
+          minWidth: 260,
+          minHeight: 340,
+          boxSizing: "border-box",
           borderRadius: 12,
           padding: 16,
           textAlign: "center",
@@ -299,7 +300,8 @@ export const GameRenderer = ({ initialData, player1Name, player2Name }: any) => 
         <div ref={containerRef} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 12, position: "relative" }}>
           {/* GAME CANVAS + WINNER BANNER */}
           <div style={{ position: "relative", display: "grid" }}>
-            {winner && (
+            {/* Added currentTurn === maxTurn condition here */}
+            {winner && currentTurn === maxTurn && (
               <div style={{
                 position: "absolute",
                 top: -40,
@@ -387,8 +389,9 @@ export const GameRenderer = ({ initialData, player1Name, player2Name }: any) => 
 
         {/* RIGHT PANEL */}
         <div style={{
-          width: 240,
-          height: 300,
+          minWidth: 260,
+          minHeight: 340,
+          boxSizing: "border-box",
           borderRadius: 12,
           padding: 16,
           textAlign: "center",
