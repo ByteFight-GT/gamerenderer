@@ -232,6 +232,11 @@ export const GameRenderer = ({ initialData, player1Name, player2Name }: any) => 
 
   const p1Stamina = getSafeStat(matchData.p1_stamina, idx);
   const p2Stamina = getSafeStat(matchData.p2_stamina, idx);
+  
+  // Dynamic Max Stamina based on the current frame index
+  const p1MaxStamina = getSafeStat(matchData.p1_max_stamina, idx);
+  const p2MaxStamina = getSafeStat(matchData.p2_max_stamina, idx);
+
   const p1Territory = getSafeStat(matchData.p1_territory, idx);
   const p2Territory = getSafeStat(matchData.p2_territory, idx);
   const p1TimeLeft = getSafeStat(matchData.p1_time_left, idx);
@@ -239,7 +244,6 @@ export const GameRenderer = ({ initialData, player1Name, player2Name }: any) => 
   const p1Bid = matchData.p1_bid;
   const p2Bid = matchData.p2_bid;
 
-  const speedOptions = [1, 2, 4, 8];
   const winner = matchData.result;
   const reason = matchData.reason;
 
@@ -295,7 +299,10 @@ export const GameRenderer = ({ initialData, player1Name, player2Name }: any) => 
             <div style={{ fontSize: 14, color: "#ccc" }}>Bid</div>
           </div>
           <div>
-            <div style={{ fontSize: 36, fontWeight: "bold", color: "#fff" }}>{p1Stamina ?? "-"}</div>
+            <div style={{ fontSize: 36, fontWeight: "bold", color: "#fff" }}>
+              {p1Stamina ?? "-"} 
+              <span style={{ fontSize: 20, color: "#888" }}> / {p1MaxStamina ?? "-"}</span>
+            </div>
             <div style={{ fontSize: 14, color: "#ccc" }}>Stamina</div>
           </div>
           <div>
@@ -426,7 +433,10 @@ export const GameRenderer = ({ initialData, player1Name, player2Name }: any) => 
             <div style={{ fontSize: 14, color: "#ccc" }}>Bid</div>
           </div>
           <div>
-            <div style={{ fontSize: 36, fontWeight: "bold", color: "#fff" }}>{p2Stamina ?? "-"}</div>
+            <div style={{ fontSize: 36, fontWeight: "bold", color: "#fff" }}>
+              {p2Stamina ?? "-"}
+              <span style={{ fontSize: 20, color: "#888" }}> / {p2MaxStamina ?? "-"}</span>
+            </div>
             <div style={{ fontSize: 14, color: "#ccc" }}>Stamina</div>
           </div>
           <div>
