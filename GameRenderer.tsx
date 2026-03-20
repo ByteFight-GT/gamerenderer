@@ -243,6 +243,18 @@ export const GameRenderer = ({ initialData, player1Name, player2Name }: any) => 
   const winner = matchData.result;
   const reason = matchData.reason;
 
+  // Determine winner color and display name based on who won
+  let winnerColor = "#FFD700"; // Default Gold (e.g. for a Tie)
+  let displayWinner = winner;
+  
+  if (winner === player1Name || winner === "Player 1" || winner === "P1" || winner === "p1" || winner === "PLAYER_1") {
+    winnerColor = "#3b82f6"; // Player 1 Blue
+    displayWinner = player1Name || "Player 1";
+  } else if (winner === player2Name || winner === "Player 2" || winner === "P2" || winner === "p2" || winner === "PLAYER_2") {
+    winnerColor = "#10b981"; // Player 2 Green
+    displayWinner = player2Name || "Player 2";
+  }
+
   return (
     <div style={{
       height: "100vh",
@@ -274,7 +286,7 @@ export const GameRenderer = ({ initialData, player1Name, player2Name }: any) => 
             fontWeight: "bold",
             fontSize: 20,
             background: currentTurn % 2 === 0 ? "#3b82f6" : "transparent",
-            color: "#fff",
+            color: currentTurn % 2 === 0 ? "#1e1e1e" : "#fff",
             borderRadius: 4,
             padding: "4px 6px"
           }}>{player1Name || "Player 1"}</h3>
@@ -312,8 +324,8 @@ export const GameRenderer = ({ initialData, player1Name, player2Name }: any) => 
                 textAlign: "center",
                 zIndex: 10
               }}>
-                <div style={{ color: "#FFD700", fontWeight: "bold", fontSize: 16 }}>
-                  Winner: {winner}
+                <div style={{ color: winnerColor, fontWeight: "bold", fontSize: 16 }}>
+                  Winner: {displayWinner}
                 </div>
                 <div style={{ color: "#ccc", fontSize: 14 }}>
                   Reason: {reason}
@@ -405,7 +417,7 @@ export const GameRenderer = ({ initialData, player1Name, player2Name }: any) => 
             fontWeight: "bold",
             fontSize: 20,
             background: currentTurn % 2 === 1 ? "#10b981" : "transparent",
-            color: "#fff",
+            color: currentTurn % 2 === 1 ? "#1e1e1e" : "#fff",
             borderRadius: 4,
             padding: "4px 6px"
           }}>{player2Name || "Player 2"}</h3>
