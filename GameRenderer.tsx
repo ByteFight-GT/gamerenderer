@@ -154,7 +154,12 @@ function buildFramesFromMatch(match: any, width: number, height: number): GameRe
 
 
 /* ---------------- COMPONENT ---------------- */
-export const GameRenderer = ({ initialData, player1Name, player2Name }: any) => {
+export const GameRenderer = ({
+  initialData,
+  player1Name,
+  player2Name,
+  onDownloadMatchJson,
+}: any) => {
   const canvasManager = useRef<CanvasManager | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
 
@@ -355,6 +360,15 @@ export const GameRenderer = ({ initialData, player1Name, player2Name }: any) => 
 
             <button style={{ borderRadius: 8, padding: "6px 14px", background: "#222", color: "#fff", border: "none", cursor: "pointer" }}
               onClick={() => setCurrentTurn(Math.min(currentTurn + 1, maxTurn))}>{">"}</button>
+
+            {typeof onDownloadMatchJson === "function" && (
+              <button
+                style={{ borderRadius: 8, padding: "6px 14px", background: "#2563eb", color: "#fff", border: "none", cursor: "pointer" }}
+                onClick={onDownloadMatchJson}
+              >
+                {"\u2B07"} Download Match Json
+              </button>
+            )}
 
             {/* Slider */}
             <input type="range" min={0} max={maxTurn} value={currentTurn}
