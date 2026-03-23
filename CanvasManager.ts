@@ -208,14 +208,16 @@ export class CanvasManager {
       }
     }
 
-		// draw HILL_BORDER where all the hills are
-		// these dont mask the actual paint, but they do help
-		// show where the hills actually are
+		// draw HILL_BORDER where there are both hills AND paint, otherwise the paint
+		// fully covers the hill. However we dont need to draw them where theres no paint
 		for (const hillId in this.mapData.hillLocs) {
 			for (const [r, c] of this.mapData.hillLocs[hillId]) {
-				this.blitSpriteOnTile(Sprite.HILL_BORDER, r, c);
+				if (paint && paint[r][c] !== 0) {
+					this.blitSpriteOnTile(Sprite.HILL_BORDER, r, c);
+				}
 			}
 		}
+
 
     // draw players last so they are on top
     if (p1Loc) {
