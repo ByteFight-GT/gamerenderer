@@ -9,6 +9,7 @@ export enum Sprite {
 	TILE_DARK,
 	HILL_LIGHT,
 	HILL_DARK,
+	HILL_BORDER,
 	WALL,
 
 	BLUE_TILE_1,
@@ -54,6 +55,7 @@ export const SPRITE_FILES = {
 
 	[Sprite.HILL_LIGHT]: "/sprites/hill_tile.png",
 	[Sprite.HILL_DARK]: "/sprites/hill_tile.png",
+	[Sprite.HILL_BORDER]: "/sprites/hill_border.png",
 	[Sprite.WALL]: "/sprites/wall_tile.png",
 
 	[Sprite.BLUE_TILE_1]: "/sprites/blue_tile_1.png",

@@ -208,6 +208,15 @@ export class CanvasManager {
       }
     }
 
+		// draw HILL_BORDER where all the hills are
+		// these dont mask the actual paint, but they do help
+		// show where the hills actually are
+		for (const hillId in this.mapData.hillLocs) {
+			for (const [r, c] of this.mapData.hillLocs[hillId]) {
+				this.blitSpriteOnTile(Sprite.HILL_BORDER, r, c);
+			}
+		}
+
     // draw players last so they are on top
     if (p1Loc) {
       this.blitSpriteOnTile(Sprite.PLAYER_BLUE, p1Loc[0], p1Loc[1]);
