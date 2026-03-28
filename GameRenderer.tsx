@@ -115,7 +115,7 @@ function buildFramesFromMatch(match: any, width: number, height: number): GameRe
       }
     }
 
-    // powerups (none in current example, but wired generically)
+    // powerups
     const powerupUpdates = match.powerup_updates?.[i] as
       | Record<string, unknown>
       | undefined;
@@ -156,7 +156,12 @@ function buildFramesFromMatch(match: any, width: number, height: number): GameRe
 
 
 /* ---------------- COMPONENT ---------------- */
-export const GameRenderer = ({ initialData, player1Name, player2Name }: any) => {
+export const GameRenderer = ({
+  initialData,
+  player1Name,
+  player2Name,
+  onDownloadMatchJson,
+}: any) => {
   const canvasManager = useRef<CanvasManager | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
 
@@ -234,6 +239,11 @@ export const GameRenderer = ({ initialData, player1Name, player2Name }: any) => 
 
   const p1Stamina = getSafeStat(matchData.p1_stamina, idx);
   const p2Stamina = getSafeStat(matchData.p2_stamina, idx);
+  
+  // Dynamic Max Stamina based on the current frame index
+  const p1MaxStamina = getSafeStat(matchData.p1_max_stamina, idx);
+  const p2MaxStamina = getSafeStat(matchData.p2_max_stamina, idx);
+
   const p1Territory = getSafeStat(matchData.p1_territory, idx);
   const p2Territory = getSafeStat(matchData.p2_territory, idx);
   const p1TimeLeft = getSafeStat(matchData.p1_time_left, idx);
@@ -241,9 +251,20 @@ export const GameRenderer = ({ initialData, player1Name, player2Name }: any) => 
   const p1Bid = matchData.p1_bid;
   const p2Bid = matchData.p2_bid;
 
-  const speedOptions = [1, 2, 4, 8];
   const winner = matchData.result;
   const reason = matchData.reason;
+
+  // Determine winner color and display name based on who won
+  let winnerColor = "#FFD700"; // Default Gold (e.g. for a Tie)
+  let displayWinner = winner;
+  
+  if (winner === player1Name || winner === "Player 1" || winner === "P1" || winner === "p1" || winner === "PLAYER_1") {
+    winnerColor = "#3b82f6"; // Player 1 Blue
+    displayWinner = player1Name || "Player 1";
+  } else if (winner === player2Name || winner === "Player 2" || winner === "P2" || winner === "p2" || winner === "PLAYER_2") {
+    winnerColor = "#10b981"; // Player 2 Green
+    displayWinner = player2Name || "Player 2";
+  }
 
   return (
     <div style={{
@@ -259,13 +280,14 @@ export const GameRenderer = ({ initialData, player1Name, player2Name }: any) => 
 
         {/* LEFT PANEL */}
         <div style={{
-          width: 240,
-          height: 300,
+          minWidth: 260,
+          minHeight: 340,
+          boxSizing: "border-box",
           borderRadius: 12,
           padding: 16,
           textAlign: "center",
           background: "#1e1e1e",
-          border: currentTurn % 2 === 0 ? "2px solid #FFD700" : "none",
+          border: currentTurn % 2 === 0 ? "2px solid #3b82f6" : "2px solid transparent",
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-around"
@@ -274,7 +296,7 @@ export const GameRenderer = ({ initialData, player1Name, player2Name }: any) => 
             margin: 0,
             fontWeight: "bold",
             fontSize: 20,
-            background: currentTurn % 2 === 0 ? "#fff" : "transparent",
+            background: currentTurn % 2 === 0 ? "#3b82f6" : "transparent",
             color: currentTurn % 2 === 0 ? "#1e1e1e" : "#fff",
             borderRadius: 4,
             padding: "4px 6px"
@@ -284,7 +306,10 @@ export const GameRenderer = ({ initialData, player1Name, player2Name }: any) => 
             <div style={{ fontSize: 14, color: "#ccc" }}>Bid</div>
           </div>
           <div>
-            <div style={{ fontSize: 36, fontWeight: "bold", color: "#fff" }}>{p1Stamina ?? "-"}</div>
+            <div style={{ fontSize: 36, fontWeight: "bold", color: "#fff" }}>
+              {p1Stamina ?? "-"} 
+              <span style={{ fontSize: 20, color: "#888" }}> / {p1MaxStamina ?? "-"}</span>
+            </div>
             <div style={{ fontSize: 14, color: "#ccc" }}>Stamina</div>
           </div>
           <div>
@@ -301,7 +326,7 @@ export const GameRenderer = ({ initialData, player1Name, player2Name }: any) => 
         <div ref={containerRef} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 12, position: "relative" }}>
           {/* GAME CANVAS + WINNER BANNER */}
           <div style={{ position: "relative", display: "grid" }}>
-            {winner && (
+            {winner && currentTurn === maxTurn && (
               <div style={{
                 position: "absolute",
                 top: -40,
@@ -313,8 +338,8 @@ export const GameRenderer = ({ initialData, player1Name, player2Name }: any) => 
                 textAlign: "center",
                 zIndex: 10
               }}>
-                <div style={{ color: "#FFD700", fontWeight: "bold", fontSize: 16 }}>
-                  Winner: {winner}
+                <div style={{ color: winnerColor, fontWeight: "bold", fontSize: 16 }}>
+                  Winner: {displayWinner}
                 </div>
                 <div style={{ color: "#ccc", fontSize: 14 }}>
                   Reason: {reason}
@@ -337,6 +362,15 @@ export const GameRenderer = ({ initialData, player1Name, player2Name }: any) => 
 
             <button style={{ borderRadius: 8, padding: "6px 14px", background: "#222", color: "#fff", border: "none", cursor: "pointer" }}
               onClick={() => setCurrentTurn(Math.min(currentTurn + 1, maxTurn))}>{">"}</button>
+
+            {typeof onDownloadMatchJson === "function" && (
+              <button
+                style={{ borderRadius: 8, padding: "6px 14px", background: "#2563eb", color: "#fff", border: "none", cursor: "pointer" }}
+                onClick={onDownloadMatchJson}
+              >
+                {"\u2B07"} Download Match Json
+              </button>
+            )}
 
             {/* Slider */}
             <input type="range" min={0} max={maxTurn} value={currentTurn}
@@ -389,13 +423,14 @@ export const GameRenderer = ({ initialData, player1Name, player2Name }: any) => 
 
         {/* RIGHT PANEL */}
         <div style={{
-          width: 240,
-          height: 300,
+          minWidth: 260,
+          minHeight: 340,
+          boxSizing: "border-box",
           borderRadius: 12,
           padding: 16,
           textAlign: "center",
           background: "#1e1e1e",
-          border: currentTurn % 2 === 1 ? "2px solid #FFD700" : "none",
+          border: currentTurn % 2 === 1 ? "2px solid #10b981" : "2px solid transparent",
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-around"
@@ -404,7 +439,7 @@ export const GameRenderer = ({ initialData, player1Name, player2Name }: any) => 
             margin: 0,
             fontWeight: "bold",
             fontSize: 20,
-            background: currentTurn % 2 === 1 ? "#fff" : "transparent",
+            background: currentTurn % 2 === 1 ? "#10b981" : "transparent",
             color: currentTurn % 2 === 1 ? "#1e1e1e" : "#fff",
             borderRadius: 4,
             padding: "4px 6px"
@@ -414,7 +449,10 @@ export const GameRenderer = ({ initialData, player1Name, player2Name }: any) => 
             <div style={{ fontSize: 14, color: "#ccc" }}>Bid</div>
           </div>
           <div>
-            <div style={{ fontSize: 36, fontWeight: "bold", color: "#fff" }}>{p2Stamina ?? "-"}</div>
+            <div style={{ fontSize: 36, fontWeight: "bold", color: "#fff" }}>
+              {p2Stamina ?? "-"}
+              <span style={{ fontSize: 20, color: "#888" }}> / {p2MaxStamina ?? "-"}</span>
+            </div>
             <div style={{ fontSize: 14, color: "#ccc" }}>Stamina</div>
           </div>
           <div>
