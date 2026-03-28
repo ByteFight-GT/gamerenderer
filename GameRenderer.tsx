@@ -87,29 +87,31 @@ function buildFramesFromMatch(match: any, width: number, height: number): GameRe
       }
     }
 
-    // beacons
-    const beaconUpdates = match.beacon_updates?.[i] as Record<string, unknown> | undefined;
+// beacons
+    const beaconUpdates = match.beacon_updates?.[i] as Record<string, number> | undefined;
     if (beaconUpdates) {
-      const parity = match.parity_playing?.[i] as number | undefined;
-      const currentPlayer: "P1" | "P2" | null =
-        parity === 1 ? "P1" : parity === -1 ? "P2" : null;
-
-      for (const [key, raw] of Object.entries(beaconUpdates)) {
+      for (const [key, rawValue] of Object.entries(beaconUpdates)) {
         const flatIndex = Number(key);
         if (Number.isNaN(flatIndex)) continue;
+        
         const y = Math.floor(flatIndex / width);
         const x = flatIndex % width;
-        if (y < 0 || y >= height || x < 0 || x >= width) continue;
 
-        if (typeof raw === "boolean") {
-          beacons[y][x] = raw && currentPlayer ? currentPlayer : null;
-        } else if (typeof raw === "number") {
-          if (raw === 0) {
-            beacons[y][x] = null;
-          } else if (currentPlayer) {
-            beacons[y][x] = currentPlayer;
-          }
+        if (rawValue === 0) {
+          // Beacon is destroyed or used up
+          beacons[y][x] = null;
+        } else if (rawValue === 1) {
+          // Force Player 1 ownership regardless of who is moving
+          beacons[y][x] = "P1";
+        } else if (rawValue === -1) {
+          // Force Player 2 ownership regardless of who is moving
+          beacons[y][x] = "P2";
         }
+        // // If it's a boolean true, we fall back to the "Lock" logic
+        // else if (rawValue === true && beacons[y][x] === null) {
+        //     const parity = match.parity_playing?.[i];
+        //     beacons[y][x] = parity === 1 ? "P1" : "P2";
+        // }
       }
     }
 
