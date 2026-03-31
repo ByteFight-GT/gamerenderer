@@ -37,7 +37,7 @@ export const GameRenderer = (props: GameRendererProps) => {
     if (props.shouldShowSpawnpoints !== undefined) {
       canvasManagerRef.current.shouldShowSpawnPoints = props.shouldShowSpawnpoints;
     }
-  }, []);
+  }, [_registerCanvases, canvasManagerRef, props.shouldShowSpawnpoints]);
 
   const handleMouseEvent = React.useCallback((event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     if (!spriteCanvasRef.current) {
@@ -58,7 +58,7 @@ export const GameRenderer = (props: GameRendererProps) => {
         }
       });
     }
-  }, []);
+  }, [_updateMouseSubscribers, canvasManagerRef]);
 
 
   return (
