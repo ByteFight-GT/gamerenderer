@@ -5,7 +5,7 @@ import { useVisualizer } from "./useVisualizer";
 import { MapLoc } from "./types";
 import { DefaultHoverElement } from "./DefaultHoverElement";
 
-type GameRendererProps = {
+export type GameRendererProps = {
   shouldShowSpawnpoints?: boolean;
   disablePanning?: boolean;
   hoverElementRenderer?: React.ComponentType<{mapLoc: MapLoc}>;
@@ -18,6 +18,10 @@ type GameRendererProps = {
     wrapperProps?: React.HTMLAttributes<HTMLDivElement>;
     contentProps?: React.HTMLAttributes<HTMLDivElement>;
   }
+}
+
+export type GameRendererHoverElementProps = {
+  mapLoc: MapLoc;
 }
 
 /** scale at which to switch to pixelated rendering so pixel art looks better up close */

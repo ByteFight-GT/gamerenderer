@@ -1,21 +1,23 @@
+import React from "react";
+import { GameRendererHoverElementProps } from "./GameRenderer";
 import { PX_PER_TILE } from "./spritesheet";
-import { MapLoc } from "./types";
-import { useVisualizer } from "./useVisualizer";
+import { useVisualizer } from "./useVisualizer"; 
 
-export function DefaultHoverElement(props: {mapLoc: MapLoc}) {
+export function DefaultHoverElement(props: GameRendererHoverElementProps) {
   
   const {canvasManagerRef} = useVisualizer();
 
-  let hoveringHill: number | null = null;
-  // HELP
-  for (const hillId in canvasManagerRef.current.mapData.hillLocs) {
-    for (const loc of canvasManagerRef.current.mapData.hillLocs[hillId]) {
-      if (loc[0] === props.mapLoc[0] && loc[1] === props.mapLoc[1]) {
-        hoveringHill = parseInt(hillId);
-        break;
+  const hoveringHill = React.useMemo(() => {
+    if (!canvasManagerRef.current.mapData.hillLocs) return null;
+    // HELP
+    for (const hillId in canvasManagerRef.current.mapData.hillLocs) {
+      for (const loc of canvasManagerRef.current.mapData.hillLocs[hillId]) {
+        if (loc[0] === props.mapLoc[0] && loc[1] === props.mapLoc[1]) {
+          return parseInt(hillId);
+        }
       }
     }
-  }
+  }, [canvasManagerRef, props.mapLoc]);
 
   return (
     <div 
