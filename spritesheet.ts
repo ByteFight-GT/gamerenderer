@@ -3,7 +3,8 @@ import playerGreenSrc from "./sprites/green_player.png";
 import playerBlueSrc from "./sprites/blue_player.png";
 import neutralTileSrc from "./sprites/neutral_tile.png";
 import hillTileSrc from "./sprites/hill_tile.png";
-import wallTileSrc from "./sprites/wall_tile.png";
+import blueWallTileSrc from "./sprites/blue_wall_tile.png";
+import greenWallTileSrc from "./sprites/green_wall_tile.png";
 import greenBeaconSrc from "./sprites/green_beacon.png";
 import blueBeaconSrc from "./sprites/blue_beacon.png";
 import powerCellSrc from "./sprites/power_cell.png";
@@ -33,7 +34,10 @@ export enum Sprite {
     TILE_DARK,
     HILL_LIGHT,
     HILL_DARK,
-    WALL,
+
+    WALL_BLUE,
+    WALL_GREEN,
+
     BEACON_GREEN,
     BEACON_BLUE,
     POWERUP_HEALTH,
@@ -67,7 +71,9 @@ export const SPRITE_FILES = {
 
     [Sprite.HILL_LIGHT]: hillTileSrc,
     [Sprite.HILL_DARK]: hillTileSrc,
-    [Sprite.WALL]: wallTileSrc,
+
+    [Sprite.WALL_BLUE]: blueWallTileSrc,
+    [Sprite.WALL_GREEN]: greenWallTileSrc,
 
     [Sprite.BEACON_GREEN]: greenBeaconSrc,
     [Sprite.BEACON_BLUE]: blueBeaconSrc,
