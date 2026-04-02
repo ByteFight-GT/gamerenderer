@@ -324,14 +324,6 @@ export const GameRenderer = ({
 
         {/* CENTER COLUMN */}
         <div ref={containerRef} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 12, position: "relative" }}>
-          {typeof onDownloadMatchJson === "function" && (
-              <button
-                style={{ borderRadius: 8, padding: "6px 14px", background: "#2563eb", color: "#fff", border: "none", cursor: "pointer" }}
-                onClick={onDownloadMatchJson}
-              >
-                {"\u2B07"} Download Match Json
-              </button>
-            )}
           {/* GAME CANVAS + WINNER BANNER */}
           <div style={{ position: "relative", display: "grid" }}>
             {winner && currentTurn === maxTurn && (

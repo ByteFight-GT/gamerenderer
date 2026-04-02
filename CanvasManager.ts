@@ -108,7 +108,7 @@ export class CanvasManager {
 			}
 		}
 
-		// draw hill borders on top of everything
+		// ✅ NEW: draw hill borders on top of everything
 		for (const { x, y } of this.mapInfo.hillCenters) {
 			this.blitSpriteOnTile(Sprite.HILL_BORDER, x, y);
 		}
@@ -194,15 +194,12 @@ export class CanvasManager {
 			}
 		}
 
-		// walls (randomly blue or green)
+		// walls
 		for (const { x, y } of this.mapInfo.wallLocs) {
-			const randomWall =
-				Math.random() < 0.5 ? Sprite.WALL_BLUE : Sprite.WALL_GREEN;
-
-			blitMapFeature(randomWall, x, y);
+			blitMapFeature(Sprite.WALL, x, y);
 		}
 
-		// hill base tiles intentionally omitted
+		// ❌ REMOVED: hill base tiles (no HILL_LIGHT anymore)
 	}
 
 	updateCanvasSize() {
