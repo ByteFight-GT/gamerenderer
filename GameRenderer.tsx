@@ -4,6 +4,7 @@ import { TransformWrapper, TransformComponent, ReactZoomPanPinchProps } from "re
 import { useVisualizer } from "./useVisualizer";
 import { MapLoc } from "./types";
 import { DefaultHoverElement } from "./DefaultHoverElement";
+import { PX_PER_TILE } from "./spritesheet";
 
 export type GameRendererProps = {
   shouldShowSpawnpoints?: boolean;
@@ -65,17 +66,22 @@ export const GameRenderer = (props: GameRendererProps) => {
   }, [_updateMouseSubscribers, canvasManagerRef]);
 
 
+  const {contentStyle, ...transformComponentRest} = props.transformComponentProps || {};
   return (
     <TransformWrapper 
     centerOnInit
     minScale={0.1} 
     maxScale={10}
-    limitToBounds={false}
     doubleClick={{ disabled: true }}
     panning={{ disabled: props.disablePanning }}
     onZoom={ref => setCurrZoomScale(ref.state.scale)} 
     {...props.transformWrapperProps}>
-      <TransformComponent {...props.transformComponentProps}>
+      <TransformComponent
+      contentStyle={{
+        padding: `${PX_PER_TILE * 10}px`,
+        ...contentStyle
+      }}
+      {...transformComponentRest}>
         <div
         onMouseDown={handleMouseEvent}
         onMouseUp={handleMouseEvent}
