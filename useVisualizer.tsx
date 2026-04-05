@@ -2,24 +2,17 @@ import React from "react";
 import { CanvasManager } from "./CanvasManager";
 import { GamestateManager } from "./GamestateManager";
 import { clamp } from "./utils";
-import type { GamePGN, GamePGNDiff, MapDataOptionalSpawnpts, MapLoc, MatchMetadata } from "./types";
-
-import _EMPTY_GAME_PGN from "./defaults/EMPTY_GAME_PGN.json";
-const EMPTY_GAME_PGN = _EMPTY_GAME_PGN as unknown as GamePGN;
-import _DEFAULT_MAP_DATA from "./defaults/DEFAULT_MAP_DATA.json";
-const DEFAULT_MAP_DATA = _DEFAULT_MAP_DATA as unknown as MapDataOptionalSpawnpts;
+import type { GameFrame, GamePGN } from "./types";
 
 /** base ms between autoplayed moves at 1x speed */
 const BASE_PLAYBACK_INTERVAL_MS = 500; 
 
-/** 
- * If current frame is above (turn_count * this), then updateGamePGN will automatically 
- * push the rendered frame to newest whenever it gets called.
- * Note that this isnt just a ux thing lol, trying to advance only if we are at the latest 
- * frame breaks cuz the state cant update fast enough before another pgnDiff comes in and 
- * the rounds end up "runing away" from the current frame.
- */
-const LIVE_GAME_AUTOADVANCE_THRESHOLD = 0.995; 
+type SubscriptionHandler = (
+	entirePGN: GamePGN | null, 
+	currGameFrame: GameFrame | null,
+	currFrameIdx: number,  
+) => void
+type Unsubscriber = () => void;
 
 export type VisualizerContextValue = {
 
@@ -27,16 +20,9 @@ export type VisualizerContextValue = {
 
 	gameManagerRef: React.RefObject<GamestateManager>;
 	canvasManagerRef: React.RefObject<CanvasManager>;
-	currentMatchData: MatchMetadata | null;
 
 	/** Bind to canvases that the Gamestates will be drawn to */
 	_registerCanvases: (spriteCanvas: HTMLCanvasElement, backgroundCanvas: HTMLCanvasElement) => void;
-	
-	/** for internal use by gamerenderer onclick */
-	_updateMouseSubscribers: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
-
-	/** Update match data (merge) with a new packet from python server. This is lazy and doesnt calc frames immediately, thats done on renderTurn (TODO: change?) */
-	updateGamePGN: (diff: GamePGNDiff) => void;
 
 	/**
 	 * Add a callback to be called whenever the game pgn or current frame changes.
@@ -46,29 +32,13 @@ export type VisualizerContextValue = {
 	 *
 	 * Returns an unsubscribe function to remove the handler.
 	 */
-	subscribeToGameOrFrameChanges: (
-		handler: (entirePGN: GamePGN, currentFrame: number) => void,
-	) => (() => void);
-
-	subscribeToCanvasMouseEvents: (
-		handler: (
-			mapLoc: MapLoc,
-			event: React.MouseEvent<HTMLDivElement, MouseEvent>
-		) => void
-	) => (() => void);
+	subscribeToGameOrFrameChanges: (handler: SubscriptionHandler) => Unsubscriber;
 
 	/**
-	 * Make the visualizer switch context to a new game from potentially a new match
+	 * Make the visualizer switch context to a new game
 	 * This causes the canvases to redraw immediately, resets states like the current frame.
-	 * 
-	 * Any args not given (undefined) will be kept as their current state. Note that this means
-	 * setting matchData=null and not including it are different! (use null to explicitly clear it)
 	 */
-	setVisualizerState: (states: {
-		matchData?: MatchMetadata | null,
-		gamePGN?: GamePGN,
-		mapData?: MapDataOptionalSpawnpts
-	}) => void;
+	setVisualizerState: (gamePGN: GamePGN) => void;
 
 	/**
 	 * Blanks out the visualizer so that theres no match/game being viewed. The renderer
@@ -102,46 +72,25 @@ export function VisualizerProvider(props: {children: React.ReactNode}) {
 
 	// SETUP AND GAMESTATE STUFF
 	
-	const stateSubscribersRef = React.useRef<Set<(pgn: GamePGN, frame: number) => void>>(new Set());
-	const clickSubscribersRef = React.useRef<Set<(mapLoc: MapLoc, event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void>>(new Set());
+	const stateSubscribersRef = React.useRef<Set<SubscriptionHandler>>(new Set());
 
 	const renderedGameFrameRef = React.useRef(0);
 
-	const gameManagerRef = React.useRef<GamestateManager>(new GamestateManager(DEFAULT_MAP_DATA, EMPTY_GAME_PGN));
-	const canvasManagerRef = React.useRef<CanvasManager>(new CanvasManager(DEFAULT_MAP_DATA));
-
-	const [currentMatchData, setCurrentMatchData] = React.useState<MatchMetadata | null>(null);
+	const gameManagerRef = React.useRef<GamestateManager>(new GamestateManager(null));
+	const canvasManagerRef = React.useRef<CanvasManager>(new CanvasManager());
 
 	const _registerCanvases = React.useCallback((spriteCanvas: HTMLCanvasElement, backgroundCanvas: HTMLCanvasElement) => {
 		canvasManagerRef.current.registerCanvases(spriteCanvas, backgroundCanvas);
 	}, []);
 
-	const updateGamePGN = React.useCallback((diff: GamePGNDiff) => {
-		const shouldMoveToHeadFrame = renderedGameFrameRef.current >= (gameManagerRef.current.gamePGN.turn_count * LIVE_GAME_AUTOADVANCE_THRESHOLD);
-
-		gameManagerRef.current.updateGamePGN(diff);
-		updateStateSubscribers();
-		
-		// TEMP: during games, render immediately if we are at head. we DO want this to happen but this impl feels weird idk.
-		if (shouldMoveToHeadFrame) {
-			setRenderedGameFrame(gameManagerRef.current.gamePGN.turn_count);
-		}
-	}, []);
-
 	const setVisualizerState: VisualizerContextValue["setVisualizerState"] = 
-		React.useCallback(states => {
-			if (states.matchData !== undefined) {
-				setCurrentMatchData(states.matchData);
-			}
-
-			const mapData = states.mapData ?? gameManagerRef.current.mapData;
-			const gamePGN = states.gamePGN ?? gameManagerRef.current.gamePGN;
-
-			canvasManagerRef.current.reset(mapData);
-			gameManagerRef.current.reset(mapData, gamePGN);
+		React.useCallback(gamePGN => {
+			gameManagerRef.current.reset(gamePGN);
+			canvasManagerRef.current.reset(gamePGN.blocked_positions);
 
 			// reset controls except for playback speed cuz thats more of a user setting
 			setRenderedGameFrame(0);
+			renderFrame(0);
 			setAutoAdvance(false);
 
 			updateStateSubscribers();
@@ -149,9 +98,8 @@ export function VisualizerProvider(props: {children: React.ReactNode}) {
 
 	const clearVisualizerState = React.useCallback(() => {
 		console.log(`[GameProvider.clearVisualizerState] restoring to default board`);
-		gameManagerRef.current.reset(DEFAULT_MAP_DATA, EMPTY_GAME_PGN);
-		canvasManagerRef.current.reset(DEFAULT_MAP_DATA);
-		setCurrentMatchData(null);
+		gameManagerRef.current.reset(null);
+		canvasManagerRef.current.reset([]);
 
 		// reset controls except for playback speed cuz thats more of a user setting
 		setRenderedGameFrame(0);
@@ -160,40 +108,29 @@ export function VisualizerProvider(props: {children: React.ReactNode}) {
 		updateStateSubscribers();
 	}, []);
 
-	const subscribeToGameOrFrameChanges = React.useCallback((
-		handler: (entirePGN: GamePGN, currentFrame: number) => void,
-	) => {
+	const subscribeToGameOrFrameChanges = React.useCallback((handler: SubscriptionHandler) => {
 		// give it initial notification
-		handler(gameManagerRef.current.gamePGN, renderedGameFrameRef.current);
+		const currGameFrame = gameManagerRef.current.getGameFrame(renderedGameFrameRef.current);
+		handler(gameManagerRef.current.gamePGN, currGameFrame, renderedGameFrameRef.current);
 
 		stateSubscribersRef.current.add(handler);
 		return () => stateSubscribersRef.current.delete(handler); // unsubscriber
 	}, []);
 
-	const subscribeToCanvasMouseEvents = React.useCallback((
-		handler: (mapLoc: MapLoc, event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
-	) => {
-		clickSubscribersRef.current.add(handler);
-		return () => clickSubscribersRef.current.delete(handler); // unsubscriber
-	}, []);
-
 	const updateStateSubscribers = React.useCallback(() => {
+		const currGameFrame = gameManagerRef.current.getGameFrame(renderedGameFrameRef.current);
 		stateSubscribersRef.current.forEach(
-			handler => handler(gameManagerRef.current.gamePGN, renderedGameFrameRef.current)
+			handler => handler(
+				gameManagerRef.current.gamePGN, 
+				currGameFrame, 
+				renderedGameFrameRef.current
+			)
 		);
-	}, []);
-
-	const _updateMouseSubscribers = React.useCallback(
-		(event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-			const mapLoc = canvasManagerRef.current.getRCFromClientCoords(event.clientX, event.clientY);
-			clickSubscribersRef.current.forEach(
-				handler => handler(mapLoc, event)
-			);
 	}, []);
 
 	const renderFrame = React.useCallback((turn: number) => {
 		const frame = gameManagerRef.current.getGameFrame(turn);
-		canvasManagerRef.current.drawGameState(frame);
+		canvasManagerRef.current.drawGameFrame(frame);
 	}, []);
 
 	// USER CONTROLS STUFF
@@ -203,7 +140,11 @@ export function VisualizerProvider(props: {children: React.ReactNode}) {
 	
 	// setRenderedGameFrame wrapper with extra checks/handlers
 	const setRenderedGameFrame = React.useCallback((frame: number) => {
-		// clamp
+		if (!gameManagerRef.current.gamePGN) {
+			console.warn(`[Visualizer.setRenderedGameFrame] tried to set frame to ${frame} but no gamePGN loaded`);
+			return;
+		}
+
 		frame = clamp(frame, 0, gameManagerRef.current.gamePGN.turn_count);
 
 		// if no change, do nothing
@@ -233,14 +174,10 @@ export function VisualizerProvider(props: {children: React.ReactNode}) {
 	const value = React.useMemo(() => ({
 		gameManagerRef,
 		canvasManagerRef,
-		currentMatchData,
 		_registerCanvases, 
-		_updateMouseSubscribers,
-		updateGamePGN,
 		setVisualizerState,
 		clearVisualizerState,
 		subscribeToGameOrFrameChanges,
-		subscribeToCanvasMouseEvents,
 		setRenderedGameFrame,
 		incrementRenderedGameFrame,
 		autoAdvance,
@@ -248,7 +185,6 @@ export function VisualizerProvider(props: {children: React.ReactNode}) {
 		playbackSpeed,
 		setPlaybackSpeed,
 	} satisfies VisualizerContextValue), [
-		currentMatchData,
 		autoAdvance,
 		playbackSpeed,
 	]);

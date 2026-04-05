@@ -1,4 +1,4 @@
-# Bytefight Spring 2026 Portable Gamerenderer
+# Bytefight Spr2026 CS3600 Portable Gamerenderer
 
 This repository contains reusable code to parse match data and draw games onto an HTML canvas.
 
