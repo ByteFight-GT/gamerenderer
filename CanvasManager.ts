@@ -1,6 +1,5 @@
 import { PX_PER_TILE, Sprite, SPRITE_FILES } from "./spritesheet";
 import type { GameFrame, MapLoc } from "./types";
-import { oob } from "./utils";
 
 const MAP_SIZE_R = 8;
 const MAP_SIZE_C = 8;
@@ -131,12 +130,15 @@ export class CanvasManager {
         img.onload = () => {
           this.spriteImages[sprite] = img;
           nLoaded += 1;
+          console.log(`[CanvasManager] loaded sprite ${Sprite[sprite]} from ${src} (${nLoaded}/${entries.length})`);
           if (nLoaded === entries.length) {
             resolve();
           }
         };
         img.onerror = err => {
-          reject(new Error(`[CanvasManager] Failed to load image for sprite ${Sprite[sprite]} from ${src}: ${err}`));
+          reject(new Error(`[CanvasManager] Failed to load image for sprite ${Sprite[sprite]} from ${src}:`, {
+            cause: err,
+          }));
         };
         img.src = src;
       });

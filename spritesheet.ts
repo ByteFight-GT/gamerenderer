@@ -14,25 +14,31 @@ export enum Sprite {
 	RAT_CAUGHT, // for the turn on which a rat is caught
 }
 
+import workerRedPng from "./assets/worker_red.png";
+import workerYellowPng from "./assets/worker_yellow.png";
+import boardPng from "./assets/board.png";
+import tileBlockedPng from "./assets/tile_blocked.png";
+import tileCarpetPng from "./assets/tile_carpet.png";
+import gluePng from "./assets/glue.png";
+import ratPng from "./assets/rat.png";
+import ratCaughtPng from "./assets/rat_caught.png";
+
+type ImportedAsset = string | { src: string };
+
+const resolveImportedAsset = (asset: ImportedAsset) =>
+	typeof asset === "string" ? asset : asset.src;
 
 const SPRITE_PATHS = {
-	[Sprite.WORKER_RED]: "worker_red.png",
-	[Sprite.WORKER_YELLOW]: "worker_yellow.png",
+	[Sprite.WORKER_RED]: resolveImportedAsset(workerRedPng),
+	[Sprite.WORKER_YELLOW]: resolveImportedAsset(workerYellowPng),
 
-	[Sprite.BOARD]: "board.png",
-	[Sprite.TILE_BLOCKED]: "tile_blocked.png",
-	[Sprite.TILE_CARPET]: "tile_carpet.png",
+	[Sprite.BOARD]: resolveImportedAsset(boardPng),
+	[Sprite.TILE_BLOCKED]: resolveImportedAsset(tileBlockedPng),
+	[Sprite.TILE_CARPET]: resolveImportedAsset(tileCarpetPng),
 
-	[Sprite.GLUE]: "glue.png",
-	[Sprite.RAT]: "rat.png",
-	[Sprite.RAT_CAUGHT]: "rat_caught.png",
+	[Sprite.GLUE]: resolveImportedAsset(gluePng),
+	[Sprite.RAT]: resolveImportedAsset(ratPng),
+	[Sprite.RAT_CAUGHT]: resolveImportedAsset(ratCaughtPng),
 } as const satisfies Record<Sprite, string>;
 
-// so that we dont need to shove these assets in the public/ folder
-// of whatever app is using this submodule
-export const SPRITE_FILES = Object.fromEntries(
-	Object.entries(SPRITE_PATHS).map(([sprite, path]) => [
-		sprite,
-		new URL(`./assets/${path}`, import.meta.url).href
-	]),
-) as Record<Sprite, string>;
+export const SPRITE_FILES = SPRITE_PATHS;
