@@ -7,6 +7,12 @@ export type GameResultReason =
 	| "ERROR"
 	| "UNKNOWN";
 
+export enum GameResult {
+	TEAM_A_WIN = 1,
+	TEAM_B_WIN = 2,
+	DRAW = 3
+}
+
 export type LeftBehindKind = "plain" | "prime" | "carpet" | "search";
 
 /** 
@@ -28,7 +34,7 @@ export type GamePGN = {
 	errlog_a: string;
 	errlog_b: string;
 	turn_count: number;
-	result: number;
+	result: GameResult;
 	reason: GameResultReason;
 	blocked_positions: MapLoc[];
 };
