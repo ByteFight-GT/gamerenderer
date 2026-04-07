@@ -9,6 +9,7 @@ const DEFAULT_WRAPPER_STYLE = {
 const CANVAS_STYLE = {
   gridColumnStart: 1, 
   gridRowStart: 1, 
+  height: "100%",
   imageRendering: "pixelated",
 } as const;
 
