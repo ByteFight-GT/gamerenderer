@@ -49,6 +49,7 @@ export class CanvasManager {
 
     this.updateCanvasSize();
     this.preloadAssets();
+    this.blitMap(); // initial blank map
   }
 
   /** throws an error if any of the canvas things are unavailable */
