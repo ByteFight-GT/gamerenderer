@@ -87,9 +87,9 @@ export class GamestateManager {
       let prevGluedTiles = structuredClone(this.computedGameFrames.at(-1)?.gluedTiles ?? []);
       let prevCarpetedTiles = structuredClone(this.computedGameFrames.at(-1)?.carpetedTiles ?? []);
 
-      // update glued tiles map
-      const leftBehind = this.gamePGN.left_behind[calcFrame-1];
-
+      // update glued tiles map.
+      // if left_behind is "prime" for THIS frame, glue action was taken prev. frame and should be visible NOW!
+      const leftBehind = this.gamePGN.left_behind[calcFrame];
       if (leftBehind === "prime") {
         if (frame % 2 === 0) {
           // p1 just moved. use their previous position (-2) as glue pos
@@ -99,23 +99,23 @@ export class GamestateManager {
           // otherwise use p1
           prevGluedTiles.push(this.gamePGN.b_pos[calcFrame-1]);
         }
-      } else if (leftBehind === "carpet") {
-        prevCarpetedTiles.push(...this.gamePGN.new_carpets[calcFrame-1]);
       }
+      
+      prevCarpetedTiles.push(...this.gamePGN.new_carpets[calcFrame]);
 
       this.computedGameFrames[calcFrame] = {
-        redLoc: this.gamePGN.a_pos[calcFrame-1],
-        yellowLoc: this.gamePGN.b_pos[calcFrame-1],
-        ratLoc: this.gamePGN.rat_position_history[calcFrame-1],
+        redLoc: this.gamePGN.a_pos[calcFrame],
+        yellowLoc: this.gamePGN.b_pos[calcFrame],
+        ratLoc: this.gamePGN.rat_position_history[calcFrame],
 
-        wasRatCaught: this.gamePGN.rat_caught[calcFrame-1],
+        wasRatCaught: this.gamePGN.rat_caught[calcFrame],
 
-        aPoints: this.gamePGN.a_points[calcFrame-1],
-        bPoints: this.gamePGN.b_points[calcFrame-1],
-        aTurnsLeft: this.gamePGN.a_turns_left[calcFrame-1],
-        bTurnsLeft: this.gamePGN.b_turns_left[calcFrame-1],
-        aTimeLeft: this.gamePGN.a_time_left[calcFrame-1],
-        bTimeLeft: this.gamePGN.b_time_left[calcFrame-1],
+        aPoints: this.gamePGN.a_points[calcFrame],
+        bPoints: this.gamePGN.b_points[calcFrame],
+        aTurnsLeft: this.gamePGN.a_turns_left[calcFrame],
+        bTurnsLeft: this.gamePGN.b_turns_left[calcFrame],
+        aTimeLeft: this.gamePGN.a_time_left[calcFrame],
+        bTimeLeft: this.gamePGN.b_time_left[calcFrame],
 
         carpetedTiles: prevCarpetedTiles,
         gluedTiles: prevGluedTiles,
