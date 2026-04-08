@@ -91,12 +91,12 @@ export class GamestateManager {
       // if left_behind is "prime" for THIS frame, glue action was taken prev. frame and should be visible NOW!
       const leftBehind = this.gamePGN.left_behind[calcFrame];
       if (leftBehind === "prime") {
-        if (frame % 2 === 0) {
-          // p1 just moved. use their previous position (-2) as glue pos
+        if (frame % 2 === 1) {
+          // a just moved. use their previous position (-2) as glue pos
           // this is safe since calcFrame should always be >=1.
           prevGluedTiles.push(this.gamePGN.a_pos[calcFrame-1]);
         } else {
-          // otherwise use p1
+          // otherwise use b
           prevGluedTiles.push(this.gamePGN.b_pos[calcFrame-1]);
         }
       }
