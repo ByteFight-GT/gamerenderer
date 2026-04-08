@@ -97,7 +97,7 @@ function DevTest() {
 
   return (
     <div className='container'>
-      <GameRenderer className='board-container' />
+      <GameRenderer wrapperProps={{ className: 'board-container' }} />
 
       <hr />
 
