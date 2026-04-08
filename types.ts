@@ -8,9 +8,9 @@ export type GameResultReason =
 	| "UNKNOWN";
 
 export enum GameResult {
-	TEAM_A_WIN = 1,
-	TEAM_B_WIN = 2,
-	DRAW = 3
+	TEAM_A_WIN = 0,
+	TEAM_B_WIN = 1,
+	DRAW = 2
 }
 
 export type LeftBehindKind = "plain" | "prime" | "carpet" | "search";
