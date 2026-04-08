@@ -93,9 +93,9 @@ export class CanvasManager {
     }
 
     // draw glued and carpeted tiles
-    frame.carpetedTiles.forEach(tile => this.blitSpriteOnTile(Sprite.TILE_CARPET, tile));
     frame.gluedTiles.forEach(tile => this.blitSpriteOnTile(Sprite.GLUE, tile));
-
+    frame.carpetedTiles.forEach(tile => this.blitSpriteOnTile(Sprite.TILE_CARPET, tile));
+    
     // drawing rat.
     // if either player caught the rat on this frame, then draw it as caught.
     // note: consecutive chunks of rat_pos_history are identical since it only moves once per 2 ply
